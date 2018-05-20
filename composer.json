@@ -1,0 +1,7 @@
+{
+    "require": {
+        "monolog/monolog": "1.0.*",
+        "phpfastcache/phpfastcache": "^6.1",
+        "jasongrimes/paginator": "^1.0"
+    }
+}
