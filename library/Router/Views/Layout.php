@@ -1,13 +1,50 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>lol asd</title>
+<?php
 
-		<meta name="theme-color" content="#941890">
+if(isset($title) && !empty($title)){
+	$title = $title . " - " . $app["config.site"]["name"];
+} else {
+	$title = $app["config.site"]["name"];
+}
+
+if(!isset($description) || empty($description)){
+	$description = DEFAULT_DESCRIPTION;
+}
+
+if(!isset($twitterImage) || empty($twitterImage)){
+	$twitterImage = DEFAULT_TWITTER_IMAGE;
+}
+
+?>
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<title>
+			<?= $title; ?>
+		</title>
+
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 		<meta http-equiv="x-ua-compatible" content="ie=edge"/>
 		<meta name="apple-mobile-web-app-capable" content="yes">
+
+		<meta name="og:site_name" content="MCSkinHistory" />
+		<meta name="og:title" content="<?= $title; ?>"/>
+		<meta name="og:description" content="<?= $description; ?>" />
+		<meta name="og:locale" content="de" />
+
+		<meta name="twitter:title" content="<?= $title; ?>"/>
+		<meta name="twitter:description" content="<?= $description; ?>" />
+		<meta name="twitter:image" content="<?= $twitterImage; ?>" />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="@mcskinhistory" />
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#941890">
+		<meta name="msapplication-TileColor" content="#941890">
+		<meta name="theme-color" content="#941890">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
 		<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet"> 
@@ -65,8 +102,8 @@
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledBy="accountDropdown">
-								<a href="<?php print $app->routeUrl("/login"); ?>" class="dropdown-item">Anmelden</a>
-								<a href="<?php print $app->routeUrl("/register"); ?>" class="dropdown-item">Registrieren</a>
+								<a href="<?= $app->routeUrl("/login"); ?>" class="dropdown-item">Anmelden</a>
+								<a href="<?= $app->routeUrl("/register"); ?>" class="dropdown-item">Registrieren</a>
 							</div>
 						</li>
 					</ul>
@@ -85,11 +122,11 @@
 				if(isset($wrapperHeadline) && !empty($wrapperHeadline)){
 					?>
 				<div class="wrapperHeadline">
-					<?php print $wrapperHeadline; ?>
+					<?= $wrapperHeadline; ?>
 				</div>
 					<?php
 				}
-				
+
 				?>
 
 				asdasdasd
