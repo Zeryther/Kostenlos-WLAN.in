@@ -129,8 +129,21 @@ if(!isset($twitterImage) || empty($twitterImage)){
 
 				?>
 
-				asdasdasd
+				<?= $content_for_layout; ?>
 			</div>
+
+			<small>
+				<?php
+
+					$firstYear = 2018;
+					$currentYear = date("Y");
+
+					$s = $currentYear;
+					if($firstYear != $currentYear) $s = $firstYear . " - " . $currentYear;
+
+				?>
+				&copy; Copyright <a href="https://gigadrivegroup.com" target="_blank">Gigadrive Group</a> <?= $s; ?> - Alle Rechte vorbehalten.
+			</small>
 		</div>
 	</body>
 </html>
