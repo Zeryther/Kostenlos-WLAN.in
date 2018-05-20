@@ -20,6 +20,7 @@ class User {
 	private $email;
 	private $level;
 	private $registerDate;
+	
 	private $userExists;
 
 	protected function __construct($id){
