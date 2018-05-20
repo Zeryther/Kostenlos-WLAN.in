@@ -20,13 +20,31 @@ body,html {
 	padding-top: 14.562px;
 }
 
+
+/* TABLET<- */
 @media only screen and (min-width : 640px) {
 	#mainHeader > .brand {
 		/*width: 20%;
 		text-align: center;*/
 	}
+
+	#mainHeader .buttons {
+		margin-top: 19.75px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
+/* SMARTPHONE */
+@media only screen and (max-width : 639px) {
+	#mainHeader .buttons {
+		margin-top: 19.75px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+/* DESKTOP<- */
 @media only screen and (min-width : 992px) {
 	#mainHeader > .container {
 		/*margin-left: 3%;*/
@@ -62,14 +80,20 @@ body,html {
 		color: #FFF;
 		font-weight: lighter;
 	}
+
+	#mainHeader .buttons .btn {
+		margin-left: 19px;
+	}
 }
 
+/* WIDE DESKTOP */
 @media only screen and (min-width : 1200px) {
 	#mainHeader .buttons .btn {
 		width: 154px;
 	}
 }
 
+/* ->DESKTOP */
 @media only screen and (max-width : 991px) {
 	#mainHeader #navbarSupportedContent {
 		margin-left: 10px;
@@ -78,19 +102,23 @@ body,html {
 
 	#mainHeader #search #searchBox {
 		margin-top: 10px;
-		width: 98.75% !important;
+		width: 96.75% !important;
 	}
 
 	#navbarSupportedContent .form-group {
 		width: 100%;
 	}
 
-	#mainHeader .buttons {
+	/*#mainHeader .buttons {
 		margin: auto;
-	}
+	}*/
 
 	#navbarSupportedContent .navbar-nav {
 		margin-bottom: 15px;
+	}
+
+	#mainHeader .brand .navbar-brand {
+		margin-left: 15px;
 	}
 }
 
@@ -119,13 +147,8 @@ input:focus {
 	box-shadow: none !important;
 }
 
-#mainHeader .buttons {
-	margin-top: 19.75px;
-}
-
 #mainHeader .buttons .btn {
 	font-weight: bold;
-	margin-left: 19px;
 	border-radius: 9px;
 	height: 36px;
 }
