@@ -20,7 +20,7 @@ class Hotspot {
 	private $name;
 	private $address;
 	private $latitude;
-	private $longtitude;
+	private $longitude;
 	private $creator;
 	private $creationTime;
 
@@ -43,7 +43,7 @@ class Hotspot {
 				$this->name = $row["name"];
 				$this->address = $row["address"];
 				$this->latitude = $row["latitude"];
-				$this->longtitude = $row["longtitude"];
+				$this->longitude = $row["longitude"];
 				$this->creator = $row["creator"];
 				$this->creationTime = $row["time"];
 
@@ -69,7 +69,7 @@ class Hotspot {
 		return $this->latitude;
 	}
 
-	public function getLongtitude(){
+	public function getLongitude(){
 		return $this->longtitude;
 	}
 
