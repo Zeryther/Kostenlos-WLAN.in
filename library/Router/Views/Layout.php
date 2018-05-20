@@ -59,7 +59,7 @@
 						} else {
 							?>
 					<ul class="navbar-nav">
-						<li class="nav-item dropdown">
+						<li class="nav-item dropdown myAccountBox">
 							<a href="#" class="nav-link dropdown-toggle" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Mein Konto <i class="ml-1 fas fa-user"></i>
 							</a>
@@ -77,6 +77,12 @@
 				</div>
 			</div>
 		</nav>
+
+		<div class="wrapper">
+			<div class="wrapperHeadline">
+				asdlolaids
+			</div>
+		</div>
 		
 		<div class="container" style="background-color: red">
 			<?= $content_for_layout; ?>

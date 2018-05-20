@@ -43,6 +43,26 @@
 	#mainHeader #search {
 		margin-left: 20px;
 	}
+
+	.myAccountBox {
+		background: #2a1b2a;
+		margin-top: -35px;
+		height: 107px;
+		width: 160px;
+		text-align: center;
+	}
+
+	#accountDropdown {
+		margin-top: 50px;
+		color: #FFF;
+		font-weight: lighter;
+	}
+}
+
+@media only screen and (min-width : 1200px) {
+	#mainHeader .buttons .btn {
+		width: 154px;
+	}
 }
 
 @media only screen and (max-width : 991px) {
@@ -99,7 +119,6 @@ input:focus {
 }
 
 #mainHeader .buttons .btn {
-	width: 154px;
 	font-weight: bold;
 	margin-left: 19px;
 	border-radius: 9px;
@@ -113,4 +132,13 @@ input:focus {
 /* HAMBURGER MENU */
 #mainHeader .navbar-toggler {
 	margin: 10px 10px;
+}
+
+.wrapper {
+
+}
+
+.wrapper .wrapperHeadline {
+	text-align: center;
+
 }
