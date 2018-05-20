@@ -197,7 +197,7 @@ class App implements \ArrayAccess {
             'base_port'    => isset($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : 80,
             'docs_root'    => null,
             'site_url'     => null
-        ], $settings);
+		], $settings);
 
         // app modules container
         $this->registry["modules"] = new \ArrayObject([]);
@@ -884,8 +884,7 @@ class App implements \ArrayAccess {
     * @return void
     */
     public function bind($path, $callback, $condition = true) {
-
-        if (!$condition) return;
+		if (!$condition) return;
 
         if (!isset($this->routes[$path])) {
             $this->routes[$path] = [];

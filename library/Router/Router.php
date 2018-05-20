@@ -7,3 +7,7 @@ $app['config.site'] = array(
 );
 
 $app->path("assets",$_SERVER["DOCUMENT_ROOT"] . "/assets");
+
+require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/HomeRoute.php";
+
+$app->run();
