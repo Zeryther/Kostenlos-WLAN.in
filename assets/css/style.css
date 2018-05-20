@@ -1,0 +1,84 @@
+:root {
+	--main-bg-color: #941890;
+}
+
+#mainHeader {
+	background-color: var(--main-bg-color);
+	/*height: 75px !important;*/
+	padding: 0;
+	font-family: "Roboto";
+}
+
+#mainHeader > .brand > .navbar-brand {
+	padding-left: 7%;
+	font-weight: bold;
+	height: 59px;
+	padding-top: 14.562px;
+}
+
+@media only screen and (min-width : 640px) {
+	#mainHeader > .brand {
+		width: 20%;
+		text-align: center;
+	}
+}
+
+@media only screen and (min-width : 992px) {
+	#mainHeader > .container {
+		margin-left: 3%;
+	}
+
+	#mainHeader {
+		height: 75px;
+	}
+
+	#mainHeader > .brand {
+		margin-left: -15px;
+	}
+}
+
+@media only screen and (max-width : 991px) {
+	#mainHeader #navbarSupportedContent {
+		margin-left: 10px;
+	}
+}
+
+#mainHeader #search {
+	margin-top: -10px;
+}
+
+#mainHeader #search label {
+	color: #FFF !important;
+	font-size: 11pt;
+	margin-bottom: -2px;
+	font-weight: lighter;
+	justify-content: left;
+}
+
+#mainHeader #search #searchBox {
+	width: 384px;
+	background-image: url('/assets/img/searchBackground.png');
+	background-repeat: repeat-x;
+	border-radius: 5px;
+	border: none;
+}
+
+#mainHeader #search #searchBox:focus {
+	border: none;
+}
+
+input:focus {
+	box-shadow: none !important;
+}
+
+#mainHeader .buttons {
+	margin-top: 19.75px;
+}
+
+#mainHeader .buttons .btn {
+	width: 154px;
+	font-weight: bold;
+	margin-left: 19px;
+	border-radius: 9px;
+	height: 36px;
+}
