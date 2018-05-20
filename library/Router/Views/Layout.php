@@ -61,12 +61,12 @@
 					<ul class="navbar-nav">
 						<li class="nav-item dropdown">
 							<a href="#" class="nav-link dropdown-toggle" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-user"></i>
+								Mein Konto <i class="ml-1 fas fa-user"></i>
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledBy="accountDropdown">
-								<a href="<?php print $app->routeUrl("/login"); ?>" class="dropdown-item">Log in</a>
-								<a href="<?php print $app->routeUrl("/register"); ?>" class="dropdown-item">Create account</a>
+								<a href="<?php print $app->routeUrl("/login"); ?>" class="dropdown-item">Anmelden</a>
+								<a href="<?php print $app->routeUrl("/register"); ?>" class="dropdown-item">Registrieren</a>
 							</div>
 						</li>
 					</ul>
