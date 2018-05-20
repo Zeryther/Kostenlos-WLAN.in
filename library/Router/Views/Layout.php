@@ -78,14 +78,14 @@
 			</div>
 		</nav>
 
-		<div class="wrapper">
-			<div class="wrapperHeadline">
-				asdlolaids
+		<div class="container">
+			<div class="wrapper">
+				<div class="wrapperHeadline">
+					asdlolaids
+				</div>
+
+				asdasdasd
 			</div>
-		</div>
-		
-		<div class="container" style="background-color: red">
-			<?= $content_for_layout; ?>
 		</div>
 	</body>
 </html>

@@ -2,6 +2,10 @@
 	--main-bg-color: #941890;
 }
 
+body,html {
+	background-color: #fbfbfb;
+}
+
 #mainHeader {
 	background-color: var(--main-bg-color);
 	/*height: 75px !important;*/
@@ -47,8 +51,9 @@
 	.myAccountBox {
 		background: #2a1b2a;
 		margin-top: -35px;
-		height: 107px;
+		height: 110px;
 		width: 160px;
+		margin-left: -162px;
 		text-align: center;
 	}
 
@@ -135,10 +140,12 @@ input:focus {
 }
 
 .wrapper {
-
+	background-color: #FFF;
+	border: 2px solid #f5f5f5;
+	border-top-width: 0px;
 }
 
 .wrapper .wrapperHeadline {
 	text-align: center;
-
+	background-color: #ededed;
 }
