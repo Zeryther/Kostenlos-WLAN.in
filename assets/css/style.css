@@ -98,7 +98,7 @@ body,html {
 	color: #FFF !important;
 	font-size: 11pt;
 	margin-bottom: -2px;
-	font-weight: lighter;
+	font-weight: 300;
 	justify-content: left;
 	z-index: 999999999;
 }
@@ -148,4 +148,7 @@ input:focus {
 .wrapper .wrapperHeadline {
 	text-align: center;
 	background-color: #ededed;
+	font-family: "Roboto";
+	font-style: italic;
+	font-weight: lighter;
 }
