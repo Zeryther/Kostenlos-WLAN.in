@@ -38,7 +38,7 @@ body,html {
 /* SMARTPHONE */
 @media only screen and (max-width : 639px) {
 	#mainHeader .buttons {
-		margin-top: 19.75px;
+		/*margin-top: 19.75px;*/
 		margin-left: auto;
 		margin-right: auto;
 	}
