@@ -80,9 +80,17 @@
 
 		<div class="container">
 			<div class="wrapper">
+				<?php
+
+				if(isset($wrapperHeadline) && !empty($wrapperHeadline)){
+					?>
 				<div class="wrapperHeadline">
-					asdlolaids
+					<?php print $wrapperHeadline; ?>
 				</div>
+					<?php
+				}
+				
+				?>
 
 				asdasdasd
 			</div>
