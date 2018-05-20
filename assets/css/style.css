@@ -18,14 +18,14 @@
 
 @media only screen and (min-width : 640px) {
 	#mainHeader > .brand {
-		width: 20%;
-		text-align: center;
+		/*width: 20%;
+		text-align: center;*/
 	}
 }
 
 @media only screen and (min-width : 992px) {
 	#mainHeader > .container {
-		margin-left: 3%;
+		/*margin-left: 3%;*/
 	}
 
 	#mainHeader {
@@ -35,16 +35,38 @@
 	#mainHeader > .brand {
 		margin-left: -15px;
 	}
+
+	#mainHeader #search {
+		margin-top: -10px;
+	}
+
+	#mainHeader #search {
+		margin-left: 20px;
+	}
 }
 
 @media only screen and (max-width : 991px) {
 	#mainHeader #navbarSupportedContent {
 		margin-left: 10px;
+		/*float: left;*/
 	}
-}
 
-#mainHeader #search {
-	margin-top: -10px;
+	#mainHeader #search #searchBox {
+		margin-top: 10px;
+		width: 98.75% !important;
+	}
+
+	#navbarSupportedContent .form-group {
+		width: 100%;
+	}
+
+	#mainHeader .buttons {
+		margin: auto;
+	}
+
+	#navbarSupportedContent .navbar-nav {
+		margin-bottom: 15px;
+	}
 }
 
 #mainHeader #search label {
@@ -53,10 +75,11 @@
 	margin-bottom: -2px;
 	font-weight: lighter;
 	justify-content: left;
+	z-index: 999999999;
 }
 
 #mainHeader #search #searchBox {
-	width: 384px;
+	width: 304px;
 	background-image: url('/assets/img/searchBackground.png');
 	background-repeat: repeat-x;
 	border-radius: 5px;
@@ -81,4 +104,13 @@ input:focus {
 	margin-left: 19px;
 	border-radius: 9px;
 	height: 36px;
+}
+
+#navbarSupportedContent .navbar-nav {
+	/*margin-right: 385px;*/
+}
+
+/* HAMBURGER MENU */
+#mainHeader .navbar-toggler {
+	margin: 10px 10px;
 }
