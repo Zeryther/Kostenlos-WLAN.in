@@ -150,7 +150,7 @@ input:focus {
 .customBtn {
 	font-weight: bold;
 	border-radius: 9px;
-	height: 36px;
+	min-height: 36px;
 }
 
 #navbarSupportedContent .navbar-nav {
