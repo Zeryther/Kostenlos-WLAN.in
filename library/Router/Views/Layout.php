@@ -27,7 +27,7 @@ if(!isset($twitterImage) || empty($twitterImage)){
 		<meta http-equiv="x-ua-compatible" content="ie=edge"/>
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<meta name="og:site_name" content="MCSkinHistory" />
+		<meta name="og:site_name" content="Kostenlos WLAN" />
 		<meta name="og:title" content="<?= $title; ?>"/>
 		<meta name="og:description" content="<?= $description; ?>" />
 		<meta name="og:locale" content="de" />
@@ -36,7 +36,7 @@ if(!isset($twitterImage) || empty($twitterImage)){
 		<meta name="twitter:description" content="<?= $description; ?>" />
 		<meta name="twitter:image" content="<?= $twitterImage; ?>" />
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:site" content="@mcskinhistory" />
+		<meta name="twitter:site" content="@KostenlosWLAN" />
 
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
