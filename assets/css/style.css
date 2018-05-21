@@ -256,7 +256,7 @@ input:focus {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	width: 170px;
+	width: 160px;
 	text-align: right;
 	font-size: 19.53px;
 }

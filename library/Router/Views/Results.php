@@ -7,7 +7,7 @@
 		</div>
 
 		<a href="" class="clearUnderline">
-			<button type="button" class="mt-2 btn btn-warning btn-block customBtn">Einen Hotspot einreichen</button>
+			<button type="button" class="my-2 btn btn-warning btn-block customBtn">Einen Hotspot einreichen</button>
 		</a>
 	</div>
 
@@ -23,7 +23,7 @@
 						<div class="sub">Südermarkt 3, 24939 Flensburgaaaaaaaaaaaaaaaaaaaaaaa</div>
 					</div>
 
-					<div class="info">Klicke für weitere Informationen</div>
+					<div class="d-none d-xl-block info">Klicke für weitere Informationen</div>
 
 					<div class="distance">3,5 km entfernt</div>
 				</div>
@@ -37,7 +37,7 @@
 						<div class="sub">Südermarkt 3, 24939 Flensburgaaaaaaaaaaaaaaaaaaaaaaa</div>
 					</div>
 
-					<div class="info">Klicke für weitere Informationen</div>
+					<div class="d-none d-xl-block info">Klicke für weitere Informationen</div>
 
 					<div class="distance">3,5 km entfernt</div>
 				</div>
@@ -51,7 +51,7 @@
 						<div class="sub">Südermarkt 3, 24939 Flensburgaaaaaaaaaaaaaaaaaaaaaaa</div>
 					</div>
 
-					<div class="info">Klicke für weitere Informationen</div>
+					<div class="d-none d-xl-block info">Klicke für weitere Informationen</div>
 
 					<div class="distance">3,5 km entfernt</div>
 				</div>
