@@ -10,3 +10,4 @@ define("DEFAULT_DESCRIPTION","");
 define("DEFAULT_TWITTER_IMAGE","");
 
 define("GIGADRIVE_API_KEY","");
+define("GOOGLE_MAPS_API_KEY","");

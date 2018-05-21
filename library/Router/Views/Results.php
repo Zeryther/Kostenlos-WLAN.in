@@ -12,50 +12,42 @@
 	</div>
 
 	<div class="col-md-8">
+		<?php
+
+			if(count($hotspots) > 0){
+				?>
 		<div class="hotspotList">
+			<?php
+
+				foreach($hotspots as $data){
+					$hotspot = $data[0];
+					$distance = Util::formatNumber(round($data[1],2));
+					$top = false;
+					?>
 			<a href="#">
 				<div class="hotspot">
-					<div class="topIcon">TOP</div>
-
+					<?= $top ? '<div class="topIcon">TOP</div>' : ''; ?>
 					<div class="address">
-						<div class="name">Eiscafé Milano</div>
+						<div class="name"><?= $hotspot->getName(); ?></div>
 						<br/>
-						<div class="sub">Südermarkt 3, 24939 Flensburgaaaaaaaaaaaaaaaaaaaaaaa</div>
+						<div class="sub"><?= $hotspot->getAddress(); ?></div>
 					</div>
 
 					<div class="d-none d-xl-block info">Klicke für weitere Informationen</div>
 
-					<div class="distance">3,5 km entfernt</div>
+					<div class="distance"><?= $distance; ?> <?= $useKilometers ? "km" : "mi"; ?> entfernt</div>
 				</div>
 			</a>
+					<?php
+				}
 
-			<a href="#">
-				<div class="hotspot">
-					<div class="address">
-						<div class="name">Eiscafé Milano</div>
-						<br/>
-						<div class="sub">Südermarkt 3, 24939 Flensburgaaaaaaaaaaaaaaaaaaaaaaa</div>
-					</div>
-
-					<div class="d-none d-xl-block info">Klicke für weitere Informationen</div>
-
-					<div class="distance">3,5 km entfernt</div>
-				</div>
-			</a>
-
-			<a href="#">
-				<div class="hotspot">
-					<div class="address">
-						<div class="name">Eiscafé Milano</div>
-						<br/>
-						<div class="sub">Südermarkt 3, 24939 Flensburgaaaaaaaaaaaaaaaaaaaaaaa</div>
-					</div>
-
-					<div class="d-none d-xl-block info">Klicke für weitere Informationen</div>
-
-					<div class="distance">3,5 km entfernt</div>
-				</div>
-			</a>
+			?>
 		</div>
+				<?php
+			} else {
+				Util::createAlert("noHotspotsFound","Es konnten keine WLAN Hotspots in deiner Nähe gefunden werden.",ALERT_TYPE_DANGER);
+			}
+
+		?>
 	</div>
 </div>

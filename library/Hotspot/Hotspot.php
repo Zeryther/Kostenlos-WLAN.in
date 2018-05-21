@@ -8,12 +8,31 @@ class Hotspot {
 			return CacheHandler::getFromCache($n);
 		} else {
 			$hotspot = new Hotspot($id);
+			$hotspot->load();
 			if($hotspot->hotspotExists == true){
 				return $hotspot;
 			} else {
 				return null;
 			}
 		}
+	}
+
+	public static function getHotspotFromData($id,$name,$address,$zipCode,$city,$latitude,$longitude,$creator,$creationTime){
+		$hotspot = new Hotspot($id);
+
+		$hotspot->name = $name;
+		$hotspot->address = $address;
+		$hotspot->zipCode = $zipCode;
+		$hotspot->city = $city;
+		$hotspot->latitude = $latitude;
+		$hotspot->longitude = $longitude;
+		$hotspot->creator = $creator;
+		$hotspot->creationTime = $creationTime;
+
+		$hotspot->hotspotExists = true;
+		$hotspot->saveToCache();
+
+		return $hotspot;
 	}
 
 	private $id;
@@ -31,7 +50,10 @@ class Hotspot {
 	protected function __construct($id){
 		$this->hotspotExists = false;
 		$this->id = $id;
+	}
 
+	private function load(){
+		$id = $this->id;
 		$mysqli = Database::Instance()->get();
 		$stmt = $mysqli->prepare("SELECT * FROM `hotspots` WHERE `id` = ?");
 		$stmt->bind_param("i",$id);
