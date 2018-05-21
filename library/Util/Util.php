@@ -78,4 +78,8 @@ class Util {
 			}
 		}
 	}
+
+	public static function formatNumber($num){
+		return number_format($num, 0, '', '.');
+	}
 }

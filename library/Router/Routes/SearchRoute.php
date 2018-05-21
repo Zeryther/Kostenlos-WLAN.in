@@ -5,7 +5,7 @@ $app->get("/search",function(){
 		$query = $_GET["q"];
 		$zipCode = null;
 
-		if(is_integer($query)){
+		if(is_numeric($query)){
 			// ZIP CODE
 			$zipCode = ZipCode::getCode($query);
 		} else {
@@ -14,7 +14,7 @@ $app->get("/search",function(){
 		}
 
 		if(!is_null($zipCode)){
-			return $zipCode;
+			$this->reroute("/" . $zipCode->getCity() . "/" . $zipCode->getZipCode());
 		} else {
 			$this->reroute("/?msg=placeNotFound");
 		}

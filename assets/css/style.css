@@ -175,3 +175,98 @@ input:focus {
 	font-style: italic;
 	font-weight: lighter;
 }
+
+.filterSettings {
+	border: 1px solid #ededed;
+	border-bottom-color: #cccccc;
+	border-bottom-width: 4px;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+.filterSettings .filterHeadline {
+	font-size: 15.88px;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.hotspotList {
+
+}
+
+.hotspotList a {
+	text-decoration: none !important;
+}
+
+.hotspotList .hotspot {
+	border: 4px solid #941890;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	padding: 25px 30px;
+	height: 103px;
+	color: #000 !important;
+	transition: background-color 0.25s ease;
+	margin-bottom: 10px;
+}
+
+.hotspotList .hotspot .topIcon {
+	background-color: #941890;
+	color: #FFF;
+	width: 42px;
+	text-align: center;
+	margin-top: -25px;
+}
+
+.hotspotList .hotspot:hover {
+	background-color: #b658b2;
+}
+
+.hotspotList .hotspot:hover .info {
+	color: #FFF !important;
+}
+
+.hotspotList .hotspot .address {
+	float: left;
+	display: block;
+	font-style: italic;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 170px;
+}
+
+.hotspotList .hotspot .address .name {
+	font-size: 19.53px;
+}
+
+.hotspotList .hotspot .address .sub {
+	font-size: 12.54px;
+	margin-top: -26px;
+}
+
+.hotspotList .hotspot .distance {
+	float: right;
+	display: block;
+	font-style: italic;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 170px;
+	text-align: right;
+	font-size: 19.53px;
+}
+
+.hotspotList .hotspot .info {
+	display: block;
+	font-style: italic;
+	font-size: 19.53px;
+	width: 280px;
+	float: left;
+	margin-top: 10px;
+	color: #007bff;
+	margin-left: 20px;
+	text-align: right;
+	transition: color 0.25s ease;
+}

@@ -18,6 +18,7 @@ class Database {
 		if($this->tried == false){
 			$this->tried = true;
 			$this->db = @new mysqli($host,$user,$password,$database,$port);
+			$this->db->set_charset("utf8mb4");
 			mysqli_report(MYSQLI_REPORT_ERROR);
 
 			if($this->db->connect_error){

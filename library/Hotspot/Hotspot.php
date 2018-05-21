@@ -19,6 +19,7 @@ class Hotspot {
 	private $id;
 	private $name;
 	private $address;
+	private $zipCode;
 	private $latitude;
 	private $longitude;
 	private $creator;
@@ -42,6 +43,7 @@ class Hotspot {
 
 				$this->name = $row["name"];
 				$this->address = $row["address"];
+				$this->zipCode = $row["zipCode"];
 				$this->latitude = $row["latitude"];
 				$this->longitude = $row["longitude"];
 				$this->creator = $row["creator"];
@@ -63,6 +65,10 @@ class Hotspot {
 
 	public function getAddress(){
 		return $this->address;
+	}
+
+	public function getZipCode(){
+		return $this->zipCode;
 	}
 
 	public function getLatitude(){

@@ -50,6 +50,8 @@ class ZipCode {
 	private $cityName;
 	private $codeExists;
 
+	private $totalResults = -1;
+
 	protected function __construct($zipCode){
 		$this->codeExists = false;
 		$this->zipCode = $zipCode;
@@ -89,6 +91,32 @@ class ZipCode {
 				return "Schweiz";
 			default:
 				return $this->country;
+		}
+	}
+
+	public function getCity(){
+		return $this->cityName;
+	}
+
+	public function totalResults(){
+		if($this->totalResults == -1){
+			$mysqli = Database::Instance()->get();
+
+			$stmt = $mysqli->prepare("SELECT COUNT(*) AS count FROM `hotspots` WHERE `zipCode` = ?");
+			$stmt->bind_param("i",$this->zipCode);
+			if($stmt->execute()){
+				$result = $stmt->get_result();
+				if($result->num_rows){
+					$row = $result->fetch_assoc();
+
+					$this->totalResults = $row["count"];
+				}
+			}
+			$stmt->close();
+
+			$this->saveToCache();
+		} else {
+			return $this->totalResults;
 		}
 	}
 
