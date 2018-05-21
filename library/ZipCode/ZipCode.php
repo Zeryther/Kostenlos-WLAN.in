@@ -16,6 +16,35 @@ class ZipCode {
 		}
 	}
 
+	public static function getCodeFromCity($city){
+		$n = "zipCodeCity_" . $city;
+
+		if(CacheHandler::existsInCache($n)){
+			return CacheHandler::getFromCache($n);
+		} else {
+			$mysqli = Database::Instance()->get();
+
+			$code = null;
+			$stmt = $mysqli->prepare("SELECT * FROM `zipCodes` WHERE `cityName` = ?");
+			$stmt->bind_param("s",trim($city));
+			if($stmt->execute()){
+				$result = $stmt->get_result();
+				if($result->num_rows){
+					$row = $result->fetch_assoc();
+
+					$code = $row["code"];
+				}
+			}
+			$stmt->close();
+
+			if(!is_null($code)){
+				return self::getCode($zipCode);
+			} else {
+				return null;
+			}
+		}
+	}
+
 	private $zipCode;
 	private $country;
 	private $cityName;
@@ -69,5 +98,6 @@ class ZipCode {
 
 	public function saveToCache(){
 		CacheHandler::setToCache("zipCode_" . $this->zipCode,$this,20*60);
+		CacheHandler::setToCache("zipCodeCity_" . $this->cityName,$this,20*60);
 	}
 }

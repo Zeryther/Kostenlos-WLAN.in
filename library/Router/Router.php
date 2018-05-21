@@ -13,6 +13,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/LoginRoute.php"
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/LogoutRoute.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/RegisterRoute.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/LoginCallbackRoute.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/SearchRoute.php";
 
 $app->on("after",function() {
 	if($this->response->status == "404"){

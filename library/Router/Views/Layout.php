@@ -74,10 +74,10 @@ if(!isset($twitterImage) || empty($twitterImage)){
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<form class="form-inline mr-auto" id="search">
+					<form class="form-inline mr-auto" id="search" method="get" action="<?php print $app->routeUrl("/search"); ?>">
 						<div class="form-group" style="display: block;">
 							<label for="searchBox">Ich suche kostenloses WLAN in</label>
-							<input id="searchBox" name="query" class="form-control mr-sm-2" type="search" aria-label="Search">
+							<input id="searchBox" name="q" class="form-control mr-sm-2" type="search" aria-label="Search">
 						</div>
 
 						<div class="buttons">
