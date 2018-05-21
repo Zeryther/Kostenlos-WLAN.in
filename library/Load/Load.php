@@ -16,4 +16,5 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Handler/Shutdown.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Util/Util.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/User/User.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Hotspot/Hotspot.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/library/ZipCode/ZipCode.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Cache/CacheHandler.php";
