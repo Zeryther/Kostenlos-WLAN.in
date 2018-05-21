@@ -16,7 +16,31 @@ class User {
 		}
 	}
 
+	public static function registerAccount($id,$username,$email){
+		$mysqli = Database::Instance()->get();
+		$account = User::getUserById($id);
+
+		if($account == null){
+			$stmt = $mysqli->prepare("INSERT IGNORE INTO `users` (`id`,`username`,`email`) VALUES(?,?,?);");
+			$stmt->bind_param("iss",$id,$username,$email);
+			$stmt->execute();
+			$stmt->close();
+
+			User::getUserById($id); // cache data after registering
+		} else {
+			$stmt = $mysqli->prepare("UPDATE `users` SET `username` = ?, `email` = ? WHERE `id` = ?");
+			$stmt->bind_param("ssi",$username,$email,$id);
+			$stmt->execute();
+			$stmt->close();
+
+			$account->setUsername($username);
+			$account->setEmail($email);
+			$account->saveToCache();
+		}
+	}
+
 	private $id;
+	private $username;
 	private $email;
 	private $level;
 	private $registerDate;
@@ -37,6 +61,7 @@ class User {
 				$this->userExists = true;
 				$row = $result->fetch_assoc();
 
+				$this->username = $row["username"];
 				$this->email = $row["email"];
 				$this->level = $row["level"];
 				$this->registerDate = $row["time"];
@@ -51,8 +76,20 @@ class User {
 		return $this->id;
 	}
 
+	public function getUsername(){
+		return $this->username;
+	}
+
+	public function setUsername($username){
+		$this->username = $username;
+	}
+
 	public function getEmail(){
 		return $this->email;
+	}
+
+	public function setEmail($email){
+		$this->email = $email;
 	}
 
 	public function getLevel(){

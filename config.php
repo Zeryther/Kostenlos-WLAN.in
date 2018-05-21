@@ -8,3 +8,5 @@ define("MYSQL_DATABASE","");
 
 define("DEFAULT_DESCRIPTION","");
 define("DEFAULT_TWITTER_IMAGE","");
+
+define("GIGADRIVE_API_KEY","");
