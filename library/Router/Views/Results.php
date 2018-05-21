@@ -24,7 +24,7 @@
 					$distance = Util::formatNumber(round($data[1],2));
 					$top = false; // TODO
 					?>
-			<a href="#">
+			<a href="<?= $app->routeUrl("/hotspot/" . $hotspot->getID()); ?>">
 				<div class="hotspot">
 					<?= $top ? '<div class="topIcon">TOP</div>' : ''; ?>
 					<div class="address">

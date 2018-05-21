@@ -9,6 +9,8 @@ if(isset($_GET["msg"]) && !empty($_GET["msg"])){
 		Util::createAlert($msg,"Die angegebene Postleitzahl/Stadt konnte nicht gefunden werden.",ALERT_TYPE_DANGER,true);
 	} else if($msg == "failedToTrack"){
 		Util::createAlert($msg,"Dein Standort konnte nicht berechnet werden.",ALERT_TYPE_DANGER,true);
+	} else if($msg == "unknownHotspot"){
+		Util::createAlert($msg,"Dieser Hotspot konnte nicht gefunden werden.",ALERT_TYPE_DANGER,true);
 	}
 }
 
