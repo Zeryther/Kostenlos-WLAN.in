@@ -95,7 +95,9 @@ if(!isset($twitterImage) || empty($twitterImage)){
 							?>
 					<ul class="navbar-nav">
 						<li class="nav-item myAccountBox">
-							<div id="accountDropdown" style="margin-top: 47px">Eingeloggt als<br/><?php print Util::getCurrentUser()->getUsername(); ?></div>
+							<a href="<?= $app->routeUrl("/account"); ?>" class="nav-link" style="margin-top: 40px" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Eingeloggt als<br/><?= Util::getCurrentUser()->getUsername(); ?>
+							</a>
 						</li>
 					</ul>
 							<?php
