@@ -92,7 +92,13 @@ if(!isset($twitterImage) || empty($twitterImage)){
 					<?php
 
 						if(Util::isLoggedIn()){
-							// TODO
+							?>
+					<ul class="navbar-nav">
+						<li class="nav-item myAccountBox">
+							<div id="accountDropdown" style="margin-top: 47px">Eingeloggt als<br/><?php print Util::getCurrentUser()->getUsername(); ?></div>
+						</li>
+					</ul>
+							<?php
 						} else {
 							?>
 					<ul class="navbar-nav">
