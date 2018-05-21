@@ -48,7 +48,7 @@ $app->bind("/:query",function($params){
 				"query" => $query,
 				"hotspots" => $hotspots,
 				"useKilometers" => $useKilometers,
-				"wrapperHeadline" => Util::formatNumber(count($hotspots)) . " Ergebnisse gefunden in " . $query
+				"wrapperHeadline" => (count($hotspots) == 1) ? Util::formatNumber(count($hotspots)) . " Ergebnis gefunden in " . $query : Util::formatNumber(count($hotspots)) . " Ergebnisse gefunden in " . $query
 			];
 			
 			return $this->render($_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Results.php with " . $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Layout.php",$data);
@@ -88,7 +88,7 @@ $app->bind("/:query",function($params){
 				"query" => $query,
 				"hotspots" => $hotspots,
 				"useKilometers" => $useKilometers,
-				"wrapperHeadline" => Util::formatNumber(count($hotspots)) . " Ergebnisse gefunden in " . $query
+				"wrapperHeadline" => (count($hotspots) == 1) ? Util::formatNumber(count($hotspots)) . " Ergebnis gefunden in " . $query : Util::formatNumber(count($hotspots)) . " Ergebnisse gefunden in " . $query
 			];
 			
 			return $this->render($_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Results.php with " . $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Layout.php",$data);
