@@ -137,7 +137,9 @@ if(!isset($twitterImage) || empty($twitterImage)){
 
 				?>
 
-				<?= $content_for_layout; ?>
+				<div style="padding: 10px">
+					<?= $content_for_layout; ?>
+				</div>
 			</div>
 
 			<small>

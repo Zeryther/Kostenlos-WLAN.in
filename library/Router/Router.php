@@ -14,4 +14,14 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/LogoutRoute.php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/RegisterRoute.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/LoginCallbackRoute.php";
 
+$app->on("after",function() {
+	if($this->response->status == "404"){
+		$data = array(
+			"title" => "404: Seite nicht gefunden"
+		);
+
+		$this->response->body = $this->render($_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/ErrorPages/404.php with " . $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Layout.php",$data);
+	}
+});
+
 $app->run();
