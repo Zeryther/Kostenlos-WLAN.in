@@ -30,7 +30,7 @@
 					<div class="address">
 						<div class="name"><?= $hotspot->getName(); ?></div>
 						<br/>
-						<div class="sub"><?= $hotspot->getAddress(); ?></div>
+						<div class="sub"><?= $hotspot->getAddress(); ?>, <?= $hotspot->getZipCode(); ?> <?= $hotspot->getCity(); ?></div>
 					</div>
 
 					<div class="d-none d-xl-block info">Klicke für weitere Informationen</div>
