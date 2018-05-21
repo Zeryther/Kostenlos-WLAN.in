@@ -22,7 +22,7 @@
 				foreach($hotspots as $data){
 					$hotspot = $data[0];
 					$distance = Util::formatNumber(round($data[1],2));
-					$top = false;
+					$top = false; // TODO
 					?>
 			<a href="#">
 				<div class="hotspot">
