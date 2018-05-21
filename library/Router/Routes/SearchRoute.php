@@ -3,18 +3,24 @@
 $app->get("/search",function(){
 	if(isset($_GET["q"]) && !empty($_GET["q"])){
 		$query = $_GET["q"];
-		$zipCode = null;
+		$zipCodes = null;
+		$city = trim($query);
 
 		if(is_numeric($query)){
 			// ZIP CODE
 			$zipCode = ZipCode::getCode($query);
+			if($zipCode != null){
+				$city = $zipCode->getCity();
+				$zipCodes = ZipCode::getCodesFromCity($query);
+			}
 		} else {
 			// CITY NAME
-			$zipCode = ZipCode::getCodeFromCity($query);
+			$zipCodes = ZipCode::getCodesFromCity($query);
 		}
 
-		if(!is_null($zipCode)){
-			$this->reroute("/" . $zipCode->getCity() . "/" . $zipCode->getZipCode());
+		if(is_array($zipCodes) && count($zipCodes) > 0){
+			$city = ZipCode::getCode($zipCodes[0])->getCity();
+			$this->reroute("/" . $city);
 		} else {
 			$this->reroute("/?msg=placeNotFound");
 		}

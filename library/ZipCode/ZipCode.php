@@ -16,31 +16,62 @@ class ZipCode {
 		}
 	}
 
-	public static function getCodeFromCity($city){
-		$n = "zipCodeCity_" . $city;
+	public static function getCodesFromCity($city){
+		$n = "zipCodesCity_" . $city;
 
 		if(CacheHandler::existsInCache($n)){
 			return CacheHandler::getFromCache($n);
 		} else {
 			$mysqli = Database::Instance()->get();
 
-			$code = null;
+			$codes = array();
+
 			$stmt = $mysqli->prepare("SELECT * FROM `zipCodes` WHERE `cityName` = ?");
 			$stmt->bind_param("s",trim($city));
 			if($stmt->execute()){
 				$result = $stmt->get_result();
 				if($result->num_rows){
-					$row = $result->fetch_assoc();
-
-					$code = $row["code"];
+					while($row = $result->fetch_assoc()){
+						array_push($codes,$row["code"]);
+					}
 				}
 			}
 			$stmt->close();
 
-			if(!is_null($code)){
-				return self::getCode($zipCode);
+			CacheHandler::setToCache($n,$codes,20*60);
+
+			return $codes;
+		}
+	}
+
+	public static function getTotalResultsFromCity($city){
+		$n = "totalResults_" . $city;
+
+		if(CacheHandler::existsInCache($n)){
+			return CacheHandler::getFromCache($n);
+		} else {
+			$zipCodes = self::getCodesFromCity($city);
+
+			if(count($zipCodes) > 0){
+				$mysqli = Database::Instance()->get();
+				$count = 0;
+				$s = "'" . implode("','",$zipCodes) . "'";
+
+				$stmt = $mysqli->prepare("SELECT COUNT(*) AS count FROM `hotspots` WHERE `zipCode` IN (?);");
+				$stmt->bind_param("s",$s);
+				if($stmt->execute()){
+					$result = $stmt->get_result();
+					if($result->num_rows){
+						$row = $result->fetch_assoc();
+
+						$count = $row["count"];
+					}
+				}
+				$stmt->close();
+
+				return $count;
 			} else {
-				return null;
+				return 0;
 			}
 		}
 	}
@@ -126,6 +157,5 @@ class ZipCode {
 
 	public function saveToCache(){
 		CacheHandler::setToCache("zipCode_" . $this->zipCode,$this,20*60);
-		CacheHandler::setToCache("zipCodeCity_" . $this->cityName,$this,20*60);
 	}
 }

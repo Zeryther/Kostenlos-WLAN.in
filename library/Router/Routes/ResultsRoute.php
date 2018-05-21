@@ -1,20 +1,17 @@
 <?php
 
-$app->bind("/:city/:zip",function($params){
-	$zipCode = ZipCode::getCode($params["zip"]);
+$app->bind("/:city",function($params){
+	$zipCodes = ZipCode::getCodesFromCity($params["city"]);
 
-	if($zipCode != null){
-		if($zipCode->getCity() == $params["city"]){
-			$data = [
-				"title" => $zipCode->getCity() . " " . $zipCode->getZipCode(),
-				"zipCode" => $zipCode,
-				"wrapperHeadline" => Util::formatNumber($zipCode->totalResults()) . " Ergebnisse gefunden in " . $zipCode->getCity()
-			];
-		
-			return $this->render($_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Results.php with " . $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Layout.php",$data);
-		} else {
-			$this->reroute("/" . $zipCode->getCity() . "/" . $zipCode->getZipCode());
-		}
+	if($zipCodes != null && count($zipCodes) > 0){
+		$data = [
+			"title" => "Kostenlose Hotspots in " . $params["city"],
+			"zipCodes" => $zipCodes,
+			"city" => $params["city"],
+			"wrapperHeadline" => Util::formatNumber(ZipCode::getTotalResultsFromCity($params["city"])) . " Ergebnisse gefunden in " . $params["city"]
+		];
+	
+		return $this->render($_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Results.php with " . $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Layout.php",$data);
 	} else {
 		$this->reroute("/?msg=placeNotFound");
 	}

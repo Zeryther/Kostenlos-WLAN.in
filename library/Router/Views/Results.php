@@ -14,7 +14,8 @@
 					<div class="topIcon">TOP</div>
 
 					<div class="address">
-						<div class="name">Eiscafé Milano</div><br/>
+						<div class="name">Eiscafé Milano</div>
+						<br/>
 						<div class="sub">Südermarkt 3, 24939 Flensburgaaaaaaaaaaaaaaaaaaaaaaa</div>
 					</div>
 
@@ -22,10 +23,13 @@
 
 					<div class="distance">3,5 km entfernt</div>
 				</div>
+			</a>
 
+			<a href="#">
 				<div class="hotspot">
 					<div class="address">
-						<div class="name">Eiscafé Milano</div><br/>
+						<div class="name">Eiscafé Milano</div>
+						<br/>
 						<div class="sub">Südermarkt 3, 24939 Flensburgaaaaaaaaaaaaaaaaaaaaaaa</div>
 					</div>
 
@@ -33,10 +37,13 @@
 
 					<div class="distance">3,5 km entfernt</div>
 				</div>
+			</a>
 
+			<a href="#">
 				<div class="hotspot">
 					<div class="address">
-						<div class="name">Eiscafé Milano</div><br/>
+						<div class="name">Eiscafé Milano</div>
+						<br/>
 						<div class="sub">Südermarkt 3, 24939 Flensburgaaaaaaaaaaaaaaaaaaaaaaa</div>
 					</div>
 
@@ -44,7 +51,7 @@
 
 					<div class="distance">3,5 km entfernt</div>
 				</div>
-			</div>
+			</a>
 		</div>
 	</div>
 </div>
