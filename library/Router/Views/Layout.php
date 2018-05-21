@@ -67,7 +67,7 @@ if(!isset($twitterImage) || empty($twitterImage)){
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-dark" id="mainHeader">
 			<div class="container">
-				<div class="brand"><a class="navbar-brand" href="#">kostenlos-wlan.in</a></div>
+				<div class="brand"><a class="navbar-brand" href="<?php print $app->routeUrl("/"); ?>">kostenlos-wlan.in</a></div>
 
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
