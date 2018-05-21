@@ -143,7 +143,7 @@ class Place {
 			$zipCode = $zipCodes[0];
 
 			foreach(self::getCitiesFromZipCode($zipCode) as $c){
-				if(strtolower($city) === strtolower($c)){
+				if(mb_strtolower($city) == mb_strtolower($c)){
 					return $c;
 				}
 			}
