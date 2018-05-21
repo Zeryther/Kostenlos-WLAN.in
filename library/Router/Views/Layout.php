@@ -149,7 +149,7 @@ if(!isset($twitterImage) || empty($twitterImage)){
 					$currentYear = date("Y");
 
 					$s = $currentYear;
-					if($firstYear != $currentYear) $s = $firstYear . " - " . $currentYear;
+					if($firstYear != $currentYear) $s = $firstYear . "-" . $currentYear;
 
 				?>
 				<a href="https://gigadrivegroup.com/legal/contact" target="_blank">Impressum</a> &bull; <a href="https://gigadrivegroup.com/legal/terms-of-service" target="_blank">Allgemeine Geschäftsbedingungen</a> &bull; <a href="https://gigadrivegroup.com/legal/privacy-policy" target="_blank">Datenschutzerklärung</a> &bull; <a href="https://gigadrivegroup.com/legal/disclaimer" target="_blank">Haftungsausschluss</a><br/>
