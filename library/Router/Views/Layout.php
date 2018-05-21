@@ -81,10 +81,10 @@ if(!isset($twitterImage) || empty($twitterImage)){
 						</div>
 
 						<div class="buttons">
-							<button type="submit" class="btn btn-warning">Suchen</button>
+							<button type="submit" class="btn btn-warning customBtn">Suchen</button>
 							
 							<a href="">
-								<button type="button" class="btn btn-warning">Orte mich!</button>
+								<button type="button" class="btn btn-warning customBtn">Orte mich!</button>
 							</a>
 						</div>
 					</form>

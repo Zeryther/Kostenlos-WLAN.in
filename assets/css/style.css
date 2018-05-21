@@ -147,7 +147,7 @@ input:focus {
 	box-shadow: none !important;
 }
 
-#mainHeader .buttons .btn {
+.customBtn {
 	font-weight: bold;
 	border-radius: 9px;
 	height: 36px;
@@ -269,4 +269,8 @@ input:focus {
 	margin-left: 20px;
 	text-align: right;
 	transition: color 0.25s ease;
+}
+
+.clearUnderline {
+	text-decoration: none !important;
 }

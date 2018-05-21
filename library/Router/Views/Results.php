@@ -5,6 +5,10 @@
 
 			asdasdas
 		</div>
+
+		<a href="" class="clearUnderline">
+			<button type="button" class="mt-2 btn btn-warning btn-block customBtn">Einen Hotspot einreichen</button>
+		</a>
 	</div>
 
 	<div class="col-md-8">
