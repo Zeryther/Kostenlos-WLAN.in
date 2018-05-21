@@ -200,7 +200,7 @@ input:focus {
 }
 
 .hotspotList .hotspot {
-	border: 4px solid #941890;
+	border: 4px solid var(--main-bg-color);
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -212,7 +212,7 @@ input:focus {
 }
 
 .hotspotList .hotspot .topIcon {
-	background-color: #941890;
+	background-color: var(--main-bg-color);
 	color: #FFF;
 	width: 42px;
 	text-align: center;
