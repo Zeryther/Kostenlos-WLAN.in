@@ -3,26 +3,24 @@
 $app->get("/search",function(){
 	if(isset($_GET["q"]) && !empty($_GET["q"])){
 		$query = $_GET["q"];
-		$zipCodes = null;
-		$city = trim($query);
 
 		if(is_numeric($query)){
 			// ZIP CODE
-			$zipCode = ZipCode::getCode($query);
-			if($zipCode != null){
-				$city = $zipCode->getCity();
-				$zipCodes = ZipCode::getCodesFromCity($query);
+			$cities = Place::getCitiesFromZipCode($query);
+			if(count($cities) > 0){
+				$this->reroute("/" . $query);
+			} else {
+				$this->reroute("/?msg=placeNotFound");
 			}
 		} else {
 			// CITY NAME
-			$zipCodes = ZipCode::getCodesFromCity($query);
-		}
+			$zipCodes = Place::getZipCodesFromCity($query);
 
-		if(is_array($zipCodes) && count($zipCodes) > 0){
-			$city = ZipCode::getCode($zipCodes[0])->getCity();
-			$this->reroute("/" . $city);
-		} else {
-			$this->reroute("/?msg=placeNotFound");
+			if(count($zipCodes) > 0){
+				$this->reroute("/" . Place::capitaliseCityName($query));
+			} else {
+				$this->reroute("/?msg=placeNotFound");
+			}
 		}
 	} else {
 		$this->reroute("/");

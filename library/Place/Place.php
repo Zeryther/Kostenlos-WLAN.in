@@ -1,22 +1,22 @@
 <?php
 
-class ZipCode {
-	public static function getCode($zipCode){
-		$n = "zipCode_" . $zipCode;
+class Place {
+	public static function getPlace($zipCode,$name){
+		$n = "zipCode_" . $zipCode . "_" . $name;
 
 		if(CacheHandler::existsInCache($n)){
 			return CacheHandler::getFromCache($n);
 		} else {
-			$code = new ZipCode($zipCode);
-			if($code->codeExists == true){
-				return $code;
+			$place = new Place($zipCode,$name);
+			if($place->exists() == true){
+				return $place;
 			} else {
 				return null;
 			}
 		}
 	}
 
-	public static function getCodesFromCity($city){
+	public static function getZipCodesFromCity($city){
 		$n = "zipCodesCity_" . $city;
 
 		if(CacheHandler::existsInCache($n)){
@@ -26,8 +26,8 @@ class ZipCode {
 
 			$codes = array();
 
-			$stmt = $mysqli->prepare("SELECT * FROM `zipCodes` WHERE `cityName` = ?");
-			$c = trim($city);
+			$stmt = $mysqli->prepare("SELECT `code` FROM `places` WHERE `cityName` LIKE ?");
+			$c = "%" . trim($city) . "%";
 			$stmt->bind_param("s",$c);
 			if($stmt->execute()){
 				$result = $stmt->get_result();
@@ -45,13 +45,41 @@ class ZipCode {
 		}
 	}
 
+	public static function getCitiesFromZipCode($code){
+		$n = "citiesZipCode_" . $code;
+
+		if(CacheHandler::existsInCache($n)){
+			return CacheHandler::getFromCache($n);
+		} else {
+			$mysqli = Database::Instance()->get();
+
+			$cities = array();
+
+			$stmt = $mysqli->prepare("SELECT `cityName` FROM `places` WHERE `code` = ?");
+			$stmt->bind_param("i",$code);
+			if($stmt->execute()){
+				$result = $stmt->get_result();
+				if($result->num_rows){
+					while($row = $result->fetch_assoc()){
+						array_push($cities,$row["cityName"]);
+					}
+				}
+			}
+			$stmt->close();
+
+			CacheHandler::setToCache($n,$cities,20*60);
+
+			return $cities;
+		}
+	}
+
 	public static function getTotalResultsFromCity($city){
 		$n = "totalResults_" . $city;
 
 		if(CacheHandler::existsInCache($n)){
 			return CacheHandler::getFromCache($n);
 		} else {
-			$zipCodes = self::getCodesFromCity($city);
+			$zipCodes = self::getZipCodesFromCity($city);
 
 			if(count($zipCodes) > 0){
 				$mysqli = Database::Instance()->get();
@@ -77,24 +105,76 @@ class ZipCode {
 		}
 	}
 
+	public static function getTotalResultsFromZipCode($zipCode){
+		$n = "totalResults_" . $zipCode;
+
+		if(CacheHandler::existsInCache($n)){
+			return CacheHandler::getFromCache($n);
+		} else {
+			$c = self::getCitiesFromZipCode($zipCode);
+			if(count($c) > 0){
+				$p = self::getPlace($zipCode,$c[0]);
+
+				$mysqli = Database::Instance()->get();
+				$count = 0;
+				$s = "'" . implode("','",$c) . "'";
+
+				$stmt = $mysqli->prepare("SELECT COUNT(*) AS count FROM `hotspots` WHERE `city` IN (?);");
+				$stmt->bind_param("s",$s);
+				if($stmt->execute()){
+					$result = $stmt->get_result();
+					if($result->num_rows){
+						$row = $result->fetch_assoc();
+
+						$count = $row["count"];
+					}
+				}
+				$stmt->close();
+
+				return $count;
+			}
+		}
+	}
+
+	public static function capitaliseCityName($city){
+		$zipCodes = self::getZipCodesFromCity($city);
+
+		if(count($zipCodes) > 0){
+			$zipCode = $zipCodes[0];
+
+			foreach(self::getCitiesFromZipCode($zipCode) as $c){
+				if(strtolower($city) === strtolower($c)){
+					return $c;
+				}
+			}
+
+			return $city;
+		} else {
+			return $city;
+		}
+	}
+
 	private $zipCode;
 	private $country;
 	private $cityName;
-	private $codeExists;
+	private $exists;
 
 	private $totalResults = -1;
 
-	protected function __construct($zipCode){
-		$this->codeExists = false;
+	protected function __construct($zipCode,$cityName){
+		$cityName = trim($cityName);
+
+		$this->exists = false;
 		$this->zipCode = $zipCode;
+		$this->cityName = $cityName;
 		$mysqli = Database::Instance()->get();
 
-		$stmt = $mysqli->prepare("SELECT * FROM `zipCodes` WHERE `code` = ?");
-		$stmt->bind_param("i",$zipCode);
+		$stmt = $mysqli->prepare("SELECT * FROM `places` WHERE `code` = ? AND `cityName` = ?");
+		$stmt->bind_param("is",$zipCode,$cityName);
 		if($stmt->execute()){
 			$result = $stmt->get_result();
 			if($result->num_rows){
-				$this->codeExists = true;
+				$this->exists = true;
 
 				$row = $result->fetch_assoc();
 				$this->country = $row["country"];
@@ -153,10 +233,10 @@ class ZipCode {
 	}
 
 	public function exists(){
-		return $this->codeExists;
+		return $this->exists;
 	}
 
 	public function saveToCache(){
-		CacheHandler::setToCache("zipCode_" . $this->zipCode,$this,20*60);
+		CacheHandler::setToCache("zipCode_" . $this->zipCode . "_" . $this->cityName,$this,20*60);
 	}
 }
