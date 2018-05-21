@@ -10,6 +10,7 @@ $app->bind("/:query",function($params){
 				"title" => "Kostenlose Hotspots in " . $query,
 				"zipCodes" => [(int)$query],
 				"cities" => $cities,
+				"query" => $query,
 				"wrapperHeadline" => Util::formatNumber(Place::getTotalResultsFromZipCode($query)) . " Ergebnisse gefunden in " . $query
 			];
 		
@@ -28,6 +29,7 @@ $app->bind("/:query",function($params){
 				"title" => "Kostenlose Hotspots in " . $query,
 				"zipCodes" => $zipCodes,
 				"cities" => [$query],
+				"query" => $query,
 				"wrapperHeadline" => Util::formatNumber(Place::getTotalResultsFromCity($query)) . " Ergebnisse gefunden in " . $query
 			];
 		
