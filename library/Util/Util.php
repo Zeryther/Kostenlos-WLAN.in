@@ -82,4 +82,35 @@ class Util {
 	public static function formatNumber($num){
 		return number_format($num, 0, '', '.');
 	}
+
+	public static function geoIPData($ip){
+		if($ip == null || empty($ip)) $ip = self::getIP();
+		$n = "geoIPData_" . urlencode($ip);
+		
+		if(CacheHandler::existsInCache($n)){
+			return json_decode(CacheHandler::getFromCache($n),true);
+		} else {
+			$data = json_decode(@file_get_contents("http://ip-api.com/json/" . $ip),true);
+
+			if(isset($data["status"]) && $data["status"] == "success"){
+				CacheHandler::setToCache($n,json_encode($data),20*60);
+			}
+
+			return $data;
+		}
+	}
+
+	public static function fixUmulaut($input){
+		$a = [
+			"ae" => "ä",
+			"oe" => "ö",
+			"ue" => "ü"
+		];
+
+		foreach($a as $b => $c){
+			$input = str_replace($b,$c,$input);
+		}
+
+		return $input;
+	}
 }

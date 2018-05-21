@@ -67,14 +67,14 @@ if(!isset($twitterImage) || empty($twitterImage)){
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-dark" id="mainHeader">
 			<div class="container">
-				<div class="brand"><a class="navbar-brand" href="<?php print $app->routeUrl("/"); ?>">kostenlos-wlan.in</a></div>
+				<div class="brand"><a class="navbar-brand" href="<?= $app->routeUrl("/"); ?>">kostenlos-wlan.in</a></div>
 
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<form class="form-inline mr-auto" id="search" method="get" action="<?php print $app->routeUrl("/search"); ?>">
+					<form class="form-inline mr-auto" id="search" method="get" action="<?= $app->routeUrl("/search"); ?>">
 						<div class="form-group" style="display: block;">
 							<label for="searchBox">Ich suche kostenloses WLAN in</label>
 							<input id="searchBox" name="q" class="form-control mr-sm-2" type="search" aria-label="Search"<?= (isset($city)) ? ' value="' . $city . '"' : ""; ?>>
@@ -83,7 +83,7 @@ if(!isset($twitterImage) || empty($twitterImage)){
 						<div class="buttons">
 							<button type="submit" class="btn btn-warning customBtn">Suchen</button>
 							
-							<a href="">
+							<a href="<?= $app->routeUrl("/track"); ?>">
 								<button type="button" class="btn btn-warning customBtn">Orte mich!</button>
 							</a>
 						</div>
