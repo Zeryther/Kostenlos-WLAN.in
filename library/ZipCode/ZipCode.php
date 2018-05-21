@@ -27,7 +27,8 @@ class ZipCode {
 			$codes = array();
 
 			$stmt = $mysqli->prepare("SELECT * FROM `zipCodes` WHERE `cityName` = ?");
-			$stmt->bind_param("s",trim($city));
+			$c = trim($city);
+			$stmt->bind_param("s",$c);
 			if($stmt->execute()){
 				$result = $stmt->get_result();
 				if($result->num_rows){
