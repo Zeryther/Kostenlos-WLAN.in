@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Monolog' => array($vendorDir . '/monolog/monolog/src'),
     'JasonGrimes' => array($vendorDir . '/jasongrimes/paginator/src'),
+    'ForceUTF8\\' => array($vendorDir . '/neitanod/forceutf8/src'),
 );

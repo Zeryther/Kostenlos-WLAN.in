@@ -22,7 +22,7 @@ $app->bind("/:query",function($params){
 		// ZIP CODE
 		$cities = Place::getCitiesFromZipCode($query);
 		if(count($cities) > 0){
-			$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? ORDER BY distance";
+			$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY distance";
 			
 			$mysqli = Database::Instance()->get();
 			$stmt = $mysqli->prepare($s);
@@ -32,7 +32,7 @@ $app->bind("/:query",function($params){
 				
 				if($result->num_rows){
 					while($row = $result->fetch_assoc()){
-						$h = Hotspot::getHotspotFromData($row["id"],$row["name"],$row["address"],$row["zipCode"],$row["city"],$row["latitude"],$row["longitude"],$row["creator"],$row["time"]);
+						$h = Hotspot::getHotspotFromData($row["id"],$row["name"],$row["address"],$row["zipCode"],$row["city"],$row["latitude"],$row["longitude"],$row["creator"],$row["time"],$row["valid"]);
 						$distance = $row["distance"];
 						
 						array_push($hotspots,[$h,$distance]);
@@ -60,7 +60,7 @@ $app->bind("/:query",function($params){
 		$zipCodes = Place::getZipCodesFromCity($query);
 		
 		if(count($zipCodes) > 0){
-			$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? ORDER BY distance";
+			$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY distance";
 			
 			$mysqli = Database::Instance()->get();
 			$stmt = $mysqli->prepare($s);
@@ -70,7 +70,7 @@ $app->bind("/:query",function($params){
 				
 				if($result->num_rows){
 					while($row = $result->fetch_assoc()){
-						$h = Hotspot::getHotspotFromData($row["id"],$row["name"],$row["address"],$row["zipCode"],$row["city"],$row["latitude"],$row["longitude"],$row["creator"],$row["time"]);
+						$h = Hotspot::getHotspotFromData($row["id"],$row["name"],$row["address"],$row["zipCode"],$row["city"],$row["latitude"],$row["longitude"],$row["creator"],$row["time"],$row["valid"]);
 						$distance = $row["distance"];
 						
 						array_push($hotspots,[$h,$distance]);

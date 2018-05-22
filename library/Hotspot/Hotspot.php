@@ -17,7 +17,7 @@ class Hotspot {
 		}
 	}
 
-	public static function getHotspotFromData($id,$name,$address,$zipCode,$city,$latitude,$longitude,$creator,$creationTime){
+	public static function getHotspotFromData($id,$name,$address,$zipCode,$city,$latitude,$longitude,$creator,$creationTime,$valid){
 		$hotspot = new Hotspot($id);
 
 		$hotspot->name = $name;
@@ -27,6 +27,7 @@ class Hotspot {
 		$hotspot->latitude = $latitude;
 		$hotspot->longitude = $longitude;
 		$hotspot->creator = $creator;
+		$hotspot->valid = $valid;
 		$hotspot->creationTime = $creationTime;
 
 		$hotspot->hotspotExists = true;
@@ -43,6 +44,7 @@ class Hotspot {
 	private $latitude;
 	private $longitude;
 	private $creator;
+	private $valid;
 	private $creationTime;
 
 	private $hotspotExists;
@@ -71,6 +73,7 @@ class Hotspot {
 				$this->latitude = $row["latitude"];
 				$this->longitude = $row["longitude"];
 				$this->creator = $row["creator"];
+				$this->valid = $row["valid"];
 				$this->creationTime = $row["time"];
 
 				$this->saveToCache();
@@ -109,6 +112,10 @@ class Hotspot {
 
 	public function getCreator(){
 		return $this->creator;
+	}
+
+	public function isValid(){
+		return $this->valid;
 	}
 
 	public function getCreationTime(){

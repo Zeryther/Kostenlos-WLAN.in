@@ -48,6 +48,13 @@ class ComposerStaticInitbf28b8b9bf15a5af997abb12becd7b6f
                 0 => __DIR__ . '/..' . '/jasongrimes/paginator/src',
             ),
         ),
+        'F' => 
+        array (
+            'ForceUTF8\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/neitanod/forceutf8/src',
+            ),
+        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
