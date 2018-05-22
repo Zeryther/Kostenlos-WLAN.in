@@ -21,7 +21,7 @@
 
 				foreach($hotspots as $data){
 					$hotspot = $data[0];
-					$distance = Util::formatNumber(round($data[1],2));
+					$distance = round($data[1],1);
 					$top = false; // TODO
 					?>
 			<a href="<?= $app->routeUrl("/hotspot/" . $hotspot->getID()); ?>">

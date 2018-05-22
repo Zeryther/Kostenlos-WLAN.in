@@ -33,7 +33,7 @@ $app->bind("/:query",function($params){
 				if($result->num_rows){
 					while($row = $result->fetch_assoc()){
 						$h = Hotspot::getHotspotFromData($row["id"],$row["name"],$row["address"],$row["zipCode"],$row["city"],$row["latitude"],$row["longitude"],$row["creator"],$row["time"],$row["valid"]);
-						$distance = $row["distance"];
+						$distance = (double)$row["distance"];
 						
 						array_push($hotspots,[$h,$distance]);
 					}
@@ -71,7 +71,7 @@ $app->bind("/:query",function($params){
 				if($result->num_rows){
 					while($row = $result->fetch_assoc()){
 						$h = Hotspot::getHotspotFromData($row["id"],$row["name"],$row["address"],$row["zipCode"],$row["city"],$row["latitude"],$row["longitude"],$row["creator"],$row["time"],$row["valid"]);
-						$distance = $row["distance"];
+						$distance = (double)$row["distance"];
 						
 						array_push($hotspots,[$h,$distance]);
 					}
