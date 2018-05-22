@@ -9,9 +9,16 @@
 		<a href="" class="clearUnderline">
 			<button type="button" class="my-2 btn btn-warning btn-block customBtn">Einen Hotspot einreichen</button>
 		</a>
+
+		<center class="my-3">
+			<?php Util::renderAd(AD_TYPE_BLOCK); ?>
+		</center>
 	</div>
 
 	<div class="col-md-8">
+		<center class="mb-3">
+			<?php Util::renderAd(AD_TYPE_LEADERBOARD); ?>
+		</center>
 		<?php
 
 			if(count($hotspots) > 0){
@@ -49,5 +56,8 @@
 			}
 
 		?>
+		<center class="mt-3">
+			<?php Util::renderAd(AD_TYPE_LEADERBOARD); ?>
+		</center>
 	</div>
 </div>

@@ -113,4 +113,36 @@ class Util {
 
 		return $input;
 	}
+
+	public static function renderAd($type){
+		if($type == AD_TYPE_LEADERBOARD){
+			echo '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<ins class="adsbygoogle"
+				style="display:block"
+				data-ad-client="ca-pub-6156128043207415"
+				data-ad-slot="1055807482"
+				data-ad-format="auto"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>';
+		} else if($type == AD_TYPE_VERTICAL){
+			echo '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<ins class="adsbygoogle"
+				 style="display:inline-block;width:120px;height:600px"
+				 data-ad-client="ca-pub-6156128043207415"
+				 data-ad-slot="1788401303"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>';
+		} else if($type == AD_TYPE_BLOCK){
+			echo '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<ins class="adsbygoogle"
+				style="display:inline-block;width:336px;height:280px"
+				data-ad-client="ca-pub-6156128043207415"
+				data-ad-slot="7069637483"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>';
+		}
+	}
 }
