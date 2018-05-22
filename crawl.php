@@ -82,6 +82,8 @@ while($id <= 894){
 					if(isset($result["geometry"])){
 						if(isset($result["geometry"]["location"])){
 							$street = explode(",",$result["formatted_address"])[0];
+							$zip = explode(" ",trim(explode(",",$result["formatted_address"])[1]))[0];
+							$city = explode(" ",trim(explode(",",$result["formatted_address"])[1]))[1];
 							$latitude = $result["geometry"]["location"]["lat"];
 							$longitude = $result["geometry"]["location"]["lng"];
 
@@ -105,7 +107,7 @@ while($id <= 894){
 	} else {
 		$mysqli = Database::Instance()->get();
 
-		$stmt = $mysqli->prepare("INSERT IGNORE INTO `hotspots` (`name`,`address`,`zipCode`,`city`,`latitude`,`longitude`,`creator`,`valid`) VALUES(?,?,?,?,?,?,3,0);");
+		$stmt = $mysqli->prepare("INSERT IGNORE INTO `hotspots` (`name`,`address`,`zipCode`,`city`,`latitude`,`longitude`,`creator`,`valid`) VALUES(?,?,?,?,?,?,3,1);");
 		$stmt->bind_param("ssisdd",$name,$street,$zip,$city,$latitude,$longitude);
 		if(!$stmt->execute()) echo $stmt->error . "\n";
 		$stmt->close();
