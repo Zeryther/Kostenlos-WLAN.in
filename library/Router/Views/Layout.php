@@ -138,7 +138,33 @@ if(!isset($twitterImage) || empty($twitterImage)){
 				?>
 
 				<div style="padding: 10px">
-					<?= $content_for_layout; ?>
+					<?php if(isset($printAccountNav) && $printAccountNav == true){
+						?>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="card">
+								<div class="card-body">
+									<ul class="nav nav-pills flex-column">
+										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ACCOUNT_NAV_HOME) echo ' active'; ?>" href="/account">Mein Konto</a></li>
+										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ACCOUNT_NAV_HOTSPOTS) echo ' active'; ?>" href="/account/hotspots">Meine Hotspots</a></li>
+										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ACCOUNT_NAV_LOGOUT) echo ' active'; ?>" href="/account/logout">Logout</a></li>
+									</ul>
+								</div>
+							</div>
+							<center class="my-2">
+								<?php Util::renderAd(AD_TYPE_BLOCK); ?>
+							</center>
+						</div>
+
+						<div class="col-md-8">
+							<?= $content_for_layout; ?>
+						</div>
+					</div>
+						<?php
+					} else {
+						echo $content_for_layout;
+					}
+					?>
 				</div>
 			</div>
 

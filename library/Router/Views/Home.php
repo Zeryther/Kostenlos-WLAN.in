@@ -11,6 +11,8 @@ if(isset($_GET["msg"]) && !empty($_GET["msg"])){
 		Util::createAlert($msg,"Dein Standort konnte nicht berechnet werden.",ALERT_TYPE_DANGER,true);
 	} else if($msg == "unknownHotspot"){
 		Util::createAlert($msg,"Dieser Hotspot konnte nicht gefunden werden.",ALERT_TYPE_DANGER,true);
+	} else if($msg == "loggedOut"){
+		Util::createAlert($msg,"Du wurdest erfolgreich ausgeloggt.",ALERT_TYPE_SUCCESS,true);
 	}
 }
 

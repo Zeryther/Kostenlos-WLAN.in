@@ -16,6 +16,10 @@ define("ALERT_TYPE_SECONDARY","secondary");
 define("ALERT_TYPE_LIGHT","light");
 define("ALERT_TYPE_PRIMARY","primary");
 
+define("ACCOUNT_NAV_HOME","ACCOUNT_NAV_HOME");
+define("ACCOUNT_NAV_HOTSPOTS","ACCOUNT_NAV_HOTSPOTS");
+define("ACCOUNT_NAV_LOGOUT","ACCOUNT_NAV_LOGOUT");
+
 class Util {
 	public static function isLoggedIn(){
 		return isset($_SESSION["id"]);
