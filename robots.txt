@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /account/
+Disallow: /track
+Disallow: /tmp/
+Disallow: /library/
