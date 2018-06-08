@@ -178,8 +178,18 @@ if(!isset($twitterImage) || empty($twitterImage)){
 					if($firstYear != $currentYear) $s = $firstYear . "-" . $currentYear;
 
 				?>
-				<a href="https://gigadrivegroup.com/legal/contact" target="_blank">Impressum</a> &bull; <a href="https://gigadrivegroup.com/legal/terms-of-service" target="_blank">Allgemeine Geschäftsbedingungen</a> &bull; <a href="https://gigadrivegroup.com/legal/privacy-policy" target="_blank">Datenschutzerklärung</a> &bull; <a href="https://gigadrivegroup.com/legal/disclaimer" target="_blank">Haftungsausschluss</a><br/>
-				&copy; Copyright <a href="https://gigadrivegroup.com" target="_blank">Gigadrive Group</a> <?= $s; ?> - Alle Rechte vorbehalten.
+				<div class="mt-2">
+					<div class="float-left">
+						<a href="https://gigadrivegroup.com/legal/contact" target="_blank">Impressum</a> &bull; <a href="https://gigadrivegroup.com/legal/terms-of-service" target="_blank">Allgemeine Geschäftsbedingungen</a> &bull; <a href="https://gigadrivegroup.com/legal/privacy-policy" target="_blank">Datenschutzerklärung</a> &bull; <a href="https://gigadrivegroup.com/legal/disclaimer" target="_blank">Haftungsausschluss</a><br/>
+						&copy; Copyright <a href="https://gigadrivegroup.com" target="_blank">Gigadrive Group</a> <?= $s; ?> - Alle Rechte vorbehalten.
+					</div>
+
+					<div class="float-right">
+						<a href="https://twitter.com/KostenlosWLAN" target="_blank" class="clearUnderline">
+							<img src="<?= $app->routeUrl("/assets/img/social/new/twitter/32.png"); ?>"/>
+						</a>
+					</div>
+				</div>
 			</small>
 		</div>
 	</body>
