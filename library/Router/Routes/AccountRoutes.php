@@ -16,6 +16,9 @@ $app->bind("/account",function(){
 
 $app->bind("/account/logout",function(){
 	session_start();
-	session_destroy();
+	
+	unset($_SESSION["id"]);
+	unset($_SESSION["username"]);
+	
 	return $this->reroute("/?msg=loggedOut");
 });

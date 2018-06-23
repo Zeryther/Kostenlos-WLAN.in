@@ -89,7 +89,7 @@ if(!isset($twitterImage) || empty($twitterImage)){
 					<form class="form-inline mr-auto" id="search" method="get" action="<?= $app->routeUrl("/search"); ?>">
 						<div class="form-group" style="display: block;">
 							<label for="searchBox">Ich suche kostenloses WLAN in</label>
-							<input id="searchBox" name="q" class="form-control mr-sm-2" type="search" aria-label="Search"<?= (isset($query)) ? ' value="' . $query . '"' : ""; ?>>
+							<input id="searchBox" name="q" class="form-control mr-sm-2" type="search" aria-label="Search"<?= (isset($_SESSION["query"])) ? ' value="' . $_SESSION["query"] . '"' : ""; ?>>
 						</div>
 
 						<div class="buttons">

@@ -4,6 +4,8 @@ $app->get("/search",function(){
 	if(isset($_GET["q"]) && !empty($_GET["q"])){
 		$query = $_GET["q"];
 
+		$_SESSION["query"] = $query;
+
 		$data = [];
 		if(isset($_GET["distanceUnit"]) && $_GET["distanceUnit"] != "km") $data["distanceUnit"] = $_GET["distanceUnit"];
 
