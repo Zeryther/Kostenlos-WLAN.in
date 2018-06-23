@@ -32,3 +32,45 @@ function number_format (number, decimals, dec_point, thousands_sep) {
     }
     return s.join(dec);
 }
+
+function initMap(){
+    let mapDiv = document.getElementById("map");
+
+    var map = new google.maps.Map(mapDiv, {
+        zoom: 16,
+        center: new google.maps.LatLng(LATITUDE,LONGITUDE),
+        mapType: "normal"
+    });
+
+    var marker = new google.maps.Marker({position: new google.maps.LatLng(LATITUDE,LONGITUDE), map: map});
+
+    var infoWindow = new google.maps.InfoWindow({
+        content: MARKER_HTML
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+        infoWindow.open(map, marker);
+    });
+}
+
+$(document).ready(function(){
+    $.timeago.settings.strings = {
+        prefixAgo: "vor",
+        prefixFromNow: "in",
+        suffixAgo: "",
+        suffixFromNow: "",
+        seconds: "wenigen Sekunden",
+        minute: "etwa einer Minute",
+        minutes: "%d Minuten",
+        hour: "etwa einer Stunde",
+        hours: "%d Stunden",
+        day: "etwa einem Tag",
+        days: "%d Tagen",
+        month: "etwa einem Monat",
+        months: "%d Monaten",
+        year: "etwa einem Jahr",
+        years: "%d Jahren"
+    };
+
+    $("time.timeago").timeago();
+});

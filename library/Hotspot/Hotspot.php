@@ -46,6 +46,7 @@ class Hotspot {
 	private $creator;
 	private $valid;
 	private $creationTime;
+	private $placeId;
 
 	private $hotspotExists;
 
@@ -75,6 +76,7 @@ class Hotspot {
 				$this->creator = $row["creator"];
 				$this->valid = $row["valid"];
 				$this->creationTime = $row["time"];
+				$this->placeId = $row["googlePlaceId"];
 
 				$this->saveToCache();
 			}
@@ -107,7 +109,7 @@ class Hotspot {
 	}
 
 	public function getLongitude(){
-		return $this->longtitude;
+		return $this->longitude;
 	}
 
 	public function getCreator(){
@@ -120,6 +122,31 @@ class Hotspot {
 
 	public function getCreationTime(){
 		return $this->creationTime;
+	}
+
+	public function getGooglePlaceID(){
+		if($this->placeId == null){
+			$data = Place::getGoogleGeocodeData($this->getName() . " " . $this->getAddress() . " " . $this->getZipCode() . " " . $this->getCity());
+
+			if(isset($data["results"]) && is_array($data["results"]) && count($data["results"]) > 0){
+				$result = $data["results"][0];
+
+				if(isset($result["place_id"])){
+					$this->placeId = $result["place_id"];
+
+					$mysqli = Database::Instance()->get();
+					mysqli_report(MYSQLI_REPORT_ALL);
+					$stmt = $mysqli->prepare("UPDATE `hotspots` SET `googlePlaceId` = ? WHERE `id` = ?");
+					$stmt->bind_param("si",$this->placeId,$this->id);
+					$stmt->execute();
+					$stmt->close();
+
+					$this->saveToCache();
+				}
+			}
+		}
+
+		return $this->placeId;
 	}
 
 	public function saveToCache(){
