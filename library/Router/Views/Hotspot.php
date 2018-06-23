@@ -3,6 +3,10 @@
 <?php if(!$hotspot->isValid())
     Util::createAlert("invalidHotspot","Dieser Hotspot wurde von der Community hinzugefügt und noch nicht als gültig markiert. Diese Daten können eventuell inkorrekt sein.",ALERT_TYPE_DANGER); ?>
 
+<center class="mb-3">
+	<?php Util::renderAd(AD_TYPE_LEADERBOARD); ?>
+</center>
+
 <div class="card">
     <h5 class="card-header">Informationen</h5>
 
@@ -37,6 +41,10 @@
         ?>
     </table>
 </div>
+
+<center class="mb-3">
+	<?php Util::renderAd(AD_TYPE_LEADERBOARD); ?>
+</center>
 
 <div id="map" class="my-2"></div>
 
