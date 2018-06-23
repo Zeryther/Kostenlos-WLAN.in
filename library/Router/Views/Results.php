@@ -3,7 +3,21 @@
 		<div class="filterSettings">
 			<div class="filterHeadline">Filtereinstellungen</div>
 
-			asdasdas
+			<div class="px-3 my-2">
+				<form action="<?= $app->routeUrl("/search"); ?>" method="get">
+					<input type="hidden" name="q" value="<?= $query; ?>"/>
+
+					<div class="form-group" style="display: block;">
+						<label for="distanceUnit">Distanzeinheit</label>
+						<select name="distanceUnit" id="distanceUnit" class="form-control">
+							<option value="km"<?= $useKilometers ? " selected" : ""; ?>>Kilometer (km)</option>
+							<option value="mi"<?= $useKilometers ? "" : " selected"; ?>>Meilen (mi)</option>
+						</select>
+					</div>
+
+					<button type="submit" class="btn btn-warning btn-block customBtn">Anwenden</button>
+				</form>
+			</div>
 		</div>
 
 		<a href="" class="clearUnderline">

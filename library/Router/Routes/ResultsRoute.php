@@ -14,6 +14,7 @@ $app->bind("/:query",function($params){
 	}
 	
 	$useKilometers = true;
+	if(isset($_GET["distanceUnit"]) && strtolower($_GET["distanceUnit"]) != "km") $useKilometers = false;
 	
 	$c = $useKilometers == true ? 6371 : 3959;
 	$maxDistance = 25;
