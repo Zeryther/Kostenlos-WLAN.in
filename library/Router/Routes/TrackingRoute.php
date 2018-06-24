@@ -5,7 +5,7 @@ $app->bind("/track",function(){
 	$geoIP = Util::geoIPData($ip);
 
 	if(is_array($geoIP) && isset($geoIP["status"]) && $geoIP["status"] == "success"){
-		$city = isset($geoIP["city"]) ? Util::fixUmulaut($geoIP["city"]) : null;
+		$city = isset($geoIP["city"]) ? Util::fixUmlaut($geoIP["city"]) : null;
 
 		if($city != null){
 			$this->reroute("/search?q=" . $city);

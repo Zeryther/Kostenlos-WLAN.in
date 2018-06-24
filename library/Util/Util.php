@@ -107,7 +107,7 @@ class Util {
 		}
 	}
 
-	public static function fixUmulaut($input){
+	public static function fixUmlaut($input){
 		$a = [
 			"ae" => "ä",
 			"oe" => "ö",
