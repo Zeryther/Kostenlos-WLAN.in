@@ -3,7 +3,7 @@
 <?php if(!$hotspot->isValid())
     Util::createAlert("invalidHotspot","Dieser Hotspot wurde von der Community hinzugefügt und noch nicht als gültig markiert. Diese Daten können eventuell inkorrekt sein.",ALERT_TYPE_DANGER); ?>
 
-<center class="mb-3">
+<center class="my-3">
 	<?php Util::renderAd(AD_TYPE_LEADERBOARD); ?>
 </center>
 
@@ -42,7 +42,7 @@
     </table>
 </div>
 
-<center class="mb-3">
+<center class="my-3">
 	<?php Util::renderAd(AD_TYPE_LEADERBOARD); ?>
 </center>
 
