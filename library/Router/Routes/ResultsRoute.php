@@ -15,9 +15,14 @@ $app->bind("/:query",function($params){
 	
 	$useKilometers = true;
 	if(isset($_GET["distanceUnit"]) && strtolower($_GET["distanceUnit"]) != "km") $useKilometers = false;
+
+	$maxDistance = 25;
+	if(isset($_GET["maxDistance"]) && is_numeric($maxDistance)) $maxDistance = (int)$_GET["maxDistance"];
+
+	if($maxDistance < FILTER_MAX_DISTANCE_MINIMUM) $maxDistance = FILTER_MAX_DISTANCE_MINIMUM;
+	if($maxDistance > FILTER_MAX_DISTANCE_MAXIMUM) $maxDistance = FILTER_MAX_DISTANCE_MAXIMUM;
 	
 	$c = $useKilometers == true ? 6371 : 3959;
-	$maxDistance = 25;
 	
 	if(is_numeric($query)){
 		// ZIP CODE
@@ -49,6 +54,7 @@ $app->bind("/:query",function($params){
 				"query" => $query,
 				"hotspots" => $hotspots,
 				"useKilometers" => $useKilometers,
+				"maxDistance" => $maxDistance,
 				"wrapperHeadline" => (count($hotspots) == 1) ? Util::formatNumber(count($hotspots)) . " Ergebnis gefunden in " . $query : Util::formatNumber(count($hotspots)) . " Ergebnisse gefunden in " . $query
 			];
 			
@@ -89,6 +95,7 @@ $app->bind("/:query",function($params){
 				"query" => $query,
 				"hotspots" => $hotspots,
 				"useKilometers" => $useKilometers,
+				"maxDistance" => $maxDistance,
 				"wrapperHeadline" => (count($hotspots) == 1) ? Util::formatNumber(count($hotspots)) . " Ergebnis gefunden in " . $query : Util::formatNumber(count($hotspots)) . " Ergebnisse gefunden in " . $query
 			];
 			

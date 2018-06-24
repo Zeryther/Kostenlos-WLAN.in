@@ -20,6 +20,9 @@ define("ACCOUNT_NAV_HOME","ACCOUNT_NAV_HOME");
 define("ACCOUNT_NAV_HOTSPOTS","ACCOUNT_NAV_HOTSPOTS");
 define("ACCOUNT_NAV_LOGOUT","ACCOUNT_NAV_LOGOUT");
 
+define("FILTER_MAX_DISTANCE_MINIMUM",1);
+define("FILTER_MAX_DISTANCE_MAXIMUM",150);
+
 class Util {
 	public static function isLoggedIn(){
 		return isset($_SESSION["id"]);

@@ -7,12 +7,24 @@
 				<form action="<?= $app->routeUrl("/search"); ?>" method="get">
 					<input type="hidden" name="q" value="<?= $query; ?>"/>
 
-					<div class="form-group" style="display: block;">
+					<div class="form-group display-block">
 						<label for="distanceUnit">Distanzeinheit</label>
 						<select name="distanceUnit" id="distanceUnit" class="form-control">
 							<option value="km"<?= $useKilometers ? " selected" : ""; ?>>Kilometer (km)</option>
 							<option value="mi"<?= $useKilometers ? "" : " selected"; ?>>Meilen (mi)</option>
 						</select>
+					</div>
+
+					<div class="form-group display-block">
+						<label for="maxDistance">Maximale Entfernung</label>
+						
+						<div class="input-group">
+							<input name="maxDistance" id="maxDistance" type="number" class="form-control" value="<?= $maxDistance; ?>" min="<?= FILTER_MAX_DISTANCE_MINIMUM; ?>" max="<?= FILTER_MAX_DISTANCE_MAXIMUM; ?>"/>
+
+							<div class="input-group-append">
+								<span class="input-group-text" id="maxDistanceDisplay"><?= $useKilometers ? "km" : "mi"; ?></span>
+							</div>
+						</div>
 					</div>
 
 					<button type="submit" class="btn btn-warning btn-block customBtn">Anwenden</button>

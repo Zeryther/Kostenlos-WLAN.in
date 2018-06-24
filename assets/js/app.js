@@ -36,21 +36,23 @@ function number_format (number, decimals, dec_point, thousands_sep) {
 function initMap(){
     let mapDiv = document.getElementById("map");
 
-    var map = new google.maps.Map(mapDiv, {
-        zoom: 16,
-        center: new google.maps.LatLng(LATITUDE,LONGITUDE),
-        mapType: "normal"
-    });
-
-    var marker = new google.maps.Marker({position: new google.maps.LatLng(LATITUDE,LONGITUDE), map: map});
-
-    var infoWindow = new google.maps.InfoWindow({
-        content: MARKER_HTML
-    });
-
-    google.maps.event.addListener(marker, 'click', function() {
-        infoWindow.open(map, marker);
-    });
+    if(mapDiv != null && typeof LATITUDE !== "undefined" && typeof LONGITUDE !== "undefined"){
+        var map = new google.maps.Map(mapDiv, {
+            zoom: 16,
+            center: new google.maps.LatLng(LATITUDE,LONGITUDE),
+            mapType: "normal"
+        });
+    
+        var marker = new google.maps.Marker({position: new google.maps.LatLng(LATITUDE,LONGITUDE), map: map});
+    
+        var infoWindow = new google.maps.InfoWindow({
+            content: MARKER_HTML
+        });
+    
+        google.maps.event.addListener(marker, 'click', function() {
+            infoWindow.open(map, marker);
+        });
+    }
 }
 
 $(document).ready(function(){
@@ -73,4 +75,14 @@ $(document).ready(function(){
     };
 
     $("time.timeago").timeago();
+
+    $("#distanceUnit").on("change", function(e){
+        let maxDistanceDisplay = $("#maxDistanceDisplay");
+
+        if(maxDistanceDisplay != null){
+            let selected = this.options[e.target.selectedIndex].value;
+
+            maxDistanceDisplay.html(selected);
+        }
+    });
 });
