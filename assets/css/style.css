@@ -278,7 +278,7 @@ input:focus {
 	text-decoration: none !important;
 }
 
-#map {
+#map,#homeMap {
 	width: 100%;
 	min-height: 400px;
 	background-color: grey;

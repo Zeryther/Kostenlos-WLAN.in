@@ -52,6 +52,37 @@ function initMap(){
         google.maps.event.addListener(marker, 'click', function() {
             infoWindow.open(map, marker);
         });
+    } else {
+        mapDiv = document.getElementById("homeMap");
+
+        if(mapDiv != null){
+            let url = "/api/spots";
+
+            $.ajax({url: url}).done(function(result){
+                var map = new google.maps.Map(mapDiv, {
+                    zoom: 5,
+                    center: new google.maps.LatLng(50.964409,11.051543),
+                    mapType: "normal"
+                });
+
+                result.forEach(hotspot => {
+                   let marker = new google.maps.Marker({
+                       position: new google.maps.LatLng(hotspot.latitude,hotspot.longitude),
+                       map: map
+                   });
+
+                   let infoWindow = new google.maps.InfoWindow({
+                       content: '<b>' + hotspot.name + '</b><br/>' + hotspot.address + '<br/>' + hotspot.zipCode + ' ' + hotspot.city + '<br/><br/><a href="/hotspot/' + hotspot.id + '"><b>Mehr Informationen</b></a>'
+                   });
+
+                   google.maps.event.addListener(marker, 'click', function(){
+                       infoWindow.open(map,marker);
+                   });
+                });
+            }).fail(function(){
+                mapDiv.html("Failed to load map.");
+            })
+        }
     }
 }
 

@@ -17,7 +17,7 @@ class Hotspot {
 		}
 	}
 
-	public static function getHotspotFromData($id,$name,$address,$zipCode,$city,$latitude,$longitude,$creator,$creationTime,$valid){
+	public static function getHotspotFromData($id,$name,$address,$zipCode,$city,$latitude,$longitude,$creator,$creationTime,$valid,$googlePlaceId = null){
 		$hotspot = new Hotspot($id);
 
 		$hotspot->name = $name;
@@ -29,6 +29,7 @@ class Hotspot {
 		$hotspot->creator = $creator;
 		$hotspot->valid = $valid;
 		$hotspot->creationTime = $creationTime;
+		$hotspot->placeID = $googlePlaceId;
 
 		$hotspot->hotspotExists = true;
 		$hotspot->saveToCache();
