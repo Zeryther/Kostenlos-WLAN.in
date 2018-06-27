@@ -59,8 +59,6 @@ $app->bind("/:query",function($params){
 			];
 			
 			return $this->render($_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Results.php with " . $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Layout.php",$data);
-		} else {
-			$this->reroute("/?msg=placeNotFound");
 		}
 	} else {
 		// CITY NAME
@@ -100,8 +98,6 @@ $app->bind("/:query",function($params){
 			];
 			
 			return $this->render($_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Results.php with " . $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Layout.php",$data);
-		} else {
-			$this->reroute("/?msg=placeNotFound");
 		}
 	}
 });
