@@ -1,7 +1,7 @@
 <?php
 
 $app->bind("/account",function(){
-	if(Util::isLoggedIn()){ // TODO
+	if(Util::isLoggedIn()){
 		$data = [
 			"title" => "Mein Account",
 			"printAccountNav" => true,

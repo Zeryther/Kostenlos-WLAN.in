@@ -163,6 +163,22 @@ if(!isset($twitterImage) || empty($twitterImage)){
 									</ul>
 								</div>
 							</div>
+							<?php
+
+								if(Util::getCurrentUser()->getLevel() == "ADMIN"){
+									?>
+							<div class="card mt-2">
+								<div class="card-body">
+									<ul class="nav nav-pills flex-column">
+										<b class="text-center">ADMIN</b>
+										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ADMIN_NAV_PENDING_SPOTS) echo ' active'; ?>" href="/admin/pendingSpots">Ausstehende Hotspots</a></li>
+									</ul>
+								</div>
+							</div>
+									<?php
+								}
+
+							?>
 							<center class="my-2">
 								<?php Util::renderAd(AD_TYPE_BLOCK); ?>
 							</center>

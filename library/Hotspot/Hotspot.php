@@ -189,6 +189,31 @@ class Hotspot {
 		return $this->placeId;
 	}
 
+	public function accept(){
+		if($this->valid == true) return;
+
+		$this->valid = true;
+
+		$mysqli = Database::Instance()->get();
+		$stmt = $mysqli->prepare("UPDATE `hotspots` SET `valid` = 1 WHERE `id` = ?");
+		$stmt->bind_param("i",$this->id);
+		$stmt->execute();
+		$stmt->close();
+
+		$this->saveToCache();
+	}
+
+	public function delete(){
+		$mysqli = Database::Instance()->get();
+
+		$stmt = $mysqli->prepare("DELETE FROM `hotspots` WHERE `id` = ?");
+		$stmt->bind_param("i",$this->id);
+		$stmt->execute();
+		$stmt->close();
+
+		CacheHandler::deleteFromCache("hotspot_" . $this->id);
+	}
+
 	public function saveToCache(){
 		$n = "hotspot_" . $this->id;
 
