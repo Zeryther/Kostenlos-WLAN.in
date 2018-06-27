@@ -15,6 +15,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/RegisterRoute.p
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/LoginCallbackRoute.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/SearchRoute.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/TrackingRoute.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/AddHotspotRoute.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/HotspotRoute.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/ResultsRoute.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/AccountRoutes.php";

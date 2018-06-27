@@ -32,7 +32,7 @@
 			</div>
 		</div>
 
-		<a href="" class="clearUnderline">
+		<a href="<?= $app->routeUrl("/hotspot/add"); ?>" class="clearUnderline">
 			<button type="button" class="my-2 btn btn-warning btn-block customBtn">Einen Hotspot einreichen</button>
 		</a>
 

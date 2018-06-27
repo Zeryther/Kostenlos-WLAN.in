@@ -37,6 +37,45 @@ class Hotspot {
 		return $hotspot;
 	}
 
+	public static function isHotspotInDatabase($googlePlaceId,$address,$zipCode,$city){
+		$b = false;
+
+		$mysqli = Database::Instance()->get();
+
+		$stmt = $mysqli->prepare("SELECT COUNT(`id`) AS `count` FROM `hotspots` WHERE `googlePlaceId` = ?");
+		$stmt->bind_param("s",$googlePlaceId);
+		if($stmt->execute()){
+			$result = $stmt->get_result();
+
+			if($result->num_rows){
+				$row = $result->fetch_assoc();
+
+				if($row["count"] > 0)
+					$b = true;
+			}
+		}
+		$stmt->close();
+
+		if($b)
+			return $b;
+
+		$stmt = $mysqli->prepare("SELECT COUNT(`id`) AS `count` FROM `hotspots` WHERE `address` LIKE ? AND `zipCode` = ? AND `city` = ?");
+		$stmt->bind_param("sis",$address,$zipCode,$city);
+		if($stmt->execute()){
+			$result = $stmt->get_result();
+
+			if($result->num_rows){
+				$row = $result->fetch_assoc();
+
+				if($row["count"] > 0)
+					$b = true;
+			}
+		}
+		$stmt->close();
+
+		return $b;
+	}
+
 	private $id;
 	private $name;
 	private $address;
