@@ -171,7 +171,8 @@ class App implements \ArrayAccess {
         'wmls'  => 'text/vnd.wap.wmlscript',
         'xsl'   => 'text/xml',
 		'xml'   => 'text/xml',
-		'svg+xml'=> 'image/svg+xml'
+        'svg+xml'=> 'image/svg+xml',
+        'javascript'=>'text/javascript'
     ];
 
     /**
