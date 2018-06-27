@@ -69,7 +69,12 @@
                 }
                 $stmt->close();
 
-            ?><h5 class="card-header">Bewertungen (<?= count($ratings); ?>)</h5>
+            $ratingCount = count($ratings);
+            
+            if(Util::isLoggedIn() && Rating::getRating($hotspot->getId(),Util::getCurrentUser()->getId()) != null)
+                $ratingCount++;
+
+            ?><h5 class="card-header">Bewertungen (<?= $ratingCount; ?>)</h5>
 
             <div class="card-body">
                 <?php if(Util::isLoggedIn()){
