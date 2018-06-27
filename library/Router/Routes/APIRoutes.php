@@ -54,7 +54,7 @@ $app->bind("/api/mapsScript",function(){
 
         $content = file_get_contents($url);
 
-        CacheHandler::setToCache($n,$content,10*60);
+        CacheHandler::setToCache($n,$content,2*60*60);
     }
     
     return $content;
