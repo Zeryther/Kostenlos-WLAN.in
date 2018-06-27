@@ -17,7 +17,7 @@ class Hotspot {
 		}
 	}
 
-	public static function getHotspotFromData($id,$name,$address,$zipCode,$city,$latitude,$longitude,$creator,$creationTime,$valid,$googlePlaceId = null){
+	public static function getHotspotFromData($id,$name,$address,$zipCode,$city,$latitude,$longitude,$creator,$creationTime,$valid,$googlePlaceId = null,$photo = null){
 		$hotspot = new Hotspot($id);
 
 		$hotspot->name = $name;
@@ -30,6 +30,7 @@ class Hotspot {
 		$hotspot->valid = $valid;
 		$hotspot->creationTime = $creationTime;
 		$hotspot->placeID = $googlePlaceId;
+		$hotspot->photo = $photo;
 
 		$hotspot->hotspotExists = true;
 		$hotspot->saveToCache();
@@ -87,6 +88,7 @@ class Hotspot {
 	private $valid;
 	private $creationTime;
 	private $placeId;
+	private $photo;
 
 	private $hotspotExists;
 
@@ -117,6 +119,7 @@ class Hotspot {
 				$this->valid = $row["valid"];
 				$this->creationTime = $row["time"];
 				$this->placeId = $row["googlePlaceId"];
+				$this->photo = $row["photo"];
 
 				$this->saveToCache();
 			}
@@ -175,7 +178,6 @@ class Hotspot {
 					$this->placeId = $result["place_id"];
 
 					$mysqli = Database::Instance()->get();
-					mysqli_report(MYSQLI_REPORT_ALL);
 					$stmt = $mysqli->prepare("UPDATE `hotspots` SET `googlePlaceId` = ? WHERE `id` = ?");
 					$stmt->bind_param("si",$this->placeId,$this->id);
 					$stmt->execute();
@@ -187,6 +189,60 @@ class Hotspot {
 		}
 
 		return $this->placeId;
+	}
+
+	public function getPhoto(){
+		if($this->photo == null){
+			$googlePlaceData = $this->getGooglePlaceData();
+
+			if($googlePlaceData != null){
+				if(isset($googlePlaceData["result"])){
+					$result = $googlePlaceData["result"];
+
+					if(isset($result["photos"]) && is_array($result["photos"]) && count($result["photos"]) > 0){
+						$this->photo = $result["photos"][0]["photo_reference"];
+
+						$mysqli = Database::Instance()->get();
+						$stmt = $mysqli->prepare("UPDATE `hotspots` SET `photo` = ? WHERE `id` = ?");
+						$stmt->bind_param("si",$this->photo,$this->id);
+						$stmt->execute();
+						$stmt->close();
+
+						$this->saveToCache();
+					}
+				}
+			}
+		}
+
+		return $this->photo;
+	}
+
+	public function getPhotoURL(){
+		$photo = $this->getPhoto();
+
+		return $photo != null ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" . $photo . "&key=" . GOOGLE_MAPS_API_KEY_PRIVATE : null;
+	}
+
+	public function getAsGoogleQuery(){
+		return $this->name . " " . $this->address . " " . $this->zipCode . " " . $this->city;
+	}
+
+	public function getGoogleGeocodeData(){
+		return Place::getGoogleGeocodeData($this->getAsGoogleQuery());
+	}
+
+	public function getGooglePlaceData(){
+		$placeId = $this->getGooglePlaceID();
+
+		if($placeId != null){
+			$url = "https://maps.googleapis.com/maps/api/place/details/json?key=" . GOOGLE_MAPS_API_KEY_PRIVATE . "&placeid=" . $placeId;
+
+			$json = @json_decode(@file_get_contents($url),true);
+
+			return $json;
+		} else {
+			return null;
+		}
 	}
 
 	public function accept(){

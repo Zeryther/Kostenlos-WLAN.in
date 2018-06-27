@@ -21,7 +21,7 @@ class Place {
 		curl_setopt_array($curl,
 			[
 				CURLOPT_RETURNTRANSFER => true,
-				CURLOPT_URL => "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($query) . "&key=" . GOOGLE_MAPS_API_KEY
+				CURLOPT_URL => "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($query) . "&key=" . GOOGLE_MAPS_API_KEY_PRIVATE
 			]
 		);
 		$result = curl_exec($curl);
