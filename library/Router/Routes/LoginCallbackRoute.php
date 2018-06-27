@@ -13,10 +13,6 @@ $app->get("/loginCallback", function(){
 			if(isset($j["success"]) && !empty($j["success"]) && $j["success"] == "Authentication successful"){
 				if(isset($j["data"])){
 					$data = $j["data"];
-	
-					if(isset($data["externalAccounts"]) && isset($data["externalAccounts"]["MINECRAFT"])){
-						$uuid = $data["externalAccounts"]["MINECRAFT"];
-					}
 
 					$userID = $data["id"];
 					$userName = $data["username"];
