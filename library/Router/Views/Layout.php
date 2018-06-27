@@ -67,12 +67,14 @@ if(!isset($twitterImage) || empty($twitterImage)){
 		} ?>
 
 		<?php echo $app->style(array(
-				"assets:css/style.css"
+				"assets:css/style.css",
+				"assets:css/star-rating-svg.css"
 			)); ?>
 		
 		<?php echo $app->script(array(
 				"assets:js/jquery.timeago.js",
-				"assets:js/app.js"
+				"assets:js/app.js",
+				"assets:js/jquery.star-rating-svg.min.js"
 			)); ?>
 	</head>
 

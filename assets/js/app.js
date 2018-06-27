@@ -116,4 +116,47 @@ $(document).ready(function(){
             maxDistanceDisplay.html(selected);
         }
     });
+
+    function updateRatingCommentCount(){
+        let self = $("textarea#ratingComment");
+
+        if(typeof self === "undefined" || self == null || self.length == 0) return;
+
+        let length = self.val().length;
+        let remaining = self.attr("maxlength")-length;
+        
+        let counter = $("#ratingCommentCounter");
+        if(counter != null)
+            counter.html(remaining.toString());
+    }
+
+    updateRatingCommentCount();
+
+    $("textarea#ratingComment").keyup(function(){
+        updateRatingCommentCount();
+    });
+
+    if($("#ratingCommentStars") != null){
+        $("#ratingCommentStars").starRating({
+            strokeColor: '#894A00',
+            strokeWidth: 10,
+            starSize: 30,
+            disableAfterRate: false,
+            starShape: "rounded",
+            forceRoundUp: true,
+            callback: function(currentRating, $el){ $("#ratingValue").val(currentRating); }
+        });
+    }
+
+    if($(".starRatingReadOnly") != null){
+        $(".starRatingReadOnly").starRating({
+            strokeColor: '#894A00',
+            strokeWidth: 10,
+            starSize: 30,
+            disableAfterRate: false,
+            starShape: "rounded",
+            forceRoundUp: true,
+            readOnly: true
+        });
+    }
 });

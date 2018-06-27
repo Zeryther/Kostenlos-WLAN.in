@@ -19,5 +19,6 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/library/User/User.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Hotspot/Hotspot.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Place/Place.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Cache/CacheHandler.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Rating/Rating.php";
 
 Util::cleanupTempFolder();

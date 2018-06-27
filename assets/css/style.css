@@ -283,3 +283,19 @@ input:focus {
 	min-height: 400px;
 	background-color: grey;
 }
+
+#ratingComment {
+	height: 140px;
+}
+
+#ratingCommentCounter {
+	position: absolute;
+	top: 150px;
+	right: 30px;
+	text-align: right;
+	color: #CCC;
+}
+
+.starRating {
+	font-size: 10px;
+}
