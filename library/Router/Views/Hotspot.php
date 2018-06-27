@@ -39,12 +39,11 @@
                 </tr>
             </table>
         </div>
+
+        <div id="map" class="my-2 rounded"></div>
     </div>
 </div>
 
 <center class="my-3">
 	<?php Util::renderAd(AD_TYPE_LEADERBOARD); ?>
 </center>
-
-<div id="map" class="my-2"></div>
-
