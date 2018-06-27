@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+date_default_timezone_set("UTC");
 
 if(isset($_SERVER["HTTP_HOST"]) && (explode(":",$_SERVER["HTTP_HOST"])[0] == "localhost" || explode(":",$_SERVER["HTTP_HOST"])[0] == "127.0.0.1")){
 	require_once $_SERVER["DOCUMENT_ROOT"] . "/../kostenloswlan-config.php";

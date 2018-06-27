@@ -35,6 +35,8 @@ class Util {
 	}
 
 	public static function timeago($timestamp){
+		$timestamp = date("Y",strtotime($timestamp)) . "-" . date("M",strtotime($timestamp)) . "-" . date("d",strtotime($timestamp)) . "T" . date("H",strtotime($timestamp)) . ":" . date("i",strtotime($timestamp)) . ":" . date("s",strtotime($timestamp)) . "Z";
+
 		return '<time class="timeago" datetime="' . $timestamp . '">' . $timestamp . '</time>';
 	}
 

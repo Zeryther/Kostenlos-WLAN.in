@@ -24,6 +24,10 @@ class Database {
 			if($this->db->connect_error){
 				die("Connect Error: " . $this->db->connect_error);
 			} else {
+				$s = $this->db->prepare("SET @@session.time_zone='UTC'");
+				$s->execute();
+				$s->close();
+				
 				$connected = true;
 			}
 		}
