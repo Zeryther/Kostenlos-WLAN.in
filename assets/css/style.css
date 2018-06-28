@@ -289,9 +289,17 @@ input:focus {
 }
 
 #ratingCommentCounter {
-	position: absolute;
 	top: 150px;
 	right: 30px;
+}
+
+#reportCounter {
+	top: 70px;
+	right: 30px;
+}
+
+.countedAreaCounter {
+	position: absolute;
 	text-align: right;
 	color: #CCC;
 }

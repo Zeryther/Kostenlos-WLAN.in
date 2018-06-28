@@ -104,6 +104,30 @@ class User {
 		return $this->userExists;
 	}
 
+	public function hasOpenReport($hotspot){
+		$status = REPORT_STATUS_OPEN;
+
+		$b = false;
+		$mysqli = Database::Instance()->get();
+
+		$stmt = $mysqli->prepare("SELECT COUNT(`id`) AS `count` FROM `reports` WHERE `user` = ? AND `hotspot` = ? AND `status` = ?");
+		$stmt->bind_param("iis",$this->id,$hotspot,$status);
+		if($stmt->execute()){
+			$result = $stmt->get_result();
+
+			if($result->num_rows){
+				$row = $result->fetch_assoc();
+
+				if($row["count"] > 0){
+					$b = true;
+				}
+			}
+		}
+		$stmt->close();
+
+		return $b;
+	}
+
 	public function saveToCache(){
 		$n = "user_" . $this->id;
 

@@ -2,6 +2,8 @@
 
 $ratings = [];
 
+$showReportForm = Util::isLoggedIn() && Util::getCurrentUser()->hasOpenReport($hotspot->getId()) == false;
+
 $hotspotId = $hotspot->getId();
 $userId = Util::isLoggedIn() ? Util::getCurrentUser()->getId() : -1;
 
@@ -71,7 +73,15 @@ if(Util::isLoggedIn() && Rating::getRating($hotspot->getId(),Util::getCurrentUse
 
                 <tr>
                     <td style="width: 30%">&nbsp;</td>
-                    <td style="width: 70%"><a class="btn btn-warning customBtn" href="https://www.google.com/maps/place/?q=<?= urlencode($hotspot->getAsGoogleQuery()); ?><?= $hotspot->getGooglePlaceId() != null ? ":" . $hotspot->getGooglePlaceId() : ""; ?>" target="_blank"><b>Auf Google Maps ansehen</b></a></td>
+                    <td style="width: 70%">
+                        <a class="btn btn-warning customBtn" href="https://www.google.com/maps/place/?q=<?= urlencode($hotspot->getAsGoogleQuery()); ?><?= $hotspot->getGooglePlaceId() != null ? ":" . $hotspot->getGooglePlaceId() : ""; ?>" target="_blank">
+                            Auf Google Maps ansehen
+                        </a><?php if($showReportForm){ ?>
+
+                        <button type="button" class="btn btn-danger customBtn ml-2" data-toggle="modal" data-target="#reportModal">
+                            Problem melden
+                        </button><?php } ?>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -135,8 +145,8 @@ if(Util::isLoggedIn() && Rating::getRating($hotspot->getId(),Util::getCurrentUse
                                 <div class="starRating" id="ratingCommentStars"<?= $rating != null ? ' data-rating="' . $rating->getStars() . '"' : ""; ?>></div>
                             </div>
 
-                            <textarea id="ratingComment" name="ratingComment" maxlength="2000" class="form-control" style="resize:none;"><?= $rating != null && $rating->getComment() != null ? $rating->getComment() : ""; ?></textarea>
-                            <span id="ratingCommentCounter"></span>
+                            <textarea id="ratingComment" data-counter="#ratingCommentCounter" name="ratingComment" maxlength="2000" class="form-control countedArea" style="resize:none;"><?= $rating != null && $rating->getComment() != null ? $rating->getComment() : ""; ?></textarea>
+                            <span id="ratingCommentCounter" class="countedAreaCounter"></span>
 
                             <input type="hidden" name="rating" id="ratingValue" value="<?= $rating != null ? $rating->getStars() : "-1"; ?>"/>
 
@@ -186,6 +196,54 @@ if(Util::isLoggedIn() && Rating::getRating($hotspot->getId(),Util::getCurrentUse
         </div>
     </div>
 </div>
+
+<?php if($showReportForm){ ?>
+<!-- REPORT MODAL -->
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledBy="reportModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reportModalLabel">Problem mit <?= Util::quote($hotspot->getName()); ?> melden</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <form action="/hotspot/report" method="post">
+                <input type="hidden" name="hotspot" value="<?= $hotspot->getId(); ?>"/>
+
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="reason" class="control-label col-sm-3 col-form-label">Grund</label>
+                            
+                        <div class="col-sm-9 mb-3">
+                            <select class="form-control" name="reason">
+                                <option value=""></option>
+                                <option value="<?= REPORT_REASON_BROKEN_HOTSPOT; ?>">Hotspot existiert nicht mehr</option>
+                                <option value="<?= REPORT_REASON_INVALID_DATA; ?>">Ungültige Daten</option>
+                                <option value="<?= REPORT_REASON_SPAM; ?>">Spam</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="text" class="control-label col-sm-3 col-form-label">Weitere Infos</label>
+                            
+                        <div class="col-sm-9 mb-3">
+                            <textarea class="form-control countedArea" data-counter="#reportCounter" type="text" name="text" id="text" autocomplete="off" maxlength="500" style="resize:none;height:100px;"></textarea>
+
+                            <span id="reportCounter" class="countedAreaCounter"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary customBtn" data-dismiss="modal">Schließen</button>
+                    <button type="submit" class="btn btn-primary customBtn">Melden</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php } ?>
 
 <center class="my-3">
 	<?php Util::renderAd(AD_TYPE_LEADERBOARD); ?>

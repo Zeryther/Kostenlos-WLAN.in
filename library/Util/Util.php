@@ -22,9 +22,21 @@ define("ACCOUNT_NAV_HOTSPOTS","ACCOUNT_NAV_HOTSPOTS");
 define("ACCOUNT_NAV_LOGOUT","ACCOUNT_NAV_LOGOUT");
 
 define("ADMIN_NAV_PENDING_SPOTS","ADMIN_NAV_PENDING_SPOTS");
+define("ADMIN_NAV_OPEN_REPORTS","ADMIN_NAV_OPEN_REPORTS");
 
 define("FILTER_MAX_DISTANCE_MINIMUM",1);
 define("FILTER_MAX_DISTANCE_MAXIMUM",150);
+
+define("REPORT_REASON_BROKEN_HOTSPOT","BROKEN_HOTSPOT");
+define("REPORT_REASON_INVALID_DATA","INVALID_DATA");
+define("REPORT_REASON_SPAM","SPAM");
+
+define("REPORT_STATUS_OPEN","OPEN");
+define("REPORT_STATUS_ACCEPTED","ACCEPTED");
+define("REPORT_STATUS_DENIED","DENIED");
+
+define("LEFT_QUOTES","&#x84;");
+define("RIGHT_QUOTES","&#148;");
 
 class Util {
 	public static function isLoggedIn(){
@@ -52,6 +64,10 @@ class Util {
 				echo '<div id="registeredalert' . $id . '" class="text-left alert alert-dismissible alert-' . $type . '"><button id="registeredalertclose' . $id . '" type="button" class="close" data-dismiss="alert"' . $d . '>&times;</button>' . $text . '</div>';
 			}
 		}
+	}
+
+	public static function quote($s){
+		return LEFT_QUOTES . $s . RIGHT_QUOTES;
 	}
 
 	public static function getRandomString($length = 16) {
@@ -156,5 +172,12 @@ class Util {
 			(adsbygoogle = window.adsbygoogle || []).push({});
 		</script>';
 		}
+	}
+
+	public static function limitString($string,$length,$addDots = false){
+		if(strlen($string) > $length)
+			$string = substr($string,0,($addDots ? $length-3 : $length)) . ($addDots ? "..." : "");
+
+		return $string;
 	}
 }

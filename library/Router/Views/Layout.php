@@ -174,6 +174,7 @@ if(!isset($twitterImage) || empty($twitterImage)){
 									<ul class="nav nav-pills flex-column">
 										<b class="text-center">ADMIN</b>
 										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ADMIN_NAV_PENDING_SPOTS) echo ' active'; ?>" href="/admin/pendingSpots">Ausstehende Hotspots</a></li>
+										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ADMIN_NAV_OPEN_REPORTS) echo ' active'; ?>" href="/admin/reports">Offene Meldungen</a></li>
 									</ul>
 								</div>
 							</div>

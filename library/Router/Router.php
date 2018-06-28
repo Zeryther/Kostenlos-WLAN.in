@@ -21,6 +21,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/ResultsRoute.ph
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/AccountRoutes.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/APIRoutes.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/AdminRoutes.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Routes/HotspotReportRoute.php";
 
 $app->on("after",function() {
 	if($this->response->status == "404"){

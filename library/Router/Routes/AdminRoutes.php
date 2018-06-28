@@ -78,3 +78,86 @@ $app->bind("/admin/pendingSpots/:page",function($params){
 		return $this->reroute("/login");
 	}
 });
+
+$app->bind("/admin/reports",function(){
+    return $this->reroute("/admin/reports/1");
+});
+
+$app->bind("/admin/reports/:page",function($params){
+    $page = (isset($params["page"]) && !empty($params["page"]) && is_numeric($params["page"]) && (int)$params["page"] > 0) ? (int)$params["page"] : 1;
+
+    if(Util::isLoggedIn()){
+        if(Util::getCurrentUser()->getLevel() != "ADMIN")
+            return $this->reroute("/account");
+
+        $successMsg = null;
+        $errorMsg = null;
+
+        if(isset($_POST["action"]) && !empty($_POST["action"])){
+            if($_POST["action"] == "accept"){
+                if(isset($_POST["reportId"]) && !empty($_POST["reportId"]) && is_numeric($_POST["reportId"])){
+                    $report = Report::getReport($_POST["reportId"]);
+                    $report->setStatus(REPORT_STATUS_ACCEPTED);
+                    $hotspot = $report->getHotspot();
+
+                    $hotspot->delete();
+
+                    $successMsg = "Die Meldung wurde angenommen und der Hotspot wurde aus der Datenbank entfernt.";
+                }
+            } else if($_POST["action"] == "decline"){
+                if(isset($_POST["reportId"]) && !empty($_POST["reportId"]) && is_numeric($_POST["reportId"])){
+                    $report = Report::getReport($_POST["reportId"]);
+                    $report->setStatus(REPORT_STATUS_DENIED);
+                    $hotspot = $report->getHotspot();
+
+                    $successMsg = "Die Meldung wurde abgelehnt.";
+                }
+            }
+        }
+
+        $itemsPerPage = 10;
+        $mysqli = Database::Instance()->get();
+
+        $num = 0;
+
+		$s = $mysqli->prepare("SELECT COUNT(`id`) AS `count` FROM `reports` WHERE `status` = 'OPEN'");
+		if($s->execute()){
+			$result = $s->get_result();
+
+            $num = $result->num_rows ? $result->fetch_assoc()["count"] : 0;
+		}
+        $s->close();
+        
+        $results = [];
+
+        if($num > 0){
+            $s = $mysqli->prepare("SELECT * FROM `reports` WHERE `status` = 'OPEN' LIMIT " . (($page-1)*$itemsPerPage) . " , " . $itemsPerPage);
+            if($s->execute()){
+                $result = $s->get_result();
+
+                while($row = $result->fetch_assoc()){
+                    $r = Report::getReportFromData($row["id"],$row["user"],$row["hotspot"],$row["reason"],$row["text"],$row["time"],$row["status"]);
+
+                    array_push($results,$r);
+                }
+            }
+            $s->close();
+        }
+
+		$data = [
+			"title" => "Offene Meldungen - Seite " . $num,
+			"printAccountNav" => true,
+            "accountNav" => ADMIN_NAV_OPEN_REPORTS,
+            "num" => $num,
+			"results" => $results,
+			"page" => $page,
+            "itemsPerPage" => $itemsPerPage,
+            "successMsg" => $successMsg,
+            "errorMsg" => $errorMsg
+		];
+	
+		return $this->render($_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Admin/OpenReports.php with " . $_SERVER["DOCUMENT_ROOT"] . "/library/Router/Views/Layout.php",$data);
+	} else {
+		return $this->reroute("/login");
+	}
+});

@@ -118,21 +118,19 @@ $(document).ready(function(){
     });
 
     function updateRatingCommentCount(){
-        let self = $("textarea#ratingComment");
-
-        if(typeof self === "undefined" || self == null || self.length == 0) return;
-
-        let length = self.val().length;
-        let remaining = self.attr("maxlength")-length;
-        
-        let counter = $("#ratingCommentCounter");
-        if(counter != null)
-            counter.html(remaining.toString());
+        $("textarea.countedArea").each(function(){
+            let length = $(this).val().length;
+            let remaining = $(this).attr("maxlength")-length;
+            
+            let counter = $($(this).attr("data-counter"));
+            if(counter != null)
+                counter.html(remaining.toString());
+        });
     }
 
     updateRatingCommentCount();
 
-    $("textarea#ratingComment").keyup(function(){
+    $("textarea.countedArea").keyup(function(){
         updateRatingCommentCount();
     });
 
