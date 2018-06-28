@@ -21,7 +21,10 @@ if(isset($_GET["msg"]) && !empty($_GET["msg"])){
 	<div class="col-md-8">
 		<h3>Willkommen auf Kostenlos-WLAN.in!</h3>
 		<p>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			Kostenlos WLAN ist eine Liste für kostenfrei angebotene Wireless LAN Verbindungen in Deutschland. Open WLAN wird immer häufiger angeboten. Viele Restaurants, Cafés usw. in deiner Nähe bieten sicher ein ähnliches Angebot! Derzeit haben wir <b id="homeHotspotCount"><i class="fas fa-spinner fa-pulse"></i></b> Hotspots in unserer Datenbank.<br/><br/>
+			Erstelle dir einen Account um etwas beizutragen, da wir alleine sicher nicht alle Hotspots finden.<br/>
+			Einer der Hotspots funktioniert nicht oder wurde abgebaut? Eingeloggte Mitglieder können auf der Hotspotseite ein Problem mit einem Hotspot melden, damit wir die Daten aktualisieren können.<br/><br/>
+			Viel Spaß beim kostenfreien Surfen!
 		</p>
 		<center class="my-3"><?php Util::renderAd(AD_TYPE_LEADERBOARD); ?></center>
 		<h3>Hotspot-Karte</h3>

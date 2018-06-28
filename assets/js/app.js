@@ -79,6 +79,8 @@ function initMap(){
                        infoWindow.open(map,marker);
                    });
                 });
+
+                $("#homeHotspotCount").html(result.length);
             }).fail(function(){
                 mapDiv.html("Failed to load map.");
             })
