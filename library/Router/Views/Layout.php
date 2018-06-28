@@ -151,7 +151,7 @@ if(!isset($twitterImage) || empty($twitterImage)){
 
 				?>
 
-				<div style="padding: 10px">
+				<div style="padding: 20px">
 					<?php if(isset($printAccountNav) && $printAccountNav == true){
 						?>
 					<div class="row">
