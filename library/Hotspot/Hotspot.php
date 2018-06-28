@@ -89,6 +89,7 @@ class Hotspot {
 	private $creationTime;
 	private $placeId;
 	private $photo;
+	private $rating;
 
 	private $hotspotExists;
 
@@ -120,6 +121,7 @@ class Hotspot {
 				$this->creationTime = $row["time"];
 				$this->placeId = $row["googlePlaceId"];
 				$this->photo = $row["photo"];
+				$this->rating = $row["rating"];
 
 				$this->saveToCache();
 			}
@@ -221,6 +223,37 @@ class Hotspot {
 		$photo = $this->getPhoto();
 
 		return $photo != null ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" . $photo . "&key=" . GOOGLE_MAPS_API_KEY_PRIVATE : null;
+	}
+
+	public function getRating(){
+		return $this->rating;
+	}
+
+	public function updateRating(){
+		$mysqli = Database::Instance()->get();
+
+		$rating = $this->rating;
+
+		$stmt = $mysqli->prepare("SELECT SUM(`stars`)/COUNT(`stars`) AS `rating` FROM `ratings` WHERE `hotspot` = ?");
+		$stmt->bind_param("i",$this->id);
+		if($stmt->execute()){
+			$result = $stmt->get_result();
+
+			if($result->num_rows){
+				$row = $result->fetch_assoc();
+
+				$rating = (double)$row["rating"];
+			}
+		}
+		$stmt->close();
+
+		$stmt = $mysqli->prepare("UPDATE `hotspots` SET `rating` = ? WHERE `id` = ?");
+		$stmt->bind_param("di",$rating,$this->id);
+		$stmt->execute();
+		$stmt->close();
+
+		$this->rating = $rating;
+		$this->saveToCache();
 	}
 
 	public function getAsGoogleQuery(){

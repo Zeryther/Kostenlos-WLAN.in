@@ -1,4 +1,35 @@
-<?php $photo = $hotspot->getPhotoURL(); ?><h1 class="display-4"><?= $hotspot->getName(); ?> <small class="text-muted"><?= $hotspot->getCity(); ?></small></h1>
+<?php $photo = $hotspot->getPhotoURL();
+
+$ratings = [];
+
+$hotspotId = $hotspot->getId();
+$userId = Util::isLoggedIn() ? Util::getCurrentUser()->getId() : -1;
+
+$mysqli = Database::Instance()->get();
+$stmt = $mysqli->prepare("SELECT u.id AS userID,u.username,u.level AS userLevel,r.stars,r.comment,r.time FROM ratings AS r INNER JOIN users AS u ON r.user = u.id WHERE r.hotspot = ? AND u.id != ? ORDER BY r.user = ? DESC, r.comment IS NOT NULL, r.time DESC;");
+$stmt->bind_param("iii",$hotspotId,$userId,$userId);
+if($stmt->execute()){
+    $result = $stmt->get_result();
+
+    if($result->num_rows){
+        while($row = $result->fetch_assoc()){
+            array_push($ratings,[
+                "rating" => Rating::getRatingFromData($hotspot->getId(),$row["userID"],$row["stars"],$row["comment"],$row["time"]),
+                "username" => $row["username"],
+                "userID" => $row["userID"],
+                "userLevel" => $row["userLevel"]
+            ]);
+        }
+    }
+}
+$stmt->close();
+
+$ratingCount = count($ratings);
+
+if(Util::isLoggedIn() && Rating::getRating($hotspot->getId(),Util::getCurrentUser()->getId()) != null)
+    $ratingCount++;
+            
+?><h1 class="display-4"><?= $hotspot->getName(); ?> <small class="text-muted"><?= $hotspot->getCity(); ?></small></h1>
 
 <?php if(!$hotspot->isValid())
     Util::createAlert("invalidHotspot","Dieser Hotspot wurde von der Community hinzugefügt und noch nicht als gültig markiert. Diese Daten können eventuell inkorrekt sein.",ALERT_TYPE_DANGER); ?>
@@ -34,6 +65,11 @@
                 </tr>
 
                 <tr>
+                    <td style="width: 30%"><b>Bewertung</b></td>
+                    <td style="width: 70%"><div class="starRatingReadOnly" data-rating="<?= $hotspot->getRating(); ?>"></div> (Insgesamt <?= $ratingCount; ?> Bewertung<?= $ratingCount == 1 ? "" : "en"; ?>)</td>
+                </tr>
+
+                <tr>
                     <td style="width: 30%">&nbsp;</td>
                     <td style="width: 70%"><a class="btn btn-warning customBtn" href="https://www.google.com/maps/place/?q=<?= urlencode($hotspot->getAsGoogleQuery()); ?><?= $hotspot->getGooglePlaceId() != null ? ":" . $hotspot->getGooglePlaceId() : ""; ?>" target="_blank"><b>Auf Google Maps ansehen</b></a></td>
                 </tr>
@@ -44,35 +80,6 @@
 
         <div class="card" id="comments">
             <?php
-
-                $ratings = [];
-
-                $hotspotId = $hotspot->getId();
-                $userId = Util::isLoggedIn() ? Util::getCurrentUser()->getId() : -1;
-
-                $mysqli = Database::Instance()->get();
-                $stmt = $mysqli->prepare("SELECT u.id AS userID,u.username,u.level AS userLevel,r.stars,r.comment,r.time FROM ratings AS r INNER JOIN users AS u ON r.user = u.id WHERE r.hotspot = ? AND u.id != ? ORDER BY r.user = ? DESC, r.comment IS NOT NULL, r.time DESC;");
-                $stmt->bind_param("iii",$hotspotId,$userId,$userId);
-                if($stmt->execute()){
-                    $result = $stmt->get_result();
-
-                    if($result->num_rows){
-                        while($row = $result->fetch_assoc()){
-                            array_push($ratings,[
-                                "rating" => Rating::getRatingFromData($hotspot->getId(),$row["userID"],$row["stars"],$row["comment"],$row["time"]),
-                                "username" => $row["username"],
-                                "userID" => $row["userID"],
-                                "userLevel" => $row["userLevel"]
-                            ]);
-                        }
-                    }
-                }
-                $stmt->close();
-
-            $ratingCount = count($ratings);
-            
-            if(Util::isLoggedIn() && Rating::getRating($hotspot->getId(),Util::getCurrentUser()->getId()) != null)
-                $ratingCount++;
 
             ?><h5 class="card-header">Bewertungen (<?= $ratingCount; ?>)</h5>
 
@@ -93,11 +100,14 @@
                             if($rating != null){
                                 $rating->update($stars,$comment);
                                 $successMsg = "Deine Bewertung wurde aktualisiert.";
+
+                                $hotspot->updateRating();
                             } else {
                                 $rating = Rating::createRating($hotspot->getId(),Util::getCurrentUser()->getId(),$stars,htmlspecialchars($comment));
 
                                 if($rating != null){
                                     $successMsg = "Deine Bewertung wurde gespeichert.";
+                                    $hotspot->updateRating();
                                 } else {
                                     $errorMsg = "Ein Fehler ist aufgetreten. Bitte versuche es später erneut.";
                                 }
@@ -128,7 +138,7 @@
                             <textarea id="ratingComment" name="ratingComment" maxlength="2000" class="form-control" style="resize:none;"><?= $rating != null && $rating->getComment() != null ? $rating->getComment() : ""; ?></textarea>
                             <span id="ratingCommentCounter"></span>
 
-                            <input type="hidden" name="rating" id="ratingValue" value="-1"/>
+                            <input type="hidden" name="rating" id="ratingValue" value="<?= $rating != null ? $rating->getStars() : "-1"; ?>"/>
 
                             <button type="submit" class="btn btn-warning customBtn mt-2">Absenden</button>
                         </div>
