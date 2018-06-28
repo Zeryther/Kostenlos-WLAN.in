@@ -62,7 +62,7 @@ $app->bind("/admin/pendingSpots/:page",function($params){
         }
 
 		$data = [
-			"title" => "Ausstehende Hotspots - Seite " . $num,
+			"title" => "Ausstehende Hotspots - Seite " . $page,
 			"printAccountNav" => true,
             "accountNav" => ADMIN_NAV_PENDING_SPOTS,
             "num" => $num,
@@ -145,7 +145,7 @@ $app->bind("/admin/reports/:page",function($params){
         }
 
 		$data = [
-			"title" => "Offene Meldungen - Seite " . $num,
+			"title" => "Offene Meldungen - Seite " . $page,
 			"printAccountNav" => true,
             "accountNav" => ADMIN_NAV_OPEN_REPORTS,
             "num" => $num,
