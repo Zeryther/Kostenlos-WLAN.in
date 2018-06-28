@@ -80,7 +80,7 @@
 
 					<div class="d-none d-xl-block info">Klicke für weitere Informationen</div>
 
-					<div class="float-right"><div class="distance"><?= $distance; ?> <?= $useKilometers ? "km" : "mi"; ?> entfernt</div>
+					<div class="float-right"><div class="distance"><?= $distance; ?> <?= $useKilometers ? "km" : "mi"; ?> entfernt*</div>
 					<div class="starRatingReadOnlySmall float-right" data-rating="<?= $hotspot->getRating(); ?>"></div></div>
 				</div>
 			</a>
@@ -95,6 +95,7 @@
 			}
 
 		?>
+		<p class="small">* Entfernung von Stadtmittelpunkt</p>
 		<center class="mt-3">
 			<?php Util::renderAd(AD_TYPE_LEADERBOARD); ?>
 		</center>
