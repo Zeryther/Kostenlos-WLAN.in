@@ -76,6 +76,30 @@ if(!isset($twitterImage) || empty($twitterImage)){
 				"assets:js/app.js",
 				"assets:js/jquery.star-rating-svg.min.js"
 			)); ?>
+
+		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+		<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+		<script>
+			window.addEventListener("load", function(){
+			window.cookieconsent.initialise({
+			"palette": {
+				"popup": {
+				"background": "#64386b",
+				"text": "#ffcdfd"
+				},
+				"button": {
+				"background": "#f8a8ff",
+				"text": "#3f0045"
+				}
+			},
+			"content": {
+				"message": "Diese Webseite verwendet Cookies um eine bessere Erfahrung zu bieten.",
+				"dismiss": "Verstanden!",
+				"link": "Mehr Infos",
+				"href": "https://gigadrivegroup.com/legal/privacy-policy"
+			}
+			})});
+		</script>
 	</head>
 
 	<body>
