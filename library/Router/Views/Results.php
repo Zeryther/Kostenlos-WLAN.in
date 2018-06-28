@@ -69,6 +69,7 @@
 					<div class="d-none d-xl-block info">Klicke für weitere Informationen</div>
 
 					<div class="distance"><?= $distance; ?> <?= $useKilometers ? "km" : "mi"; ?> entfernt</div>
+					<div class="starRatingReadOnlySmall float-right" data-rating="<?= $hotspot->getRating(); ?>"></div>
 				</div>
 			</a>
 					<?php
