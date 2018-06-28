@@ -83,6 +83,7 @@ $app->bind("/:query",function($params){
 				"useKilometers" => $useKilometers,
 				"maxDistance" => $maxDistance,
 				"sorting" => $sorting,
+				"description" => "Finde kostenlose Wireless LAN Hotspots in " . $query,
 				"wrapperHeadline" => (count($hotspots) == 1) ? Util::formatNumber(count($hotspots)) . " Ergebnis gefunden in " . $query : Util::formatNumber(count($hotspots)) . " Ergebnisse gefunden in " . $query
 			];
 			
@@ -147,6 +148,7 @@ $app->bind("/:query",function($params){
 				"useKilometers" => $useKilometers,
 				"maxDistance" => $maxDistance,
 				"sorting" => $sorting,
+				"description" => "Finde kostenlose Wireless LAN Hotspots in " . $query,
 				"wrapperHeadline" => (count($hotspots) == 1) ? Util::formatNumber(count($hotspots)) . " Ergebnis gefunden in " . $query : Util::formatNumber(count($hotspots)) . " Ergebnisse gefunden in " . $query
 			];
 			
