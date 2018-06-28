@@ -161,7 +161,6 @@ if(!isset($twitterImage) || empty($twitterImage)){
 									<ul class="nav nav-pills flex-column">
 										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ACCOUNT_NAV_HOME) echo ' active'; ?>" href="/account">Mein Konto</a></li>
 										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ACCOUNT_NAV_RATINGS) echo ' active'; ?>" href="/account/ratings">Meine Bewertungen</a></li>
-										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ACCOUNT_NAV_HOTSPOTS) echo ' active'; ?>" href="/account/hotspots">Meine Hotspots</a></li>
 										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ACCOUNT_NAV_LOGOUT) echo ' active'; ?>" href="/account/logout">Logout</a></li>
 									</ul>
 								</div>
