@@ -17,7 +17,7 @@ $app->bind("/api/spots",function(){
 
             if($result->num_rows){
                 while($row = $result->fetch_assoc()){
-                    $hotspot = Hotspot::getHotspotFromData($row["id"],$row["name"],$row["address"],$row["zipCode"],$row["city"],$row["latitude"],$row["longitude"],$row["creator"],$row["time"],$row["valid"],$row["googlePlaceId"]);
+                    $hotspot = Hotspot::getHotspotFromData($row["id"],$row["name"],$row["address"],$row["zipCode"],$row["city"],$row["latitude"],$row["longitude"],$row["creator"],$row["time"],$row["valid"],$row["googlePlaceId"],$row["photo"],$row["rating"]);
 
                     $h = [
                         "id" => $row["id"],

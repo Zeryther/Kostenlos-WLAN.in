@@ -53,7 +53,7 @@ $app->bind("/admin/pendingSpots/:page",function($params){
                 $result = $s->get_result();
 
                 while($row = $result->fetch_assoc()){
-                    $h = Hotspot::getHotspotFromData($row["id"],$row["name"],$row["address"],$row["zipCode"],$row["city"],$row["latitude"],$row["longitude"],$row["creator"],$row["time"],$row["valid"],$row["googlePlaceId"]);
+                    $h = Hotspot::getHotspotFromData($row["id"],$row["name"],$row["address"],$row["zipCode"],$row["city"],$row["latitude"],$row["longitude"],$row["creator"],$row["time"],$row["valid"],$row["googlePlaceId"],$row["photo"],$row["rating"]);
 
                     array_push($results,$h);
                 }
