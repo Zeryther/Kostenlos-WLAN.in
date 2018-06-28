@@ -250,7 +250,6 @@ input:focus {
 }
 
 .hotspotList .hotspot .distance {
-	float: right;
 	display: block;
 	font-style: italic;
 	overflow: hidden;

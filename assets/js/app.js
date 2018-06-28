@@ -164,7 +164,7 @@ $(document).ready(function(){
         $(".starRatingReadOnlySmall").starRating({
             strokeColor: '#894A00',
             strokeWidth: 10,
-            starSize: 20,
+            starSize: 15,
             disableAfterRate: false,
             starShape: "rounded",
             forceRoundUp: true,
