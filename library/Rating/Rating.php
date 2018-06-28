@@ -63,7 +63,7 @@ class Rating {
         $mysqli = Database::Instance()->get();
 
         $stmt = $mysqli->prepare("SELECT * FROM `ratings` WHERE `hotspot` = ? AND `user` = ?");
-        $stmt->bind_param("ii",$hotspot,$user);
+        $stmt->bind_param("ii",$this->hotspot,$this->user);
         if($stmt->execute()){
             $result = $stmt->get_result();
 
