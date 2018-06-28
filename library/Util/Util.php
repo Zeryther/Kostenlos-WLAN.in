@@ -118,9 +118,9 @@ class Util {
 		if(CacheHandler::existsInCache($n)){
 			return json_decode(CacheHandler::getFromCache($n),true);
 		} else {
-			$data = json_decode(@file_get_contents("http://ip-api.com/json/" . $ip),true);
+			$data = json_decode(@file_get_contents("http://api.ipstack.com/" . $ip . "?access_key=" . IPSTACK_KEY . "&format=1"),true);
 
-			if(isset($data["status"]) && $data["status"] == "success"){
+			if(isset($data["city"])){
 				CacheHandler::setToCache($n,json_encode($data),20*60);
 			}
 

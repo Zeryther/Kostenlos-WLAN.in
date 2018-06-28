@@ -4,7 +4,7 @@ $app->bind("/track",function(){
 	$ip = Util::getIP();
 	$geoIP = Util::geoIPData($ip);
 
-	if(is_array($geoIP) && isset($geoIP["status"]) && $geoIP["status"] == "success"){
+	if(is_array($geoIP) && isset($geoIP["city"])){
 		$city = isset($geoIP["city"]) ? Util::fixUmlaut($geoIP["city"]) : null;
 
 		if($city != null){
