@@ -17,7 +17,7 @@ $app->get("/search",function(){
 			// ZIP CODE
 			$cities = Place::getCitiesFromZipCode($query);
 			if(count($cities) > 0){
-				$this->reroute("/" . $query . $dataString);
+				$this->reroute("/" . urlencode($query) . $dataString);
 			} else {
 				$this->reroute("/?msg=placeNotFound");
 			}
@@ -26,7 +26,7 @@ $app->get("/search",function(){
 			$zipCodes = Place::getZipCodesFromCity($query);
 
 			if(count($zipCodes) > 0){
-				$this->reroute("/" . Place::capitaliseCityName($query) . $dataString);
+				$this->reroute("/" . urlencode(Place::capitaliseCityName($query)) . $dataString);
 			} else {
 				$this->reroute("/?msg=placeNotFound");
 			}
