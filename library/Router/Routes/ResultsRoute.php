@@ -19,6 +19,9 @@ $app->bind("/:query",function($params){
 	$maxDistance = 25;
 	if(isset($_GET["maxDistance"]) && is_numeric($maxDistance)) $maxDistance = (int)$_GET["maxDistance"];
 
+	$sorting = "next";
+	if(isset($_GET["sorting"]) && !empty($_GET["sorting"])) $sorting = $_GET["sorting"];
+
 	if($maxDistance < FILTER_MAX_DISTANCE_MINIMUM) $maxDistance = FILTER_MAX_DISTANCE_MINIMUM;
 	if($maxDistance > FILTER_MAX_DISTANCE_MAXIMUM) $maxDistance = FILTER_MAX_DISTANCE_MAXIMUM;
 	
@@ -28,7 +31,31 @@ $app->bind("/:query",function($params){
 		// ZIP CODE
 		$cities = Place::getCitiesFromZipCode($query);
 		if(count($cities) > 0){
-			$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY distance";
+			$s = null;
+
+			switch($sorting){
+				case "next":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY distance ASC";
+					break;
+				case "last":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY distance DESC";
+					break;
+				case "newest":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY time DESC";
+					break;
+				case "oldest":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY time ASC";
+					break;
+				case "best":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY rating DESC";
+					break;
+				case "worst":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY rating ASC";
+					break;
+				default:
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY distance ASC";
+					break;
+			}
 			
 			$mysqli = Database::Instance()->get();
 			$stmt = $mysqli->prepare($s);
@@ -55,6 +82,7 @@ $app->bind("/:query",function($params){
 				"hotspots" => $hotspots,
 				"useKilometers" => $useKilometers,
 				"maxDistance" => $maxDistance,
+				"sorting" => $sorting,
 				"wrapperHeadline" => (count($hotspots) == 1) ? Util::formatNumber(count($hotspots)) . " Ergebnis gefunden in " . $query : Util::formatNumber(count($hotspots)) . " Ergebnisse gefunden in " . $query
 			];
 			
@@ -65,7 +93,31 @@ $app->bind("/:query",function($params){
 		$zipCodes = Place::getZipCodesFromCity($query);
 		
 		if(count($zipCodes) > 0){
-			$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY distance";
+			$s = null;
+
+			switch($sorting){
+				case "next":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY distance ASC";
+					break;
+				case "last":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY distance DESC";
+					break;
+				case "newest":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY time DESC";
+					break;
+				case "oldest":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY time ASC";
+					break;
+				case "best":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY rating DESC";
+					break;
+				case "worst":
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY rating ASC";
+					break;
+				default:
+					$s = "SELECT *,(?*acos(cos(radians(?))*cos(radians(latitude))*cos(radians(longitude)-radians(?))+sin(radians(?))*sin(radians(latitude)))) AS distance FROM hotspots HAVING distance <= ? AND `valid` = 1 ORDER BY distance ASC";
+					break;
+			}
 			
 			$mysqli = Database::Instance()->get();
 			$stmt = $mysqli->prepare($s);
@@ -94,6 +146,7 @@ $app->bind("/:query",function($params){
 				"hotspots" => $hotspots,
 				"useKilometers" => $useKilometers,
 				"maxDistance" => $maxDistance,
+				"sorting" => $sorting,
 				"wrapperHeadline" => (count($hotspots) == 1) ? Util::formatNumber(count($hotspots)) . " Ergebnis gefunden in " . $query : Util::formatNumber(count($hotspots)) . " Ergebnisse gefunden in " . $query
 			];
 			

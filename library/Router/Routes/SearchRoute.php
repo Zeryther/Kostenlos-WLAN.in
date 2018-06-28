@@ -9,6 +9,7 @@ $app->get("/search",function(){
 		$data = [];
 		if(isset($_GET["distanceUnit"]) && $_GET["distanceUnit"] != "km") $data["distanceUnit"] = $_GET["distanceUnit"];
 		if(isset($_GET["maxDistance"]) && is_numeric($_GET["maxDistance"]) && (int)$_GET["maxDistance"] != 25) $data["maxDistance"] = (int)$_GET["maxDistance"];
+		if(isset($_GET["sorting"]) && !empty($_GET["sorting"]) && $_GET["sorting"] != "next") $data["sorting"] = $_GET["sorting"];
 
 		$dataString = count($data) > 0 ? "?" . http_build_query($data) : "";
 

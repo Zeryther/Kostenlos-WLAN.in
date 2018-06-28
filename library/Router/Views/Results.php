@@ -8,6 +8,18 @@
 					<input type="hidden" name="q" value="<?= $query; ?>"/>
 
 					<div class="form-group display-block">
+						<label for="sorting">Sortierung</label>
+						<select name="sorting" id="sorting" class="form-control">
+							<option value="next"<?= $sorting == "next" ? " selected" : ""; ?>>Entfernung (Nächste zuerst)</option>
+							<option value="last"<?= $sorting == "last" ? " selected" : ""; ?>>Entfernung (Weiteste zuerst)</option>
+							<option value="newest"<?= $sorting == "newest" ? " selected" : ""; ?>>Alter (Neuste zuerst)</option>
+							<option value="oldest"<?= $sorting == "oldest" ? " selected" : ""; ?>>Alter (Älteste zuerst)</option>
+							<option value="best"<?= $sorting == "best" ? " selected" : ""; ?>>Bewertung (Beste zuerst)</option>
+							<option value="worst"<?= $sorting == "worst" ? " selected" : ""; ?>>Bewertung (Schlechteste zuerst)</option>
+						</select>
+					</div>
+
+					<div class="form-group display-block">
 						<label for="distanceUnit">Distanzeinheit</label>
 						<select name="distanceUnit" id="distanceUnit" class="form-control">
 							<option value="km"<?= $useKilometers ? " selected" : ""; ?>>Kilometer (km)</option>
