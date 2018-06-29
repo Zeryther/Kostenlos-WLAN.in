@@ -40,7 +40,7 @@ $app->bind("/account/ratings/:page",function($params){
         $results = [];
 
         if($num > 0){
-			$s = $mysqli->prepare("SELECT * FROM `ratings` WHERE `user` = ? LIMIT " . (($page-1)*$itemsPerPage) . " , " . $itemsPerPage);
+			$s = $mysqli->prepare("SELECT * FROM `ratings` WHERE `user` = ? ORDER BY `time` DESC LIMIT " . (($page-1)*$itemsPerPage) . " , " . $itemsPerPage);
 			$s->bind_param("i",$userID);
             if($s->execute()){
                 $result = $s->get_result();
