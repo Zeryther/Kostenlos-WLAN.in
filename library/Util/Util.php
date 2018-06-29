@@ -48,9 +48,11 @@ class Util {
 	}
 
 	public static function timeago($timestamp){
-		$timestamp = date("Y",strtotime($timestamp)) . "-" . date("M",strtotime($timestamp)) . "-" . date("d",strtotime($timestamp)) . "T" . date("H",strtotime($timestamp)) . ":" . date("i",strtotime($timestamp)) . ":" . date("s",strtotime($timestamp)) . "Z";
+		$str = strtotime($timestamp);
 
-		return '<time class="timeago" datetime="' . $timestamp . '">' . $timestamp . '</time>';
+		$timestamp = date("Y",$str) . "-" . date("m",$str) . "-" . date("d",$str) . "T" . date("H",$str) . ":" . date("i",$str) . ":" . date("s",$str) . "Z";
+
+		return '<time class="timeago" datetime="' . $timestamp . '" title="' . date("d",$str) . "." . date("m",$str) . "." . date("Y",$str) . " " . date("H",$str) . ":" . date("i",$str) . ":" . date("s",$str) . '">' . $timestamp . '</time>';
 	}
 
 	public static function createAlert($id,$text,$type = ALERT_TYPE_INFO,$dismissible = FALSE,$saveDismiss = FALSE){
