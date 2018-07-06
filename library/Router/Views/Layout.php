@@ -148,8 +148,8 @@ if(!isset($twitterImage) || empty($twitterImage)){
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledBy="accountDropdown">
-								<a href="<?= $app->routeUrl("/login"); ?>" class="dropdown-item">Anmelden</a>
-								<a href="<?= $app->routeUrl("/register"); ?>" class="dropdown-item">Registrieren</a>
+								<a data-no-instant href="<?= $app->routeUrl("/login"); ?>" class="dropdown-item">Anmelden</a>
+								<a data-no-instant href="<?= $app->routeUrl("/register"); ?>" class="dropdown-item">Registrieren</a>
 							</div>
 						</li>
 					</ul>
@@ -185,7 +185,7 @@ if(!isset($twitterImage) || empty($twitterImage)){
 									<ul class="nav nav-pills flex-column">
 										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ACCOUNT_NAV_HOME) echo ' active'; ?>" href="/account">Mein Konto</a></li>
 										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ACCOUNT_NAV_RATINGS) echo ' active'; ?>" href="/account/ratings">Meine Bewertungen</a></li>
-										<li class="nav-item"><a class="nav-link<?php if(isset($accountNav) && $accountNav == ACCOUNT_NAV_LOGOUT) echo ' active'; ?>" href="/account/logout">Logout</a></li>
+										<li class="nav-item"><a data-no-instant class="nav-link<?php if(isset($accountNav) && $accountNav == ACCOUNT_NAV_LOGOUT) echo ' active'; ?>" href="/account/logout">Logout</a></li>
 									</ul>
 								</div>
 							</div>
@@ -250,5 +250,8 @@ if(!isset($twitterImage) || empty($twitterImage)){
 
 		<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?= GOOGLE_MAPS_API_KEY_PUBLIC; ?>&callback=initMap"> </script>-->
 		<script async defer src="<?= $app->routeUrl("/api/mapsScript"); ?>"> </script>
+
+		<script src="<?= $app->routeUrl("/assets/js/instantclick.min.js"); ?>" data-no-instant></script>
+		<script data-no-instant>InstantClick.init();InstantClick.on("change",function(){$("time.timeago").timeago();});</script>
 	</body>
 </html>

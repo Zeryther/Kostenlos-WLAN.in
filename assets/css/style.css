@@ -306,3 +306,7 @@ input:focus {
 .starRating {
 	font-size: 10px;
 }
+
+#instantclick-bar {
+	background: #000;
+}
