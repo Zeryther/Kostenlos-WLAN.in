@@ -38,6 +38,8 @@ if(!isset($twitterImage) || empty($twitterImage)){
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:site" content="@KostenlosWLAN" />
 
+		<noscript><meta http-equiv="refresh" content="0; URL=https://gigadrivegroup.com/badbrowser"></noscript>
+
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
