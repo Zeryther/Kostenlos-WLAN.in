@@ -254,6 +254,6 @@ if(!isset($twitterImage) || empty($twitterImage)){
 		<script async defer src="<?= $app->routeUrl("/api/mapsScript"); ?>"> </script>
 
 		<script src="<?= $app->routeUrl("/assets/js/instantclick.min.js"); ?>" data-no-instant></script>
-		<script data-no-instant>InstantClick.init();InstantClick.on("change",function(){$("time.timeago").timeago();});</script>
+		<script data-no-instant>InstantClick.init();InstantClick.on("change",function(){$("time.timeago").timeago();function updateRatingCommentCount(){$("textarea.countedArea").each(function(){let length = $(this).val().length;let remaining = $(this).attr("maxlength")-length;let counter = $($(this).attr("data-counter"));if(counter != null)counter.html(remaining.toString());});}updateRatingCommentCount();$("textarea.countedArea").keyup(function(){updateRatingCommentCount();});if($("#ratingCommentStars") != null){$("#ratingCommentStars").starRating({strokeColor: '#894A00',strokeWidth: 10,starSize: 30,disableAfterRate: false,starShape: "rounded",forceRoundUp: true,callback: function(currentRating, $el){ $("#ratingValue").val(currentRating); }});}if($(".starRatingReadOnly") != null){$(".starRatingReadOnly").starRating({strokeColor: '#894A00',strokeWidth: 10,starSize: 30,disableAfterRate: false,starShape: "rounded",forceRoundUp: true,readOnly: true});}if($(".starRatingReadOnlySmall") != null){$(".starRatingReadOnlySmall").starRating({strokeColor: '#894A00',strokeWidth: 10,starSize: 15,disableAfterRate: false,starShape: "rounded",forceRoundUp: true,readOnly: true});}});</script>
 	</body>
 </html>
