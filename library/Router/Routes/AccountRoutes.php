@@ -71,8 +71,6 @@ $app->bind("/account/ratings/:page",function($params){
 });
 
 $app->bind("/account/logout",function(){
-	session_start();
-	
 	unset($_SESSION["id"]);
 	unset($_SESSION["username"]);
 	
