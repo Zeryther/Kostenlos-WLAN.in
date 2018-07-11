@@ -58,16 +58,6 @@ if(!isset($twitterImage) || empty($twitterImage)){
 
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
 
-		<?php if(isset($lat) && isset($lng) && isset($markerHtml)){
-			?>
-		<script type="text/javascript">
-			var LATITUDE = <?= $lat; ?>;
-			var LONGITUDE = <?= $lng; ?>;
-			var MARKER_HTML = "<?= $markerHtml; ?>";
-		</script>
-			<?php
-		} ?>
-
 		<?php echo $app->style(array(
 				"assets:css/style.css",
 				"assets:css/star-rating-svg.css"
@@ -105,6 +95,15 @@ if(!isset($twitterImage) || empty($twitterImage)){
 	</head>
 
 	<body>
+	<?php if(isset($lat) && isset($lng) && isset($markerHtml)){
+			?>
+		<script type="text/javascript">
+			var LATITUDE = <?= $lat; ?>;
+			var LONGITUDE = <?= $lng; ?>;
+			var MARKER_HTML = "<?= $markerHtml; ?>";
+		</script>
+			<?php
+		} ?>
 		<nav class="navbar navbar-expand-lg navbar-dark" id="mainHeader">
 			<div class="container">
 				<div class="brand"><a class="navbar-brand" href="<?= $app->routeUrl("/"); ?>">kostenlos-wlan.in</a></div>
@@ -251,9 +250,9 @@ if(!isset($twitterImage) || empty($twitterImage)){
 		</div>
 
 		<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?= GOOGLE_MAPS_API_KEY_PUBLIC; ?>&callback=initMap"> </script>-->
-		<script async defer src="<?= $app->routeUrl("/api/mapsScript"); ?>"> </script>
+		<script data-no-instant async defer src="<?= $app->routeUrl("/api/mapsScript"); ?>"> </script>
 
 		<script src="<?= $app->routeUrl("/assets/js/instantclick.min.js"); ?>" data-no-instant></script>
-		<script data-no-instant>InstantClick.init();InstantClick.on("change",function(){$("time.timeago").timeago();function updateRatingCommentCount(){$("textarea.countedArea").each(function(){let length = $(this).val().length;let remaining = $(this).attr("maxlength")-length;let counter = $($(this).attr("data-counter"));if(counter != null)counter.html(remaining.toString());});}updateRatingCommentCount();$("textarea.countedArea").keyup(function(){updateRatingCommentCount();});if($("#ratingCommentStars") != null){$("#ratingCommentStars").starRating({strokeColor: '#894A00',strokeWidth: 10,starSize: 30,disableAfterRate: false,starShape: "rounded",forceRoundUp: true,callback: function(currentRating, $el){ $("#ratingValue").val(currentRating); }});}if($(".starRatingReadOnly") != null){$(".starRatingReadOnly").starRating({strokeColor: '#894A00',strokeWidth: 10,starSize: 30,disableAfterRate: false,starShape: "rounded",forceRoundUp: true,readOnly: true});}if($(".starRatingReadOnlySmall") != null){$(".starRatingReadOnlySmall").starRating({strokeColor: '#894A00',strokeWidth: 10,starSize: 15,disableAfterRate: false,starShape: "rounded",forceRoundUp: true,readOnly: true});}});</script>
+		<script data-no-instant>InstantClick.init();InstantClick.on("change",function(){$("time.timeago").timeago();initMap();function updateRatingCommentCount(){$("textarea.countedArea").each(function(){let length = $(this).val().length;let remaining = $(this).attr("maxlength")-length;let counter = $($(this).attr("data-counter"));if(counter != null)counter.html(remaining.toString());});}updateRatingCommentCount();$("textarea.countedArea").keyup(function(){updateRatingCommentCount();});if($("#ratingCommentStars") != null){$("#ratingCommentStars").starRating({strokeColor: '#894A00',strokeWidth: 10,starSize: 30,disableAfterRate: false,starShape: "rounded",forceRoundUp: true,callback: function(currentRating, $el){ $("#ratingValue").val(currentRating); }});}if($(".starRatingReadOnly") != null){$(".starRatingReadOnly").starRating({strokeColor: '#894A00',strokeWidth: 10,starSize: 30,disableAfterRate: false,starShape: "rounded",forceRoundUp: true,readOnly: true});}if($(".starRatingReadOnlySmall") != null){$(".starRatingReadOnlySmall").starRating({strokeColor: '#894A00',strokeWidth: 10,starSize: 15,disableAfterRate: false,starShape: "rounded",forceRoundUp: true,readOnly: true});}});</script>
 	</body>
 </html>
