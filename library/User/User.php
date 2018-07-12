@@ -16,25 +16,26 @@ class User {
 		}
 	}
 
-	public static function registerAccount($id,$username,$email){
+	public static function registerAccount($id,$username,$email,$token){
 		$mysqli = Database::Instance()->get();
 		$account = User::getUserById($id);
 
 		if($account == null){
-			$stmt = $mysqli->prepare("INSERT IGNORE INTO `users` (`id`,`username`,`email`) VALUES(?,?,?);");
-			$stmt->bind_param("iss",$id,$username,$email);
+			$stmt = $mysqli->prepare("INSERT IGNORE INTO `users` (`id`,`username`,`email`,`token`) VALUES(?,?,?,?);");
+			$stmt->bind_param("isss",$id,$username,$email,$token);
 			$stmt->execute();
 			$stmt->close();
 
 			User::getUserById($id); // cache data after registering
 		} else {
-			$stmt = $mysqli->prepare("UPDATE `users` SET `username` = ?, `email` = ? WHERE `id` = ?");
-			$stmt->bind_param("ssi",$username,$email,$id);
+			$stmt = $mysqli->prepare("UPDATE `users` SET `username` = ?, `email` = ?, `token` = ? WHERE `id` = ?");
+			$stmt->bind_param("sssi",$username,$email,$token,$id);
 			$stmt->execute();
 			$stmt->close();
 
 			$account->setUsername($username);
 			$account->setEmail($email);
+			$account->setToken($token);
 			$account->saveToCache();
 		}
 	}
@@ -42,6 +43,7 @@ class User {
 	private $id;
 	private $username;
 	private $email;
+	private $token;
 	private $level;
 	private $registerDate;
 	
@@ -63,6 +65,7 @@ class User {
 
 				$this->username = $row["username"];
 				$this->email = $row["email"];
+				$this->token = $row["token"];
 				$this->level = $row["level"];
 				$this->registerDate = $row["time"];
 
@@ -90,6 +93,14 @@ class User {
 
 	public function setEmail($email){
 		$this->email = $email;
+	}
+
+	public function getToken(){
+		return $this->token;
+	}
+
+	public function setToken($token){
+		$this->token = $token;
 	}
 
 	public function getLevel(){
