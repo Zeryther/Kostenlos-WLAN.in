@@ -1,5 +1,7 @@
 <?php
 
+namespace KostenlosWLAN;
+
 define("USERRANK_USER","USER");
 define("USERRANK_ADMIN","ADMIN");
 
@@ -38,15 +40,42 @@ define("REPORT_STATUS_DENIED","DENIED");
 define("LEFT_QUOTES","&#x84;");
 define("RIGHT_QUOTES","&#148;");
 
+/**
+ * Utility functions
+ * 
+ * @package Util
+ * @author Gigadrive (support@gigadrivegroup.com)
+ * @copyright 2018 Gigadrive
+ * @link https://gigadrivegroup.com/dev/technologies
+ */
 class Util {
+	/**
+	 * Returns whether the user is currently logged in
+	 * 
+	 * @access public
+	 * @return bool
+	 */
 	public static function isLoggedIn(){
 		return isset($_SESSION["id"]);
 	}
 
+	/**
+	 * Returns the user object of the currently logged in user, null if not logged in
+	 * 
+	 * @access public
+	 * @return User
+	 */
 	public static function getCurrentUser(){
 		return self::isLoggedIn() == true ? User::getUserById($_SESSION["id"]) : null;
 	}
 
+	/**
+	 * Returns HTML code to convert a timestamp to "x minutes ago" format with timeago.js
+	 * 
+	 * @access public
+	 * @param string $timestamp
+	 * @return string
+	 */
 	public static function timeago($timestamp){
 		$str = strtotime($timestamp);
 
@@ -55,6 +84,17 @@ class Util {
 		return '<time class="timeago" datetime="' . $timestamp . '" title="' . date("d",$str) . "." . date("m",$str) . "." . date("Y",$str) . " " . date("H",$str) . ":" . date("i",$str) . ":" . date("s",$str) . '">' . $timestamp . '</time>';
 	}
 
+	/**
+	 * Returns HTML code for a bootstrap alert
+	 * 
+	 * @access public
+	 * @param string $id
+	 * @param string $text
+	 * @param string $type
+	 * @param bool $dismissible
+	 * @param bool $saveDismiss
+	 * @return string
+	 */
 	public static function createAlert($id,$text,$type = ALERT_TYPE_INFO,$dismissible = FALSE,$saveDismiss = FALSE){
 		$cookieName = "registeredAlert" . $id;
 
@@ -68,10 +108,23 @@ class Util {
 		}
 	}
 
+	/**
+	 * Returns a string with prepending and appending german quotation marks
+	 * 
+	 * @access public
+	 * @param string $s
+	 * @return string
+	 */
 	public static function quote($s){
 		return LEFT_QUOTES . $s . RIGHT_QUOTES;
 	}
 
+	/**
+	 * Returns a random string
+	 * 
+	 * @access public
+	 * @param int $length
+	 */
 	public static function getRandomString($length = 16) {
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$charactersLength = strlen($characters);
@@ -82,6 +135,12 @@ class Util {
 		return $randomString;
 	}
 
+	/**
+	 * Returns the current user's IP address
+	 * 
+	 * @access public
+	 * @return string
+	 */
 	public static function getIP(){
 		$ip = "undefined";
 		
@@ -96,6 +155,11 @@ class Util {
 		return $ip;
 	}
 
+	/**
+	 * Performs a check to clean up the /tmp folder
+	 * 
+	 * @access public
+	 */
 	public static function cleanupTempFolder(){
 		$files = glob($_SERVER["DOCUMENT_ROOT"] . "/tmp/*");
 		$now = time();
@@ -109,10 +173,24 @@ class Util {
 		}
 	}
 
+	/**
+	 * Formats a number (eg. 1000000 to 1.000.000)
+	 * 
+	 * @access public
+	 * @param int|float|double $num
+	 * @return string
+	 */
 	public static function formatNumber($num){
 		return number_format($num, 0, '', '.');
 	}
 
+	/**
+	 * Returns GeoIP data from IPStack.com
+	 * 
+	 * @access public
+	 * @param string $ip
+	 * @return array|json
+	 */
 	public static function geoIPData($ip){
 		if($ip == null || empty($ip)) $ip = self::getIP();
 		$n = "geoIPData_" . urlencode($ip);
@@ -130,6 +208,13 @@ class Util {
 		}
 	}
 
+	/**
+	 * Converts ae, oe and ue to their german umlaut equivalents
+	 * 
+	 * @access public
+	 * @param string $input
+	 * @return string
+	 */
 	public static function fixUmlaut($input){
 		$a = [
 			"ae" => "ä",
@@ -144,6 +229,13 @@ class Util {
 		return $input;
 	}
 
+	/**
+	 * Echoes HTML code for an advertisment block
+	 * 
+	 * @access public
+	 * @param string $type
+	 * @return string
+	 */
 	public static function renderAd($type){
 		if($type == AD_TYPE_LEADERBOARD){
 			echo '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -176,9 +268,20 @@ class Util {
 		}
 	}
 
+	/**
+	 * Limits a string and adds "..." to the end if needed
+	 * 
+	 * @access public
+	 * @param string $string
+	 * @param int $length
+	 * @param bool $addDots
+	 * @return string
+	 */
 	public static function limitString($string,$length,$addDots = false){
+		$dots = "...";
+
 		if(strlen($string) > $length)
-			$string = substr($string,0,($addDots ? $length-3 : $length)) . ($addDots ? "..." : "");
+			$string = substr($string,0,($addDots ? $length-strlen($dots) : $length)) . ($addDots ? $dots : "");
 
 		return $string;
 	}

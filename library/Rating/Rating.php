@@ -1,6 +1,24 @@
 <?php
 
+namespace KostenlosWLAN;
+
+/**
+ * Represents a rating given by a user to a hotspot
+ * 
+ * @package Rating
+ * @author Gigadrive (support@gigadrivegroup.com)
+ * @copyright 2018 Gigadrive
+ * @link https://gigadrivegroup.com/dev/technologies
+ */
 class Rating {
+	/**
+	 * Get a rating by hotspot and user IDs
+	 * 
+	 * @access public
+	 * @param int $hotspot
+	 * @param int $user
+	 * @return Rating
+	 */
     public static function getRating($hotspot,$user){
         $n = "rating_" . $hotspot . "_" . $user;
 
@@ -18,6 +36,17 @@ class Rating {
         }
     }
 
+	/**
+	 * Gets a rating from data
+	 * 
+	 * @access public
+	 * @param int $hotspot
+	 * @param int $user
+	 * @param double $stars
+	 * @param string $comment
+	 * @param string $time
+	 * @return Rating
+	 */
     public static function getRatingFromData($hotspot,$user,$stars,$comment,$time){
         $rating = new Rating($hotspot,$user);
 
@@ -33,6 +62,16 @@ class Rating {
         return $rating;
     }
 
+	/**
+	 * Creates a rating and saves it to the database
+	 * 
+	 * @access public
+	 * @param int $hotspot
+	 * @param int $user
+	 * @param double $stars
+	 * @param string $comment
+	 * @return Rating The rating object, returns null if the rating could not be created
+	 */
     public static function createRating($hotspot,$user,$stars,$comment){
         $b = false;
 
@@ -46,19 +85,59 @@ class Rating {
         return $b == true ? Rating::getRating($hotspot,$user) : null;
     }
 
-    private $hotspot;
-    private $user;
-    private $stars;
-    private $comment;
+	/**
+	 * @access private
+	 * @var int $hotspot
+	 */
+	private $hotspot;
+	
+	/**
+	 * @access private
+	 * @var int $user
+	 */
+	private $user;
+	
+	/**
+	 * @access private
+	 * @var double $stars
+	 */
+	private $stars;
+	
+	/**
+	 * @access private
+	 * @var string $comment
+	 */
+	private $comment;
+	
+	/**
+	 * @access private
+	 * @var string $time
+	 */
     private $time;
 
+	/**
+	 * @access private
+	 * @var bool $exists
+	 */
     private $exists = false;
 
+	/**
+	 * Constructor
+	 * 
+	 * @access protected
+	 * @param int $hotspot
+	 * @param int $user
+	 */
     protected function __construct($hotspot,$user){
         $this->hotspot = $hotspot;
         $this->user = $user;
     }
 
+	/**
+	 * Loads the rating data
+	 * 
+	 * @access private
+	 */
     private function load(){
         $mysqli = Database::Instance()->get();
 
@@ -83,30 +162,73 @@ class Rating {
         $stmt->close();
     }
 
+	/**
+	 * Gets the hotspot id
+	 * 
+	 * @access public
+	 * @return int
+	 */
     public function getHotspotId(){
         return $this->hotspot;
     }
 
+	/**
+	 * Gets the hotspot object
+	 * 
+	 * @access public
+	 * @return Hotspot
+	 */
     public function getHotspot(){
         return Hotspot::getHotspotById($this->hotspot);
     }
 
+	/**
+	 * Gets the user id
+	 * 
+	 * @access public
+	 * @return int
+	 */
     public function getUserId(){
         return $this->user;
     }
 
+	/**
+	 * Gets the user object
+	 * 
+	 * @access public
+	 * @return User
+	 */
     public function getUser(){
         return User::getUserById($this->user);
     }
 
+	/**
+	 * Gets the amount of stars given
+	 * 
+	 * @access public
+	 * @return double
+	 */
     public function getStars(){
         return $this->stars;
     }
 
+	/**
+	 * Gets the comment written
+	 * 
+	 * @access public
+	 * @return string
+	 */
     public function getComment(){
         return $this->comment;
     }
 
+	/**
+	 * Updates the rating's stars and comment
+	 * 
+	 * @access public
+	 * @param double $stars
+	 * @param string $comment
+	 */
     public function update($stars,$comment){
         if($stars == $this->stars && $comment == $this->comment) return;
 
@@ -122,10 +244,21 @@ class Rating {
         $this->saveToCache();
     }
 
+	/**
+	 * Gets the timestamp when the rating was created
+	 * 
+	 * @access public
+	 * @return string
+	 */
     public function getTime(){
         return $this->time;
     }
 
+	/**
+	 * Saves the rating to the cache
+	 * 
+	 * @access public
+	 */
     public function saveToCache(){
         $n = "rating_" . $this->hotspot . "_" . $this->user;
         

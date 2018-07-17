@@ -1,6 +1,24 @@
 <?php
 
+namespace KostenlosWLAN;
+
+/**
+ * Represents a city/zip code combination
+ * 
+ * @package Place
+ * @author Gigadrive (support@gigadrivegroup.com)
+ * @copyright 2018 Gigadrive
+ * @link https://gigadrivegroup.com/dev/technologies
+ */
 class Place {
+	/**
+	 * Gets a place by zip code and city name
+	 * 
+	 * @access public
+	 * @param int $zipCode
+	 * @param string $name
+	 * @return Place
+	 */
 	public static function getPlace($zipCode,$name){
 		$n = "zipCode_" . $zipCode . "_" . $name;
 
@@ -16,6 +34,13 @@ class Place {
 		}
 	}
 
+	/**
+	 * Gets geocode data from Google's API
+	 * 
+	 * @access public
+	 * @param string $query
+	 * @return array|json
+	 */
 	public static function getGoogleGeocodeData($query){
 		$curl = curl_init();
 		curl_setopt_array($curl,
@@ -29,6 +54,13 @@ class Place {
 		return json_decode($result,true);
 	}
 
+	/**
+	 * Gets latitude and longitude as key->value pair from either a zip code or a city name
+	 * 
+	 * @access public
+	 * @param int|string $query
+	 * @return array
+	 */
 	public static function getLatLngFromQuery($query){
 		if(is_numeric($query)){
 			// ZIP CODE
@@ -57,6 +89,13 @@ class Place {
 		return null;
 	}
 
+	/**
+	 * Gets an array of zip codes matching a city name
+	 * 
+	 * @access public
+	 * @param string $city
+	 * @return array
+	 */
 	public static function getZipCodesFromCity($city){
 		$n = "zipCodesCity_" . $city;
 
@@ -86,6 +125,13 @@ class Place {
 		}
 	}
 
+	/**
+	 * Gets an array of city names matching a zip code
+	 * 
+	 * @access public
+	 * @param int $code
+	 * @return array
+	 */
 	public static function getCitiesFromZipCode($code){
 		$n = "citiesZipCode_" . $code;
 
@@ -114,6 +160,13 @@ class Place {
 		}
 	}
 
+	/**
+	 * Gets the amount of hotspots that match a city name
+	 * 
+	 * @access public
+	 * @param string $city
+	 * @return int
+	 */
 	public static function getTotalResultsFromCity($city){
 		$n = "totalResults_" . $city;
 
@@ -146,6 +199,13 @@ class Place {
 		}
 	}
 
+	/**
+	 * Gets the amount of hotspots that match a zip code
+	 * 
+	 * @access public
+	 * @param int $zipCode
+	 * @return int
+	 */
 	public static function getTotalResultsFromZipCode($zipCode){
 		$n = "totalResults_" . $zipCode;
 
@@ -177,6 +237,13 @@ class Place {
 		}
 	}
 
+	/**
+	 * Returns a properly capitalized city name (e.g "berlin" becomes "Berlin")
+	 * 
+	 * @access public
+	 * @param string $city
+	 * @return string
+	 */
 	public static function capitaliseCityName($city){
 		$zipCodes = self::getZipCodesFromCity($city);
 
@@ -195,15 +262,55 @@ class Place {
 		}
 	}
 
+	/**
+	 * @access private
+	 * @var int $zipCode
+	 */
 	private $zipCode;
+
+	/**
+	 * @access private
+	 * @var string $country
+	 */
 	private $country;
+
+	/**
+	 * @access private
+	 * @var string $cityName
+	 */
 	private $cityName;
+
+	/**
+	 * @access private
+	 * @var float $latitude
+	 */
 	private $latitude;
+
+	/**
+	 * @access private
+	 * @var float $longitude
+	 */
 	private $longitude;
+
+	/**
+	 * @access private
+	 * @var bool $exists
+	 */
 	private $exists;
 
+	/**
+	 * @access private
+	 * @var int $totalResults
+	 */
 	private $totalResults = -1;
 
+	/**
+	 * Constructor
+	 * 
+	 * @access protected
+	 * @param int $zipCode
+	 * @param string $cityName
+	 */
 	protected function __construct($zipCode,$cityName){
 		$cityName = trim($cityName);
 
@@ -230,14 +337,32 @@ class Place {
 		}
 	}
 
+	/**
+	 * Gets the place's zip code
+	 * 
+	 * @access public
+	 * @return int
+	 */
 	public function getZipCode(){
 		return $this->zipCode;
 	}
 
+	/**
+	 * Gets the place's country's code
+	 * 
+	 * @access public
+	 * @return string
+	 */
 	public function getCountry(){
 		return $this->country;
 	}
 
+	/**
+	 * Gets the place's country's name
+	 * 
+	 * @access public
+	 * @return string
+	 */
 	public function getCountryName(){
 		switch($this->country){
 			case "DE":
@@ -251,10 +376,22 @@ class Place {
 		}
 	}
 
+	/**
+	 * Gets the place's city
+	 * 
+	 * @access public
+	 * @return string
+	 */
 	public function getCity(){
 		return $this->cityName;
 	}
 
+	/**
+	 * Gets the place's latitude and longitude and fetches them from Google if needed
+	 * 
+	 * @access public
+	 * @return array
+	 */
 	public function getLatLng(){
 		if($this->latitude == null || $this->longitude == null){
 			$data = self::getGoogleGeocodeData($this->cityName . " " . $this->zipCode);
@@ -281,6 +418,11 @@ class Place {
 		return ["latitude" => $this->latitude,"longitude" => $this->longitude];
 	}
 
+	/**
+	 * Saves latitude and longitude to the database
+	 * 
+	 * @access private
+	 */
 	private function saveLatLng(){
 		$mysqli = Database::Instance()->get();
 
@@ -292,6 +434,12 @@ class Place {
 		$this->saveToCache();
 	}
 
+	/**
+	 * Gets the total amount of results from this place
+	 * 
+	 * @access public
+	 * @return int
+	 */
 	public function totalResults(){
 		if($this->totalResults == -1){
 			$mysqli = Database::Instance()->get();
@@ -314,10 +462,21 @@ class Place {
 		}
 	}
 
+	/**
+	 * Gets whether this place exists and is valid
+	 * 
+	 * @access public
+	 * @return bool
+	 */
 	public function exists(){
 		return $this->exists;
 	}
 
+	/**
+	 * Saves this place to the cache
+	 * 
+	 * @access public
+	 */
 	public function saveToCache(){
 		CacheHandler::setToCache("zipCode_" . $this->zipCode . "_" . $this->cityName,$this,20*60);
 	}
