@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\Hotspot;
+
 $app->bind("/hotspot/:id",function($params){
 	$id = $params["id"];
 

@@ -1,6 +1,9 @@
 <center class="mb-2"><?php Util::renderAd(AD_TYPE_LEADERBOARD); ?></center>
 <?php
 
+use KostenlosWLAN\Hotspot;
+use KostenlosWLAN\Place;
+
 $successMsg = null;
 $errorMsg = null;
 

@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\Place;
+
 $app->get("/search",function(){
 	if(isset($_GET["q"]) && !empty($_GET["q"])){
 		$query = $_GET["q"];

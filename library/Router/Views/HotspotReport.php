@@ -1,5 +1,8 @@
 <?php
 
+use KostenlosWLAN\Hotspot;
+use KostenlosWLAN\Report;
+
 $successMsg = null;
 $errorMsg = null;
 $user = Util::getCurrentUser();

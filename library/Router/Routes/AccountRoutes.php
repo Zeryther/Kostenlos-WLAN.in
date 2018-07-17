@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\Rating;
+
 $app->bind("/account",function(){
 	if(Util::isLoggedIn()){
 		$data = [

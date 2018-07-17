@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\Hotspot;
+
 $app->bind("/api/spots",function(){
     $this->response->mime = "json";
 

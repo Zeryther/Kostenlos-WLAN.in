@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\User;
+
 if(isset($successMsg) && !is_null($successMsg))
     Util::createAlert("successMsg",$successMsg,ALERT_TYPE_SUCCESS,true);
 

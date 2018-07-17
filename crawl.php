@@ -6,6 +6,7 @@ if((isset($_SERVER["DOCUMENT_ROOT"]) && !empty($_SERVER["DOCUMENT_ROOT"])) || (i
 }
 
 use \ForceUTF8\Encoding;
+use KostenlosWLAN\Place;
 
 $_SERVER["DOCUMENT_ROOT"] = __DIR__;
 $_SERVER["HTTP_HOST"] = "localhost:3000";

@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\User;
+
 $app->get("/loginCallback", function(){
 	if(!Util::isLoggedIn()){
 		if(isset($_GET["code"])){

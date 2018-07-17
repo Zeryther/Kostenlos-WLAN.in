@@ -1,4 +1,8 @@
-<?php $photo = $hotspot->getPhotoURL();
+<?php
+
+use KostenlosWLAN\Rating;
+
+$photo = $hotspot->getPhotoURL();
 
 $ratings = [];
 
