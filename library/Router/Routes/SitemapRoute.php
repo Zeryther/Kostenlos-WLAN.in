@@ -4,7 +4,7 @@ $app->bind("/sitemap",function(){
     $this->response->mime = "xml";
     $this->response->code = "200"; 
 
-    $n = "sitemapString";
+    $n = "sitemapString" . isset($_GET["rand"]) ? "_" . $_GET["rand"] : "";
 
     $s = "";
     if(CacheHandler::existsInCache($n)){
