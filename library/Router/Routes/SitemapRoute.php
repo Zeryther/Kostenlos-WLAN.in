@@ -11,7 +11,7 @@ $app->bind("/sitemap",function(){
         $s = CacheHandler::getFromCache($n);
     } else {
         $mysqli = Database::Instance()->get();
-        $stmt = $mysqli->prepare("SELECT `cityName` FROM `places`");
+        $stmt = $mysqli->prepare("SELECT `cityName` FROM `places` ORDER BY RAND()");
         if($stmt->execute()){
             $result = $stmt->get_result();
 
@@ -23,7 +23,7 @@ $app->bind("/sitemap",function(){
         }
         $stmt->close();
 
-        $stmt = $mysqli->prepare("SELECT `id` FROM `hotspots`");
+        $stmt = $mysqli->prepare("SELECT `id` FROM `hotspots` ORDER BY RAND()");
         if($stmt->execute()){
             $result = $stmt->get_result();
 
