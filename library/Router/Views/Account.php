@@ -17,10 +17,6 @@
 				<td style="width: 50%;"><?= $user->getEmail(); ?></td>
 			</tr>
 			<tr>
-				<td style="width: 50%;"><b>Kontotyp</b></td>
-				<td style="width: 50%;"><?= $user->getLevel(); ?></td>
-			</tr>
-			<tr>
 				<td style="width: 50%;"><b>Registrierungsdatum</b></td>
 				<td style="width: 50%;"><?= Util::timeago($user->getRegisterDate()); ?></td>
 			</tr>
