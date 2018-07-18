@@ -1,3 +1,8 @@
+@font-face {
+	font-family: 'Myriad Pro Bold';
+	src: url('../fonts/MyriadPro-Bold.otf');
+}
+
 :root {
 	--main-bg-color: #941890;
 }
@@ -309,4 +314,68 @@ input:focus {
 
 #instantclick-bar {
 	background: #000;
+}
+
+#home #hscr {
+	width: 100%;
+}
+
+#home #ybox {
+	background: #FFC600;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#home #ybox #ybp {
+	background: var(--main-bg-color);
+	color: white;
+	text-align: center;
+	padding-top: 19px;
+	padding-bottom: 16px;
+	max-width: 768px;
+}
+
+#home #ybox #ybp hr {
+	background: #F5F5F5 !important;
+	color: #F5F5F5 !important;
+	height: 2px;
+}
+
+#home #ybox #ybcontenttop p#line1 {
+	margin: 0;
+	color: white;
+	font-size: 17px;
+	font-family: 'Myriad Pro Bold';
+}
+
+#home #ybox #ybcontenttop p#line2 {
+	margin: 0;
+	color: #FFC600;
+	font-size: 26px;
+	font-family: 'Myriad Pro Bold';
+}
+
+#home #ybox #ybcontentbottom {
+	
+}
+
+#home #ybox #ybcontentbottom #homeSearchForm {
+	max-width: 447px;
+}
+
+#home #ybox #ybcontentbottom #homeSearchBox {
+	margin-top: 10px;
+	margin-bottom: 12px;
+	border-radius: 5px;
+	border: none;
+}
+
+#home #ybox #ybcontentbottom button {
+	margin-top: 0px;
+	width: 154px;
+}
+
+#home #ybox #ybcontentbottom #homeSearchForm div label {
+	margin-bottom: 0px;
+	font-size: 18px;
 }
