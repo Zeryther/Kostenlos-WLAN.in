@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\Util;
+
 $app->get("/login", function(){
 	if(!Util::isLoggedIn()){
 		$redir = "http" . (isset($_SERVER["HTTPS"]) ? "s" : "") . "://" . $_SERVER["HTTP_HOST"] . "/loginCallback";

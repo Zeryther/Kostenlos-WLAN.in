@@ -22,4 +22,4 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Cache/CacheHandler.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Rating/Rating.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/library/Report/Report.php";
 
-Util::cleanupTempFolder();
+\KostenlosWLAN\Util::cleanupTempFolder();

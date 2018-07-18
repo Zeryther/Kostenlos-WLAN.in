@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\Util;
+
 if(isset($_GET["msg"]) && !empty($_GET["msg"])){
 	$msg = $_GET["msg"];
 

@@ -1,6 +1,7 @@
 <?php
 
 use KostenlosWLAN\Rating;
+use KostenlosWLAN\Util;
 
 $photo = $hotspot->getPhotoURL();
 

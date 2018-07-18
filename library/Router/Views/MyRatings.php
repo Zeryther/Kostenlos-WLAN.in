@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\Util;
+
 function paginate($currentPage,$itemsPerPage,$total){
 	$paginator = new JasonGrimes\Paginator($total,$itemsPerPage,$currentPage,"/admin/pendingSpots/(:num)");
 

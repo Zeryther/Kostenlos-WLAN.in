@@ -1,4 +1,9 @@
-<?php $user = Util::getCurrentUser(); ?>
+<?php
+
+use KostenlosWLAN\Util;
+$user = Util::getCurrentUser();
+
+?>
 <div class="card">
 	<h5 class="card-header">Mein Konto</h5>
 

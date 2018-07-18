@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\Util;
+
 if(isset($title) && !empty($title)){
 	$title = $title . " - " . $app["config.site"]["name"];
 } else {

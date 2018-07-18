@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\Util;
+
 $app->bind("/hotspot/report",function(){
     if(!Util::isLoggedIn()) return $this->reroute("/login");
 

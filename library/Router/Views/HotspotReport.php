@@ -2,6 +2,7 @@
 
 use KostenlosWLAN\Hotspot;
 use KostenlosWLAN\Report;
+use KostenlosWLAN\Util;
 
 $successMsg = null;
 $errorMsg = null;

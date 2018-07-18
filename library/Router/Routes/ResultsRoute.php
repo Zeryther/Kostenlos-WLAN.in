@@ -2,6 +2,7 @@
 
 use KostenlosWLAN\Hotspot;
 use KostenlosWLAN\Place;
+use KostenlosWLAN\Util;
 
 $app->bind("/:query",function($params){
 	$query = $params["query"];

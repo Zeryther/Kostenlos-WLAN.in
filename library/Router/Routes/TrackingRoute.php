@@ -1,5 +1,7 @@
 <?php
 
+use KostenlosWLAN\Util;
+
 $app->bind("/track",function(){
 	$ip = Util::getIP();
 	$geoIP = Util::geoIPData($ip);

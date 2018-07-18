@@ -2,6 +2,7 @@
 
 use KostenlosWLAN\Hotspot;
 use KostenlosWLAN\Report;
+use KostenlosWLAN\Util;
 
 $app->bind("/admin/pendingSpots",function(){
     return $this->reroute("/admin/pendingSpots/1");
