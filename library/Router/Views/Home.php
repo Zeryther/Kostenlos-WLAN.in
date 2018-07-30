@@ -18,23 +18,37 @@ if(isset($_GET["msg"]) && !empty($_GET["msg"])){
 	}
 }
 
-?>
-<div class="row">
-	<div class="col-md-8">
-		<h3>Willkommen auf Kostenlos-WLAN.in!</h3>
-		<p>
-			Kostenlos WLAN ist eine Liste für kostenfrei angebotene Wireless LAN Verbindungen. Open WLAN wird immer häufiger angeboten. Viele Restaurants, Cafés usw. in deiner Nähe bieten sicher ein ähnliches Angebot! Derzeit haben wir <b id="homeHotspotCount"><i class="fas fa-spinner fa-pulse"></i></b> Hotspots in unserer Datenbank.<br/><br/>
-			Erstelle dir einen Account um etwas beizutragen, da wir alleine sicher nicht alle Hotspots finden.<br/>
-			Einer der Hotspots funktioniert nicht oder wurde abgebaut? Eingeloggte Mitglieder können auf der Hotspotseite ein Problem mit einem Hotspot melden, damit wir die Daten aktualisieren können.<br/><br/>
-			Viel Spaß beim kostenfreien Surfen!
-		</p>
-		<center class="my-3"><?php Util::renderAd(AD_TYPE_LEADERBOARD); ?></center>
-		<h3>Hotspot-Karte</h3>
-		<div id="homeMap" class="my-2"></div>
-	</div>
+?><div id="home">
+	<img src="assets/img/hscr.jpg" id="hscr"/>
 
-	<div class="col-md-4">
-		<center class="my-3"><?php Util::renderAd(AD_TYPE_BLOCK); ?></center>
-		<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/KostenlosWLAN?ref_src=twsrc%5Etfw">Tweets by KostenlosWLAN</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+	<div id="ybox">
+		<div id="ybp" class="mx-auto">
+			<div id="ybcontenttop" class="mx-auto">
+				<p id="line1">
+					Du suchst kostenloses WLAN in deiner Stadt?
+				</p>
+
+				<p id="line2">
+					Dann bist du hier genau richtig.
+				</p>
+			</div>
+
+			<hr/>
+
+			<div id="ybcontentbottom">
+				<form method="get" action="/search">
+					<div id="homeSearchForm" class="mx-auto">
+						<div class="form-group" style="display: block;">
+							<label for="homeSearchBox">Gebe deine Stadt an und lege los!</label>
+							<input id="homeSearchBox" name="q" class="form-control mr-sm-2" type="search" aria-label="Search" autocomplete="off" spellcheck="off">
+						</div>
+
+						<button type="submit" class="btn btn-warning customBtn">Suchen</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<center class="mt-3"><?php Util::renderAd(AD_TYPE_LEADERBOARD); ?></center>
 	</div>
 </div>
