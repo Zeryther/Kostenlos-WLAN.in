@@ -61,7 +61,7 @@ $app->bind("/:query",function($params){
 					break;
 			}
 			
-			$mysqli = Database::Instance()->get();
+			$mysqli = \Database::Instance()->get();
 			$stmt = $mysqli->prepare($s);
 			$stmt->bind_param("idddd",$c,$x,$y,$x,$maxDistance);
 			if($stmt->execute()){
@@ -124,7 +124,7 @@ $app->bind("/:query",function($params){
 					break;
 			}
 			
-			$mysqli = Database::Instance()->get();
+			$mysqli = \Database::Instance()->get();
 			$stmt = $mysqli->prepare($s);
 			$stmt->bind_param("idddd",$c,$x,$y,$x,$maxDistance);
 			if($stmt->execute()){

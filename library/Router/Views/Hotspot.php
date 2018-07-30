@@ -12,7 +12,7 @@ $showReportForm = Util::isLoggedIn() && Util::getCurrentUser()->hasOpenReport($h
 $hotspotId = $hotspot->getId();
 $userId = Util::isLoggedIn() ? Util::getCurrentUser()->getId() : -1;
 
-$mysqli = Database::Instance()->get();
+$mysqli = \Database::Instance()->get();
 $stmt = $mysqli->prepare("SELECT u.id AS userID,u.username,u.level AS userLevel,r.stars,r.comment,r.time FROM ratings AS r INNER JOIN users AS u ON r.user = u.id WHERE r.hotspot = ? AND u.id != ? ORDER BY r.user = ? DESC, r.comment IS NOT NULL, r.time DESC;");
 $stmt->bind_param("iii",$hotspotId,$userId,$userId);
 if($stmt->execute()){

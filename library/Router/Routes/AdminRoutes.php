@@ -37,7 +37,7 @@ $app->bind("/admin/pendingSpots/:page",function($params){
         }
 
         $itemsPerPage = 10;
-        $mysqli = Database::Instance()->get();
+        $mysqli = \Database::Instance()->get();
 
         $num = 0;
 
@@ -120,7 +120,7 @@ $app->bind("/admin/reports/:page",function($params){
         }
 
         $itemsPerPage = 10;
-        $mysqli = Database::Instance()->get();
+        $mysqli = \Database::Instance()->get();
 
         $num = 0;
 

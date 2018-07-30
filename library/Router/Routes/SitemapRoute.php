@@ -7,10 +7,10 @@ $app->bind("/sitemap",function(){
     $n = "sitemapString" . isset($_GET["rand"]) ? "_" . $_GET["rand"] : "";
 
     $s = "";
-    if(CacheHandler::existsInCache($n)){
-        $s = CacheHandler::getFromCache($n);
+    if(\CacheHandler::existsInCache($n)){
+        $s = \CacheHandler::getFromCache($n);
     } else {
-        $mysqli = Database::Instance()->get();
+        $mysqli = \Database::Instance()->get();
         $stmt = $mysqli->prepare("SELECT `cityName` FROM `places` ORDER BY RAND()");
         if($stmt->execute()){
             $result = $stmt->get_result();
@@ -35,7 +35,7 @@ $app->bind("/sitemap",function(){
         }
         $stmt->close();
 
-        CacheHandler::setToCache($n,$s,20*60);
+        \CacheHandler::setToCache($n,$s,20*60);
     }
 
     return '<?xml version="1.0" encoding="UTF-8" ?>

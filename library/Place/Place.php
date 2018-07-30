@@ -22,8 +22,8 @@ class Place {
 	public static function getPlace($zipCode,$name){
 		$n = "zipCode_" . $zipCode . "_" . $name;
 
-		if(CacheHandler::existsInCache($n)){
-			return CacheHandler::getFromCache($n);
+		if(\CacheHandler::existsInCache($n)){
+			return \CacheHandler::getFromCache($n);
 		} else {
 			$place = new Place($zipCode,$name);
 			if($place->exists() == true){
@@ -99,10 +99,10 @@ class Place {
 	public static function getZipCodesFromCity($city){
 		$n = "zipCodesCity_" . $city;
 
-		if(CacheHandler::existsInCache($n)){
-			return CacheHandler::getFromCache($n);
+		if(\CacheHandler::existsInCache($n)){
+			return \CacheHandler::getFromCache($n);
 		} else {
-			$mysqli = Database::Instance()->get();
+			$mysqli = \Database::Instance()->get();
 
 			$codes = array();
 
@@ -119,7 +119,7 @@ class Place {
 			}
 			$stmt->close();
 
-			CacheHandler::setToCache($n,$codes,20*60);
+			\CacheHandler::setToCache($n,$codes,20*60);
 
 			return $codes;
 		}
@@ -135,10 +135,10 @@ class Place {
 	public static function getCitiesFromZipCode($code){
 		$n = "citiesZipCode_" . $code;
 
-		if(CacheHandler::existsInCache($n)){
-			return CacheHandler::getFromCache($n);
+		if(\CacheHandler::existsInCache($n)){
+			return \CacheHandler::getFromCache($n);
 		} else {
-			$mysqli = Database::Instance()->get();
+			$mysqli = \Database::Instance()->get();
 
 			$cities = array();
 
@@ -154,7 +154,7 @@ class Place {
 			}
 			$stmt->close();
 
-			CacheHandler::setToCache($n,$cities,20*60);
+			\CacheHandler::setToCache($n,$cities,20*60);
 
 			return $cities;
 		}
@@ -170,13 +170,13 @@ class Place {
 	public static function getTotalResultsFromCity($city){
 		$n = "totalResults_" . $city;
 
-		if(CacheHandler::existsInCache($n)){
-			return CacheHandler::getFromCache($n);
+		if(\CacheHandler::existsInCache($n)){
+			return \CacheHandler::getFromCache($n);
 		} else {
 			$zipCodes = self::getZipCodesFromCity($city);
 
 			if(count($zipCodes) > 0){
-				$mysqli = Database::Instance()->get();
+				$mysqli = \Database::Instance()->get();
 				$count = 0;
 				$s = "'" . implode("','",$zipCodes) . "'";
 
@@ -209,14 +209,14 @@ class Place {
 	public static function getTotalResultsFromZipCode($zipCode){
 		$n = "totalResults_" . $zipCode;
 
-		if(CacheHandler::existsInCache($n)){
-			return CacheHandler::getFromCache($n);
+		if(\CacheHandler::existsInCache($n)){
+			return \CacheHandler::getFromCache($n);
 		} else {
 			$c = self::getCitiesFromZipCode($zipCode);
 			if(count($c) > 0){
 				$p = self::getPlace($zipCode,$c[0]);
 
-				$mysqli = Database::Instance()->get();
+				$mysqli = \Database::Instance()->get();
 				$count = 0;
 				$s = "'" . implode("','",$c) . "'";
 
@@ -317,7 +317,7 @@ class Place {
 		$this->exists = false;
 		$this->zipCode = $zipCode;
 		$this->cityName = $cityName;
-		$mysqli = Database::Instance()->get();
+		$mysqli = \Database::Instance()->get();
 
 		$stmt = $mysqli->prepare("SELECT * FROM `places` WHERE `code` = ? AND `cityName` = ?");
 		$stmt->bind_param("is",$zipCode,$cityName);
@@ -424,7 +424,7 @@ class Place {
 	 * @access private
 	 */
 	private function saveLatLng(){
-		$mysqli = Database::Instance()->get();
+		$mysqli = \Database::Instance()->get();
 
 		$stmt = $mysqli->prepare("UPDATE `places` SET `latitude` = ?, `longitude` = ? WHERE (`code` = ? OR `cityName` = ?) AND (`latitude` IS NULL OR `longitude` IS NULL)");
 		$stmt->bind_param("ddis",$this->latitude,$this->longitude,$this->zipCode,$this->cityName);
@@ -442,7 +442,7 @@ class Place {
 	 */
 	public function totalResults(){
 		if($this->totalResults == -1){
-			$mysqli = Database::Instance()->get();
+			$mysqli = \Database::Instance()->get();
 
 			$stmt = $mysqli->prepare("SELECT COUNT(*) AS count FROM `hotspots` WHERE `zipCode` = ?");
 			$stmt->bind_param("i",$this->zipCode);
@@ -478,6 +478,6 @@ class Place {
 	 * @access public
 	 */
 	public function saveToCache(){
-		CacheHandler::setToCache("zipCode_" . $this->zipCode . "_" . $this->cityName,$this,20*60);
+		\CacheHandler::setToCache("zipCode_" . $this->zipCode . "_" . $this->cityName,$this,20*60);
 	}
 }

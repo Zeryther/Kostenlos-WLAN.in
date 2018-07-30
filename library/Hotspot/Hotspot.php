@@ -21,8 +21,8 @@ class Hotspot {
 	public static function getHotspotById($id){
 		$n = "hotspot_" . $id;
 
-		if(CacheHandler::existsInCache($n)){
-			return CacheHandler::getFromCache($n);
+		if(\CacheHandler::existsInCache($n)){
+			return \CacheHandler::getFromCache($n);
 		} else {
 			$hotspot = new Hotspot($id);
 			$hotspot->load();
@@ -87,7 +87,7 @@ class Hotspot {
 	public static function isHotspotInDatabase($googlePlaceId,$address,$zipCode,$city){
 		$b = false;
 
-		$mysqli = Database::Instance()->get();
+		$mysqli = \Database::Instance()->get();
 
 		$stmt = $mysqli->prepare("SELECT COUNT(`id`) AS `count` FROM `hotspots` WHERE `googlePlaceId` = ?");
 		$stmt->bind_param("s",$googlePlaceId);
@@ -225,7 +225,7 @@ class Hotspot {
 	 */
 	private function load(){
 		$id = $this->id;
-		$mysqli = Database::Instance()->get();
+		$mysqli = \Database::Instance()->get();
 		$stmt = $mysqli->prepare("SELECT * FROM `hotspots` WHERE `id` = ?");
 		$stmt->bind_param("i",$id);
 		if($stmt->execute()){
@@ -370,7 +370,7 @@ class Hotspot {
 				if(isset($result["place_id"])){
 					$this->placeId = $result["place_id"];
 
-					$mysqli = Database::Instance()->get();
+					$mysqli = \Database::Instance()->get();
 					$stmt = $mysqli->prepare("UPDATE `hotspots` SET `googlePlaceId` = ? WHERE `id` = ?");
 					$stmt->bind_param("si",$this->placeId,$this->id);
 					$stmt->execute();
@@ -401,7 +401,7 @@ class Hotspot {
 					if(isset($result["photos"]) && is_array($result["photos"]) && count($result["photos"]) > 0){
 						$this->photo = $result["photos"][0]["photo_reference"];
 
-						$mysqli = Database::Instance()->get();
+						$mysqli = \Database::Instance()->get();
 						$stmt = $mysqli->prepare("UPDATE `hotspots` SET `photo` = ? WHERE `id` = ?");
 						$stmt->bind_param("si",$this->photo,$this->id);
 						$stmt->execute();
@@ -444,7 +444,7 @@ class Hotspot {
 	 * @access public
 	 */
 	public function updateRating(){
-		$mysqli = Database::Instance()->get();
+		$mysqli = \Database::Instance()->get();
 
 		$rating = $this->rating;
 
@@ -520,7 +520,7 @@ class Hotspot {
 
 		$this->valid = true;
 
-		$mysqli = Database::Instance()->get();
+		$mysqli = \Database::Instance()->get();
 		$stmt = $mysqli->prepare("UPDATE `hotspots` SET `valid` = 1 WHERE `id` = ?");
 		$stmt->bind_param("i",$this->id);
 		$stmt->execute();
@@ -535,14 +535,14 @@ class Hotspot {
 	 * @access public
 	 */
 	public function delete(){
-		$mysqli = Database::Instance()->get();
+		$mysqli = \Database::Instance()->get();
 
 		$stmt = $mysqli->prepare("DELETE FROM `hotspots` WHERE `id` = ?");
 		$stmt->bind_param("i",$this->id);
 		$stmt->execute();
 		$stmt->close();
 
-		CacheHandler::deleteFromCache("hotspot_" . $this->id);
+		\CacheHandler::deleteFromCache("hotspot_" . $this->id);
 	}
 
 	/**
@@ -553,6 +553,6 @@ class Hotspot {
 	public function saveToCache(){
 		$n = "hotspot_" . $this->id;
 
-		CacheHandler::setToCache($n,$this,20*60);
+		\CacheHandler::setToCache($n,$this,20*60);
 	}
 }

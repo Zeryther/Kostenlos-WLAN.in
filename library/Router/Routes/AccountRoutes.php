@@ -26,7 +26,7 @@ $app->bind("/account/ratings/:page",function($params){
 
 	if(Util::isLoggedIn()){
 		$itemsPerPage = 10;
-        $mysqli = Database::Instance()->get();
+        $mysqli = \Database::Instance()->get();
 
 		$num = 0;
 		$userID = Util::getCurrentUser()->getId();

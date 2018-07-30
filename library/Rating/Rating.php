@@ -22,8 +22,8 @@ class Rating {
     public static function getRating($hotspot,$user){
         $n = "rating_" . $hotspot . "_" . $user;
 
-        if(CacheHandler::existsInCache($n)){
-            return CacheHandler::getFromCache($n);
+        if(\CacheHandler::existsInCache($n)){
+            return \CacheHandler::getFromCache($n);
         } else {
             $rating = new Rating($hotspot,$user);
             $rating->load();
@@ -75,7 +75,7 @@ class Rating {
     public static function createRating($hotspot,$user,$stars,$comment){
         $b = false;
 
-        $mysqli = Database::Instance()->get();
+        $mysqli = \Database::Instance()->get();
         $stmt = $mysqli->prepare("INSERT INTO `ratings` (`hotspot`,`user`,`stars`,`comment`) VALUES(?,?,?,?);");
         $stmt->bind_param("iids",$hotspot,$user,$stars,$comment);
         if($stmt->execute())
@@ -139,7 +139,7 @@ class Rating {
 	 * @access private
 	 */
     private function load(){
-        $mysqli = Database::Instance()->get();
+        $mysqli = \Database::Instance()->get();
 
         $stmt = $mysqli->prepare("SELECT * FROM `ratings` WHERE `hotspot` = ? AND `user` = ?");
         $stmt->bind_param("ii",$this->hotspot,$this->user);
@@ -235,7 +235,7 @@ class Rating {
         $this->stars = $stars;
         $this->comment = $comment;
 
-        $mysqli = Database::Instance()->get();
+        $mysqli = \Database::Instance()->get();
         $stmt = $mysqli->prepare("UPDATE `ratings` SET `stars` = ?, `comment` = ? WHERE `hotspot` = ? AND `user` = ?");
         $stmt->bind_param("dsii",$stars,$comment,$this->hotspot,$this->user);
         $stmt->execute();
@@ -262,6 +262,6 @@ class Rating {
     public function saveToCache(){
         $n = "rating_" . $this->hotspot . "_" . $this->user;
         
-        CacheHandler::setToCache($n,$this,10*60);
+        \CacheHandler::setToCache($n,$this,10*60);
     }
 }

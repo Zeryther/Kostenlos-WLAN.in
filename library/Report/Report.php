@@ -21,8 +21,8 @@ class Report {
     public static function getReport($id){
         $n = "report_" . $id;
 
-        if(CacheHandler::existsInCache($n)){
-            return CacheHandler::getFromCache($n);
+        if(\CacheHandler::existsInCache($n)){
+            return \CacheHandler::getFromCache($n);
         } else {
             $report = new Report($id);
             $report->load();
@@ -77,7 +77,7 @@ class Report {
 	 */
     public static function createReport($user,$hotspot,$reason,$text){
         $report = null;
-        $mysqli = Database::Instance()->get();
+        $mysqli = \Database::Instance()->get();
 
         $stmt = $mysqli->prepare("INSERT INTO `reports` (`user`,`hotspot`,`reason`,`text`) VALUES(?,?,?,?);");
         $stmt->bind_param("iiss",$user,$hotspot,$reason,$text);
@@ -153,7 +153,7 @@ class Report {
 	 * @access private
 	 */
     private function load(){
-        $mysqli = Database::Instance()->get();
+        $mysqli = \Database::Instance()->get();
 
         $stmt = $mysqli->prepare("SELECT * FROM `reports` WHERE `id` = ?");
         $stmt->bind_param("i",$this->id);
@@ -277,7 +277,7 @@ class Report {
     public function setStatus($status){
         $this->status = $status;
 
-        $mysqli = Database::Instance()->get();
+        $mysqli = \Database::Instance()->get();
 
         $stmt = $mysqli->prepare("UPDATE `reports` SET `status` = ? WHERE `id` = ?");
         $stmt->bind_param("si",$this->status,$this->id);
@@ -305,6 +305,6 @@ class Report {
     public function saveToCache(){
         $n = "report_" . $this->id;
 
-        CacheHandler::setToCache($n,$this,10*60);
+        \CacheHandler::setToCache($n,$this,10*60);
     }
 }

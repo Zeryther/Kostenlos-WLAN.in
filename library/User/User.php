@@ -21,8 +21,8 @@ class User {
 	public static function getUserById($id){
 		$n = "user_" . $id;
 
-		if(CacheHandler::existsInCache($n)){
-			return CacheHandler::getFromCache($n);
+		if(\CacheHandler::existsInCache($n)){
+			return \CacheHandler::getFromCache($n);
 		} else {
 			$user = new User($id);
 			if($user->userExists == true){
@@ -43,7 +43,7 @@ class User {
 	 * @param string $token
 	 */
 	public static function registerAccount($id,$username,$email,$token){
-		$mysqli = Database::Instance()->get();
+		$mysqli = \Database::Instance()->get();
 		$account = User::getUserById($id);
 
 		if($account == null){
@@ -118,7 +118,7 @@ class User {
 		$this->userExists = false;
 
 		$this->id = $id;
-		$mysqli = Database::Instance()->get();
+		$mysqli = \Database::Instance()->get();
 		$stmt = $mysqli->prepare("SELECT * FROM `users` WHERE `id` = ?");
 		$stmt->bind_param("i",$id);
 		if($stmt->execute()){
@@ -245,7 +245,7 @@ class User {
 		$status = REPORT_STATUS_OPEN;
 
 		$b = false;
-		$mysqli = Database::Instance()->get();
+		$mysqli = \Database::Instance()->get();
 
 		$stmt = $mysqli->prepare("SELECT COUNT(`id`) AS `count` FROM `reports` WHERE `user` = ? AND `hotspot` = ? AND `status` = ?");
 		$stmt->bind_param("iis",$this->id,$hotspot,$status);
@@ -273,6 +273,6 @@ class User {
 	public function saveToCache(){
 		$n = "user_" . $this->id;
 
-		CacheHandler::setToCache($n,$this,20*60);
+		\CacheHandler::setToCache($n,$this,20*60);
 	}
 }

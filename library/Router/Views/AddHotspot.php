@@ -59,7 +59,7 @@ if(isset($_POST["name"]) && isset($_POST["address"]) && isset($_POST["zipCode"])
                                     if(!$doError){
                                         if(!Hotspot::isHotspotInDatabase($googlePlaceId,$street,$zipCode,$city)){
                                             $creator = Util::getCurrentUser()->getId();
-                                            $mysqli = Database::Instance()->get();
+                                            $mysqli = \Database::Instance()->get();
 
                                             $stmt = $mysqli->prepare("INSERT INTO `hotspots` (`name`,`address`,`zipCode`,`city`,`latitude`,`longitude`,`creator`,`valid`,`googlePlaceId`) VALUES(?,?,?,?,?,?,?,0,?);");
                                             $stmt->bind_param("ssisddis",$name,$address,$zipCode,$city,$latitude,$longitude,$creator,$googlePlaceId);

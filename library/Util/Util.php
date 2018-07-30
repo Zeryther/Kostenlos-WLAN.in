@@ -195,13 +195,13 @@ class Util {
 		if($ip == null || empty($ip)) $ip = self::getIP();
 		$n = "geoIPData_" . urlencode($ip);
 		
-		if(CacheHandler::existsInCache($n)){
-			return json_decode(CacheHandler::getFromCache($n),true);
+		if(\CacheHandler::existsInCache($n)){
+			return json_decode(\CacheHandler::getFromCache($n),true);
 		} else {
 			$data = json_decode(@file_get_contents("http://api.ipstack.com/" . $ip . "?access_key=" . IPSTACK_KEY . "&format=1"),true);
 
 			if(isset($data["city"])){
-				CacheHandler::setToCache($n,json_encode($data),20*60);
+				\CacheHandler::setToCache($n,json_encode($data),20*60);
 			}
 
 			return $data;
