@@ -19,7 +19,7 @@ if(isset($_GET["msg"]) && !empty($_GET["msg"])){
 }
 
 ?><div id="home">
-	<img src="assets/img/hscr.jpg" id="hscr"/>
+	<img src="/assets/img/hscr.jpg" id="hscr"/>
 
 	<div id="ybox">
 		<div id="ybp" class="mx-auto">
